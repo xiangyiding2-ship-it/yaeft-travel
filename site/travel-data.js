@@ -505,11 +505,55 @@ TRAVEL_GLOBAL.TRAVEL = (function () {
     ]
   };
 
-  // ---------- 实拍（待上传）----------
+  // ---------- 实拍 ----------
   var photos = {
-    status: '真实照片在 iPhone 相册，按国家/城市归档后填充到 site/assets/photos/。',
-    cover: '',
-    byCountry: {}
+    status: '35 张 iPhone 实拍，第一批按国家归档（2026-09-14）。',
+    cover: 'photos/tr/img1.jpg',
+    byCountry: {
+      kz: ['photos/kz/img1.jpg', 'photos/kz/img2.jpg', 'photos/kz/img3.jpg', 'photos/kz/img4.jpg', 'photos/kz/img5.jpg', 'photos/kz/img6.jpg'],
+      ge: ['photos/ge/img1.jpg', 'photos/ge/img2.jpg', 'photos/ge/img3.jpg', 'photos/ge/img4.jpg', 'photos/ge/img5.jpg', 'photos/ge/img6.jpg', 'photos/ge/img7.jpg'],
+      am: ['photos/am/img1.jpg', 'photos/am/img2.jpg', 'photos/am/img3.jpg', 'photos/am/img4.jpg', 'photos/am/img5.jpg'],
+      tr: ['photos/tr/img1.jpg', 'photos/tr/img2.jpg', 'photos/tr/img3.jpg', 'photos/tr/img4.jpg', 'photos/tr/img5.jpg', 'photos/tr/img6.jpg', 'photos/tr/img7.jpg'],
+      eg: ['photos/eg/img1.jpg', 'photos/eg/img2.jpg', 'photos/eg/img3.jpg', 'photos/eg/img4.jpg', 'photos/eg/img5.jpg', 'photos/eg/img6.jpg'],
+      ae: ['photos/ae/img1.jpg', 'photos/ae/img2.jpg', 'photos/ae/img3.jpg', 'photos/ae/img4.jpg']
+    },
+    captions: {
+      'photos/kz/img1.jpg': '绿巴扎：马肉摊',
+      'photos/kz/img2.jpg': '阿拉木图：雪山下的游乐园',
+      'photos/kz/img3.jpg': '阿拉木图：东正教教堂',
+      'photos/kz/img4.jpg': '阿拉木图地铁：马赛克壁画站',
+      'photos/kz/img5.jpg': '阿拉木图周边山地',
+      'photos/kz/img6.jpg': '阿克套：Mangystau 荒漠雅丹',
+      'photos/ge/img1.jpg': '第比利斯青旅：聚会之夜',
+      'photos/ge/img2.jpg': '西格纳吉：写生的人',
+      'photos/ge/img3.jpg': '第比利斯：黄昏与缆车',
+      'photos/ge/img4.jpg': '第比利斯街头涂鸦',
+      'photos/ge/img5.jpg': '姆兹赫塔：圣剑山雕塑',
+      'photos/ge/img6.jpg': '姆兹赫塔：巨石阵纪念碑',
+      'photos/ge/img7.jpg': '卡兹别克：格尔盖蒂三一教堂',
+      'photos/am/img1.jpg': '埃里温：Cascade 阶梯',
+      'photos/am/img2.jpg': '塞凡湖：湖畔教堂',
+      'photos/am/img3.jpg': '加尼神庙',
+      'photos/am/img4.jpg': '石头狂想曲：柱状岩壁',
+      'photos/am/img5.jpg': '教堂内部：祭坛烛光',
+      'photos/tr/img1.jpg': '格雷梅：小镇黄昏全景',
+      'photos/tr/img2.jpg': '格雷梅：地面追热气球',
+      'photos/tr/img3.jpg': '地中海：海边泡水',
+      'photos/tr/img4.jpg': '费特希耶：海盗船泡沫派对',
+      'photos/tr/img5.jpg': '伊斯坦布尔：清真寺穹顶',
+      'photos/tr/img6.jpg': '伊斯坦布尔：黄昏与海鸥',
+      'photos/tr/img7.jpg': '伊斯坦布尔：港口圆月',
+      'photos/eg/img1.jpg': '达哈卜：红海珊瑚礁',
+      'photos/eg/img2.jpg': '达哈卜：野攀',
+      'photos/eg/img3.jpg': '地中海滨海公路',
+      'photos/eg/img4.jpg': '撒哈拉：沙丘光影',
+      'photos/eg/img5.jpg': '撒哈拉：沙漠银河',
+      'photos/eg/img6.jpg': '开罗：图坦卡蒙黄金面具',
+      'photos/ae/img1.jpg': '迪拜：哈利法塔夜景',
+      'photos/ae/img2.jpg': '迪拜机场贵宾厅',
+      'photos/ae/img3.jpg': '迪拜：相框与车流',
+      'photos/ae/img4.jpg': '迪拜：Dubai Mall 水族馆'
+    }
   };
 
   // ---------- 会变化的信息：发布前联网核实 ----------

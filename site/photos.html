@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>实拍 · 亚欧非大环线</title>
-<meta name="description" content="路上的真实照片，全部来自 iPhone 相册。按国家整理中。">
+<meta name="description" content="路上的真实照片，全部来自 iPhone 相册，按国家归档。">
 <link rel="stylesheet" href="style.css">
 </head>
 <body data-page="photos">
@@ -35,7 +35,7 @@
     <div class="verify-note">
       <div>
         <strong style="color:var(--fg);">照片说明</strong><br>
-        所有照片为本人 iPhone 实拍，按国家/城市归档后填充到 <code>site/assets/photos/</code>。会优先使用真实素材，不使用网图。
+        所有照片为本人 iPhone 实拍，按国家归档。点开可看大图；首批 35 张，后续城市照片陆续补入。
       </div>
     </div>
   </div>
@@ -49,17 +49,19 @@
 (function () {
   var T = window.TRAVEL;
   document.getElementById('photoGrid').innerHTML = T.countries.map(function (c) {
-    var n = (T.photos.byCountry[c.id] || []).length;
+    var photoWall = T.photos.byCountry[c.id] || [];
+    var wall = photoWall.length
+      ? photoWall.map(function (p) {
+          var cap = (T.photos.captions && T.photos.captions[p]) || c.name + '实拍';
+          return '<figure class="pw-fig"><a href="' + p + '" target="_blank" rel="noopener"><img src="' + p + '" alt="' + cap + '" loading="lazy"></a>' +
+            '<figcaption>' + cap + '</figcaption></figure>';
+        }).join('')
+      : '<div class="pw-more">照片整理中</div>';
     return '<div class="card" style="margin-bottom:14px;">' +
       '<div class="cc-head" style="display:flex;align-items:baseline;gap:10px;margin-bottom:10px;">' +
       '<h3 style="font-size:18px;font-weight:700;">' + c.name + '</h3>' +
-      '<span class="cc-days" style="font-size:12.5px;color:var(--soft);">' + (n ? n + ' 张' : '整理中') + '</span></div>' +
-      '<div class="photo-wall">' + (n
-        ? T.photos.byCountry[c.id].map(function (p) {
-            return '<a href="' + p + '" target="_blank" rel="noopener"><img src="' + p + '" alt="' + c.name + '实拍"></a>';
-          }).join('')
-        : '<div class="pw-more">照片整理中</div>') +
-      '</div></div>';
+      '<span class="cc-days" style="font-size:12.5px;color:var(--soft);">' + (photoWall.length ? photoWall.length + ' 张' : '整理中') + '</span></div>' +
+      '<div class="photo-wall">' + wall + '</div></div>';
   }).join('');
 })();
 </script>

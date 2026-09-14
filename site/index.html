@@ -55,6 +55,21 @@
   </div>
 </section>
 
+<!-- ============ 沿途实录 ============ -->
+<section class="section" id="roadPhotosSec">
+  <div class="container">
+    <div class="section-head" style="display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:8px;">
+      <div>
+        <span class="eyebrow">ON THE ROAD · 沿途实录</span>
+        <h2 class="block-title">路上拍下的真实画面</h2>
+        <p class="lead" style="margin-top:8px;">全部来自 iPhone 相册，不是网图。拖着看，点开看大图。</p>
+      </div>
+      <a class="drag-hint" href="photos.html" style="margin-bottom:4px;text-decoration:none;border-bottom:1px solid var(--fg);">全部照片 →</a>
+    </div>
+    <div class="drag-scroll" id="roadPhotos"></div>
+  </div>
+</section>
+
 <!-- ============ 花费总览 ============ -->
 <section class="section">
   <div class="container">
@@ -215,6 +230,27 @@
         '<div class="cc-tags">' + tags + '</div>' +
         '<div class="cc-days">' + c.days + ' 天 · ' + c.region + '</div>' +
       '</div></a>';
+  }).join('');
+
+  // ---- 沿途实录（每国精选照片，横向拖动）----
+  var roadPicks = [
+    { id: 'kz', src: 'photos/kz/img1.jpg', cap: '绿巴扎：马肉摊' },
+    { id: 'kz', src: 'photos/kz/img6.jpg', cap: '阿克套：Mangystau 荒漠雅丹' },
+    { id: 'ge', src: 'photos/ge/img7.jpg', cap: '卡兹别克：格尔盖蒂三一教堂' },
+    { id: 'ge', src: 'photos/ge/img3.jpg', cap: '第比利斯：黄昏与缆车' },
+    { id: 'am', src: 'photos/am/img1.jpg', cap: '埃里温：Cascade 阶梯' },
+    { id: 'am', src: 'photos/am/img2.jpg', cap: '塞凡湖：湖畔教堂' },
+    { id: 'tr', src: 'photos/tr/img2.jpg', cap: '格雷梅：地面追热气球' },
+    { id: 'tr', src: 'photos/tr/img4.jpg', cap: '费特希耶：海盗船泡沫派对' },
+    { id: 'eg', src: 'photos/eg/img5.jpg', cap: '撒哈拉：沙漠银河' },
+    { id: 'eg', src: 'photos/eg/img1.jpg', cap: '达哈卜：红海珊瑚礁' },
+    { id: 'ae', src: 'photos/ae/img1.jpg', cap: '迪拜：哈利法塔夜景' },
+    { id: 'ae', src: 'photos/ae/img4.jpg', cap: '迪拜：Dubai Mall 水族馆' }
+  ];
+  document.getElementById('roadPhotos').innerHTML = roadPicks.map(function (r) {
+    return '<a class="drag-item road-card" href="photos.html">' +
+      '<img src="' + r.src + '" alt="' + r.cap + '" loading="lazy">' +
+      '<div class="road-cap"><span class="badge">' + r.id + '</span>' + r.cap + '</div></a>';
   }).join('');
 
   // ---- 花费表 ----

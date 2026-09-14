@@ -198,7 +198,15 @@ ${(tips || cost) ? `<section class="section" id="tips-costs">
       <h2 class="block-title">${esc(c.name)}实拍</h2>
     </div>
     <div class="photo-wall" id="photoWall">
-      <div class="pw-more">照片整理中，即将上线</div>
+      ${(() => {
+        const list = (T.photos && T.photos.byCountry && T.photos.byCountry[c.id]) || [];
+        return list.length
+          ? list.map(p => {
+              const cap = (T.photos.captions && T.photos.captions[p]) || c.name + '实拍';
+              return `<a href="../${esc(p)}" target="_blank" rel="noopener" title="${esc(cap)}"><img src="../${esc(p)}" alt="${esc(cap)}" loading="lazy"></a>`;
+            }).join('')
+          : '<div class="pw-more">照片整理中，即将上线</div>';
+      })()}
     </div>
   </div>
 </section>

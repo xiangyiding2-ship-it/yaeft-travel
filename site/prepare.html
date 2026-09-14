@@ -48,10 +48,11 @@
   <div class="container">
     <div class="section-head">
       <span class="eyebrow">INSURANCE · 保险</span>
-      <h2 class="block-title">旅行保险：一定要买</h2>
+      <h2 class="block-title">旅行保险：被查概率高，建议买</h2>
     </div>
     <div class="card" style="border-color:var(--fg);">
-      <p style="font-size:14.5px;line-height:1.8;"><strong>亲身经历：格鲁吉亚边检真的会查保险。</strong>我本人入境格鲁吉亚时被要求出示旅行保险，所以这条必须写在最前面——不要赌。</p>
+      <p style="font-size:14.5px;line-height:1.8;"><strong>实话实说：我本人没买旅行保险。</strong>这是一次冒险的决定，不推荐模仿。</p>
+      <p style="font-size:14.5px;line-height:1.8;margin-top:8px;"><strong>但格鲁吉亚查保险的概率很高</strong>——特别是坐飞机入境，边检会查验电子凭证。建议出发前买好，并提前把保单存成手机里的 PDF/截图。</p>
       <div style="margin-top:10px;font-size:13px;color:var(--soft);">会变化的信息：保险保额/险种要求请以官方最新规定为准（待核实：2026 最新保险规定）。</div>
     </div>
   </div>
@@ -193,7 +194,7 @@
     ['大背包', '极致轻量化，只背必需品；青旅多人间为主'],
     ['美元现金 300', '出国前兑换，用于换当地货币与落地签'],
     ['Visa 卡', '境外主力支付；埃及 ATM 取现每笔约 3 美元手续费'],
-    ['旅行保险', '格鲁吉亚边检会查！保额覆盖全程'],
+    ['旅行保险', '我本人没买（不推荐模仿）；格鲁吉亚查得严，尤其飞机入境查电子凭证，建议买'],
     ['电话卡方案', '提前买好或落地办理，见上'],
     ['洗漱用品', '沿线不少住宿不提供'],
     ['转换插头', '欧标圆两脚（C/F）为主'],
@@ -208,18 +209,21 @@
 
   // ---- App ----
   var apps = [
-    ['Booking / Agoda', '订住宿，跨平台比价', ''],
-    ['Uber / inDrive', '埃及打车主力，便宜好用', ''],
+    ['Booking / Agoda', '订住宿，跨平台比价', '线下入住有机会更便宜，可以到店问价'],
+    ['Uber / inDrive / 国际滴滴版', '打车主力', ''],
+    ['Yandex Maps', '斯坦国和中亚国比 Google Maps 更好用', ''],
+    ['Google Maps', '导航（其余地区）', ''],
     ['GetYourGuide', '阿克套 Mangystau 一日团等活动的预订', ''],
     ['Instagram', '联系 mangystau_safari 报荒漠团', ''],
-    ['Google Maps', '导航', ''],
-    ['微信 / 支付宝', '国内支付与回国段', ''],
     ['WITBUS', '锡瓦 → 开罗的长途巴士', ''],
+    ['GoBus', '订票体验一般，建议线下购票', ''],
+    ['微信 / 支付宝', '国内支付与回国段', ''],
     ['翻译 / 汇率类', '基础沟通与换算', '']
   ];
   document.getElementById('appList').innerHTML = apps.map(function (a) {
     return '<div class="transport-card" style="margin-bottom:8px;"><div class="tc-route"><h3>' + a[0] + '</h3></div>' +
-      '<div class="tc-detail">' + a[1] + '</div></div>';
+      '<div class="tc-detail">' + a[1] + '</div>' +
+      (a[2] ? '<div class="tc-note">' + a[2] + '</div>' : '') + '</div>';
   }).join('');
 
   // ---- 避坑 ----

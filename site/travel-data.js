@@ -150,6 +150,8 @@ TRAVEL_GLOBAL.TRAVEL = (function () {
       insurance: '', sim: '提前购买电话卡（¥44），使用 6 天。',
       payment: '城市公交、地铁可用；地铁站风格各异。',
       exchange: '物价不便宜，更推荐自己做饭。',
+      exchangeRate: { label: '1 元 ≈ 67 坚戈', updated: '2026-09-14', src: '新浪财经/哈央行 2026-09-14' },
+      food: '汉堡等快餐为主；自己做饭更划算。',
       accommodation: '推荐：Good Inn Hostel（阿拉木图）。',
       transportDetail: [
         { route: '阿拉木图 → 阿克套', mode: '飞机', cost: '¥855', note: '哈国内飞行' },
@@ -189,11 +191,13 @@ TRAVEL_GLOBAL.TRAVEL = (function () {
       tags: ['红酒', '山城', '黑海', '自驾'],
       summary: '高加索腹地，第比利斯老城、西格纳吉红酒小镇、巴统黑海。',
       visa: '免签',
-      visaDetail: '格鲁吉亚免签。⚠️ 旅行保险可能被查——本人实际被查过，务必购买覆盖全程的旅行保险。（待核实：2026 最新保险规定，参考：2026 年起要求保额约 3 万拉里的旅行保险）',
-      insurance: '旅行保险可能被查——本人实际被查过，务必购买。',
+      visaDetail: '格鲁吉亚免签。⚠️ 边检查保险概率高（尤其飞机入境，查电子凭证）——我本人经历过被查（当时没买保险，不推荐模仿），务必提前备好电子保单。（待核实：2026 最新保险规定，参考：2026 年起要求保额约 3 万拉里的旅行保险）',
+      insurance: '边检查保险概率高（尤其飞机入境，查电子凭证）。我本人没买保险，不推荐模仿。',
       sim: '建议落地买电话卡（约 ¥55）。',
       payment: '巴统部分小巴和商店只收里拉；可少量兑换土耳其里拉。',
       exchange: '可以少量兑换土耳其里拉备用。',
+      exchangeRate: { label: '1 元 ≈ 0.39 拉里', updated: '2026-09-14', src: 'Xe/菜鸟汇率 2026-09-14' },
+      food: '自由广场旁的 45cm 长「Istanbul 卷饼店」；自己做饭。',
       accommodation: '第比利斯：City Guli Hostel（厨房好用、离自由广场近）；西格纳吉：那托与拉多青旅；巴统：Hostel VOYAGE。',
       transportDetail: [
         { route: '第比利斯 → 姆兹赫塔 → 久姆里 → 埃里温', mode: '3人租车自驾', cost: '分摊', note: '也可以拆开使用公共交通' },
@@ -230,7 +234,7 @@ TRAVEL_GLOBAL.TRAVEL = (function () {
         }
       ],
       tips: [
-        '保险必买，边检真的会查',
+        '边检查保险概率高（尤其飞机），记得备好电子保单',
         '巴统换少量里拉，小巴和商店只收里拉',
         '姆兹赫塔不自驾建议包车'
       ],
@@ -246,6 +250,8 @@ TRAVEL_GLOBAL.TRAVEL = (function () {
       insurance: '', sim: '使用“一带一路”流量卡，约 11.8 元/天。',
       payment: '埃里温几乎全程现金 + 自己做饭（账单可见消费很少）。',
       exchange: '现金为主，自己做饭。',
+      exchangeRate: { label: '1 元 ≈ 54 德拉姆', updated: '2026-09-14', src: '新浪财经 2026-09-14' },
+      food: '自己做饭；最大超市里的 BBQ 肉卷。',
       accommodation: '普通游客建议青旅（埃里温）。',
       transportDetail: [
         { route: '第比利斯 → 姆兹赫塔 → 久姆里 → 埃里温', mode: '3人租车自驾', cost: '¥1,000+¥225 分摊', note: '费用放入亚美尼亚·交通' },
@@ -285,6 +291,8 @@ TRAVEL_GLOBAL.TRAVEL = (function () {
       insurance: '', sim: '提前购买流量卡（¥39）。',
       payment: '交通小红卡刷 Visa 价格明显更高，建议办卡。',
       exchange: '伊斯坦布尔亚洲区物价更便宜。',
+      exchangeRate: { label: '1 元 ≈ 7.25 里拉', updated: '2026-09-14', src: '新浪财经 2026-09-14' },
+      food: '格雷梅自己做饭；其他地方以快餐为主。',
       accommodation: '格雷梅：Home Cave Hostel；安塔利亚：BE BOLD Hostel；费特希耶：HZD 青旅；伊斯坦布尔：塔克西姆中央酒店。',
       transportDetail: [
         { route: '巴统 → 格土边境 → Hopa → Nevşehir → 格雷梅', mode: '长途汽车', cost: '', note: '约 17 小时' },
@@ -365,6 +373,8 @@ TRAVEL_GLOBAL.TRAVEL = (function () {
       insurance: '', sim: '落地购买 WE 电话卡（在达哈卜使用 30GB WE 流量卡）。',
       payment: 'Uber 和 inDrive 都很好用，打车比前面国家便宜；Visa 在 National Bank ATM 取现，每笔国内银行卡约收 3 美元手续费。',
       exchange: '美元主要用于兑换当地货币（300 美元现金中埃及分配：落地签 30 + 换钱 20 + 潜水混合支付 50）。',
+      exchangeRate: { label: '1 元 ≈ 7.4 埃镑', updated: '2026-09-14', src: '中国货币网参考汇率 2026-09' },
+      food: '中餐、穆斯林餐、快餐。',
       accommodation: '马特鲁：龙门客栈青旅（中国人开的）；锡瓦：A&S House；开罗：马迪纳旅舍（Agoda）。',
       transportDetail: [
         { route: '沙姆沙伊赫机场 → 达哈卜', mode: 'Taxi', cost: '', note: '' },
@@ -444,6 +454,8 @@ TRAVEL_GLOBAL.TRAVEL = (function () {
       insurance: '', sim: '迪拜落地领取流量卡。',
       payment: '不要换太多现金（100 元人民币现金换了迪拜钱）。',
       exchange: '机场/市区换少量现金即可。',
+      exchangeRate: { label: '1 元 ≈ 0.55 迪拉姆', updated: '2026-09-14', src: 'Xe/Wise 2026-09-14' },
+      food: '机场贵宾厅、中餐。',
       accommodation: '仅 1 天中转，未安排长期住宿。',
       transportDetail: [
         { route: '开罗 → 迪拜', mode: '飞机', cost: '', note: '返程第一段' },

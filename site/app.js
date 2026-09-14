@@ -60,6 +60,7 @@
         '<div class="footer-bottom">' +
           '<span>© 2026 ' + esc(T.meta.title) + ' · 独立攻略站</span>' +
           '<span>' + esc(T.meta.signature) + '</span>' +
+          '<span>全网同名：向一丁</span>' +
         '</div>' +
       '</div>';
   }

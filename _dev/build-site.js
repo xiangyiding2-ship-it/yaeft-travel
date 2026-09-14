@@ -70,6 +70,7 @@ function pageFor(c) {
   const badgeRow = [`<span class="badge">${c.region}</span>`, `<span class="badge">${c.days} 天</span>`]
     .concat((c.tags || []).map(t => `<span class="badge soft">${esc(t)}</span>`))
     .concat([`<span class="badge">花费 ¥${(T.costs.byCountry[c.costKey] || {}).合计 || '—'}</span>`])
+    .concat(c.exchangeRate ? [`<span class="badge">${esc(c.exchangeRate.label)} · ${esc(c.exchangeRate.updated)}</span>`] : [])
     .join('\n      ');
 
   const infoLines = [];
@@ -101,6 +102,16 @@ function pageFor(c) {
     (t.cost ? `<div class="tc-meta"><span class="badge">${esc(t.cost)}</span></div>` : '') +
     (t.note ? `<div class="tc-detail">${esc(t.note)}</div>` : '') + `</div>`
   ).join('');
+
+  const foodBlock = c.food ? `<section class="section" id="food">
+  <div class="container">
+    <div class="section-head">
+      <span class="eyebrow">FOOD &amp; DRINK · 吃什么</span>
+      <h2 class="block-title">吃什么</h2>
+    </div>
+    <div class="card"><p style="font-size:14.5px;line-height:1.8;">${esc(c.food)}</p></div>
+  </div>
+</section>` : '';
 
   const tips = (c.tips || []).map(t => `<div style="border-bottom:1px dashed var(--line);padding:9px 0;font-size:13.5px;">· ${esc(t)}</div>`).join('');
   const cost = T.costs.byCountry[c.costKey];
@@ -151,6 +162,8 @@ ${transports ? `<section class="section" id="transport">
     ${transports}
   </div>
 </section>` : ''}
+
+${foodBlock}
 
 ${(tips || cost) ? `<section class="section" id="tips-costs">
   <div class="container">

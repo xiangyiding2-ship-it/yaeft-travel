@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>实拍 · 亚欧非大环线</title>
+<meta name="description" content="路上的真实照片，全部来自 iPhone 相册。按国家整理中。">
+<link rel="stylesheet" href="style.css">
+</head>
+<body data-page="photos">
+
+<header class="site-header" id="siteHeader"></header>
+
+<div class="container">
+  <div class="page-head">
+    <div class="crumb"><a href="index.html">首页</a> / 实拍</div>
+    <span class="eyebrow">PHOTOS · 实拍</span>
+    <h1 class="page-title">实拍</h1>
+    <p class="lead" style="margin-top:14px;">这里放的是<strong>路上真实拍下的照片</strong>，不是网图：哈萨克斯坦的绿巴扎、格鲁吉亚的红酒小镇、格雷梅地面追的热气球、达哈卜的红海、锡瓦的撒哈拉……照片正在从 iPhone 相册整理归档，按国家上线。</p>
+  </div>
+</div>
+
+<section class="section" id="photos">
+  <div class="container">
+    <div class="section-head">
+      <span class="eyebrow">BY COUNTRY · 按国家</span>
+      <h2 class="block-title">照片墙</h2>
+    </div>
+    <div id="photoGrid"></div>
+  </div>
+</section>
+
+<section class="section" style="padding-top:10px;padding-bottom:20px;">
+  <div class="container">
+    <div class="verify-note">
+      <div>
+        <strong style="color:var(--fg);">照片说明</strong><br>
+        所有照片为本人 iPhone 实拍，按国家/城市归档后填充到 <code>site/assets/photos/</code>。会优先使用真实素材，不使用网图。
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="site-footer" id="siteFooter"></footer>
+
+<script src="travel-data.js"></script>
+<script src="app.js"></script>
+<script>
+(function () {
+  var T = window.TRAVEL;
+  document.getElementById('photoGrid').innerHTML = T.countries.map(function (c) {
+    var n = (T.photos.byCountry[c.id] || []).length;
+    return '<div class="card" style="margin-bottom:14px;">' +
+      '<div class="cc-head" style="display:flex;align-items:baseline;gap:10px;margin-bottom:10px;">' +
+      '<h3 style="font-size:18px;font-weight:700;">' + c.name + '</h3>' +
+      '<span class="cc-days" style="font-size:12.5px;color:var(--soft);">' + (n ? n + ' 张' : '整理中') + '</span></div>' +
+      '<div class="photo-wall">' + (n
+        ? T.photos.byCountry[c.id].map(function (p) {
+            return '<a href="' + p + '" target="_blank" rel="noopener"><img src="' + p + '" alt="' + c.name + '实拍"></a>';
+          }).join('')
+        : '<div class="pw-more">照片整理中</div>') +
+      '</div></div>';
+  }).join('');
+})();
+</script>
+</body>
+</html>

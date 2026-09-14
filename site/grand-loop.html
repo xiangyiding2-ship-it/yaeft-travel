@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>大环线怎么走 · 亚欧非大环线</title>
+<meta name="description" content="六段跨国的接驳：陆路出境、17 小时大巴、3 人租车自驾、跨海飞行。59 天时间轴。">
+<link rel="stylesheet" href="style.css">
+</head>
+<body data-page="grand-loop">
+
+<header class="site-header" id="siteHeader"></header>
+
+<div class="container">
+  <div class="page-head">
+    <div class="crumb"><a href="index.html">首页</a> / 大环线</div>
+    <span class="eyebrow">THE GRAND OVERLAND LOOP</span>
+    <h1 class="page-title">大环线怎么走</h1>
+    <p class="lead" style="margin-top:14px;">2026 年 6 月 29 日从中国出发，8 月 26 日回到国内，共 <strong>59 天</strong>：中国 → 哈萨克斯坦 → 格鲁吉亚 → 亚美尼亚 → 土耳其 → 埃及 → 阿联酋。这一段怎么走，不写每天去了哪，只写<strong>每一段是怎么接上的</strong>。</p>
+    <div class="badge-row" style="margin-top:16px;">
+      <span class="badge">6 国免签/落地签</span>
+      <span class="badge">1 段陆路出境</span>
+      <span class="badge">1 段 17 小时大巴</span>
+      <span class="badge">1 段 3 人租车自驾</span>
+      <span class="badge">3 段飞行</span>
+      <span class="badge">机场过夜 2 次</span>
+    </div>
+  </div>
+</div>
+
+<!-- ============ 六段接驳 ============ -->
+<section class="section" id="segments">
+  <div class="container">
+    <div class="section-head">
+      <span class="eyebrow">SEGMENTS · 六段接驳</span>
+      <h2 class="block-title">每一段怎么走</h2>
+    </div>
+    <div id="segmentList"></div>
+  </div>
+</section>
+
+<!-- ============ 59 天时间轴 ============ -->
+<section class="section" id="timeline">
+  <div class="container">
+    <div class="section-head">
+      <span class="eyebrow">59 DAYS · DAY BY DAY</span>
+      <h2 class="block-title">59 天时间轴</h2>
+      <p class="lead" style="margin-top:8px;">按真实停留拆分：乌鲁木齐 3 天、伊犁 2 天、阿拉木图 4 天、阿克套 3 天、格鲁吉亚 6 天、亚美尼亚 4 天、土耳其 11 天、埃及 23 天、迪拜 1 天、杭州 2 天。</p>
+    </div>
+    <div class="timeline" id="timelineList"></div>
+  </div>
+</section>
+
+<footer class="site-footer" id="siteFooter"></footer>
+
+<script src="travel-data.js"></script>
+<script src="app.js"></script>
+<script>
+(function () {
+  var T = window.TRAVEL;
+
+  // ---- 六段接驳 ----
+  document.getElementById('segmentList').innerHTML = T.routeSegments.map(function (s, i) {
+    var steps = s.steps.map(function (st) { return '<div>→ ' + st + '</div>'; }).join('');
+    var note = s.note ? '<div class="tc-note">⚠ ' + s.note + '</div>' : '';
+    return '<div class="transport-card">' +
+      '<div class="tc-route">' +
+        '<span style="font-family:var(--font-latin);font-size:12px;color:var(--soft);letter-spacing:.1em;">SEGMENT ' + (i + 1) + '</span>' +
+        '<h3>' + s.from + '</h3><span style="color:var(--soft);">→</span><h3>' + s.to + '</h3>' +
+        '<span class="tc-mode">' + s.verified + '</span>' +
+      '</div>' +
+      '<div class="tc-meta"><span class="badge">' + s.duration + '</span></div>' +
+      '<div class="tc-detail">' + steps + '</div>' + note +
+    '</div>';
+  }).join('');
+
+  // ---- 时间轴 ----
+  var running = 0;
+  document.getElementById('timelineList').innerHTML = T.timeline.map(function (t) {
+    running += t.days;
+    return '<div class="tl-item">' +
+      '<div class="tl-days">DAY ' + (running - t.days + 1) + ' – ' + running + ' · ' + t.days + ' 天</div>' +
+      '<h3>' + t.place + ' <span style="color:var(--soft);font-weight:500;font-size:14px;">· ' + t.country + '</span></h3>' +
+      '<p>' + t.note + '</p>' +
+    '</div>';
+  }).join('');
+})();
+</script>
+</body>
+</html>

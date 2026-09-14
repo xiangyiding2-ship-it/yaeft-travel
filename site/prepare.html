@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>出发准备 · 签证/保险/电话卡/支付 · 亚欧非大环线</title>
+<meta name="description" content="签证速查、旅行保险（格鲁吉亚边检实查）、电话卡、支付换汇、行李清单、常用 App、避坑清单。">
+<link rel="stylesheet" href="style.css">
+</head>
+<body data-page="prepare">
+
+<header class="site-header" id="siteHeader"></header>
+
+<div class="container">
+  <div class="page-head">
+    <div class="crumb"><a href="index.html">首页</a> / 出发准备</div>
+    <span class="eyebrow">BEFORE YOU GO</span>
+    <h1 class="page-title">出发准备</h1>
+    <p class="lead" style="margin-top:14px;">签证、保险、电话卡、货币与常用 App——出发前把这一页过一遍。<strong>所有会变化的信息，发布前都会重新联网核实并标注更新时间</strong>；这里标注「待核实」的，是本人记忆中的价格或政策。</p>
+  </div>
+</div>
+
+<nav class="chip-nav">
+  <a href="#visa">签证</a>
+  <a href="#insurance">保险</a>
+  <a href="#sim">电话卡</a>
+  <a href="#payment">支付换汇</a>
+  <a href="#stay">住宿</a>
+  <a href="#pack">行李</a>
+  <a href="#apps">App</a>
+  <a href="#tips">避坑</a>
+</nav>
+
+<!-- ============ 签证速查 ============ -->
+<section class="section" id="visa">
+  <div class="container">
+    <div class="section-head">
+      <span class="eyebrow">VISA · 签证速查</span>
+      <h2 class="block-title">签证速查</h2>
+      <p class="lead" style="margin-top:8px;">本人 2026 年 6-8 月实际入境时的政策。签证政策会变，出发前务必以官方最新公布为准。</p>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:12px;" id="visaGrid"></div>
+  </div>
+</section>
+
+<!-- ============ 保险 ============ -->
+<section class="section" id="insurance">
+  <div class="container">
+    <div class="section-head">
+      <span class="eyebrow">INSURANCE · 保险</span>
+      <h2 class="block-title">旅行保险：一定要买</h2>
+    </div>
+    <div class="card" style="border-color:var(--fg);">
+      <p style="font-size:14.5px;line-height:1.8;"><strong>亲身经历：格鲁吉亚边检真的会查保险。</strong>我本人入境格鲁吉亚时被要求出示旅行保险，所以这条必须写在最前面——不要赌。</p>
+      <div style="margin-top:10px;font-size:13px;color:var(--soft);">会变化的信息：保险保额/险种要求请以官方最新规定为准（待核实：2026 最新保险规定）。</div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 电话卡 ============ -->
+<section class="section" id="sim">
+  <div class="container">
+    <div class="section-head">
+      <span class="eyebrow">SIM · 电话卡</span>
+      <h2 class="block-title">一路上怎么上网</h2>
+    </div>
+    <div id="simList"></div>
+  </div>
+</section>
+
+<!-- ============ 支付换汇 ============ -->
+<section class="section" id="payment">
+  <div class="container">
+    <div class="section-head">
+      <span class="eyebrow">MONEY · 支付与换汇</span>
+      <h2 class="block-title">钱怎么带、怎么花</h2>
+    </div>
+    <div class="info-lines">
+      <div class="info-line"><div class="il-key">国内</div><div class="il-val"><b>微信、支付宝</b></div></div>
+      <div class="info-line"><div class="il-key">出发前</div><div class="il-val"><b>兑换 300 美元现金</b>（手续费 ¥10）：哈萨克斯坦换钱 20 美元 · 格鲁吉亚换钱 80 美元 · 土耳其换钱 100 美元 · 埃及落地签 30 美元 · 埃及换钱 20 美元 · 潜水混合支付 50 美元</div></div>
+      <div class="info-line"><div class="il-key">境外</div><div class="il-val">大部分时候使用 <b>Visa</b>；美元主要用于兑换当地货币</div></div>
+      <div class="info-line"><div class="il-key">埃及</div><div class="il-val">Visa 在 <b>National Bank ATM</b> 取现，每笔国内银行卡约收 <b>3 美元</b>手续费</div></div>
+      <div class="info-line"><div class="il-key">迪拜</div><div class="il-val">不要换太多现金（100 元人民币现金换了迪拜钱）</div></div>
+      <div class="info-line"><div class="il-key">汇率口径</div><div class="il-val">账单整理统一按 <b>1 USD ≈ 6.76 CNY</b>（由本卡人民币入账反推）</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 住宿 ============ -->
+<section class="section" id="stay">
+  <div class="container">
+    <div class="section-head">
+      <span class="eyebrow">STAY · 住宿</span>
+      <h2 class="block-title">住哪里、怎么订</h2>
+    </div>
+    <div class="info-lines">
+      <div class="info-line"><div class="il-key">风格</div><div class="il-val"><b>青旅多人间为主</b>，机场过夜 2 次</div></div>
+      <div class="info-line"><div class="il-key">预订</div><div class="il-val"><b>Booking + Agoda 比价</b></div></div>
+      <div class="info-line"><div class="il-key">土耳其</div><div class="il-val">当地网络环境可能无法正常使用 Booking；因为用了提前购买的国内流量卡，所以可以正常使用</div></div>
+      <div class="info-line"><div class="il-key">推荐</div><div class="il-val">阿拉木图 Good Inn · 第比利斯 City Guli · 西格纳吉 那托与拉多 · 巴统 Hostel VOYAGE · 格雷梅 Home Cave · 安塔利亚 BE BOLD · 费特希耶 HZD · 马特鲁 龙门客栈 · 锡瓦 A&S House · 开罗 马迪纳旅舍</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 行李 ============ -->
+<section class="section" id="pack">
+  <div class="container">
+    <div class="section-head">
+      <span class="eyebrow">PACKING · 行李清单</span>
+      <h2 class="block-title">极致轻量化的包里有什么</h2>
+    </div>
+    <div class="card">
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:10px 20px;" id="packList"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ App ============ -->
+<section class="section" id="apps">
+  <div class="container">
+    <div class="section-head">
+      <span class="eyebrow">APPS · 常用 App</span>
+      <h2 class="block-title">路上靠这些 App</h2>
+    </div>
+    <div id="appList"></div>
+  </div>
+</section>
+
+<!-- ============ 避坑 ============ -->
+<section class="section" id="tips">
+  <div class="container">
+    <div class="section-head">
+      <span class="eyebrow">PITFALLS · 避坑</span>
+      <h2 class="block-title">踩过的坑，都写在这</h2>
+    </div>
+    <div id="tipList"></div>
+  </div>
+</section>
+
+<section class="section" style="padding-top:10px;padding-bottom:20px;">
+  <div class="container">
+    <div class="verify-note">
+      <div>
+        <strong style="color:var(--fg);">会变化的信息</strong><br>
+        签证、保险要求、交通、价格、门票、电话卡、营业时间等会变化的信息，最终发布前会重新联网核实，并标明更新时间。本人经历部分按实际记录。
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="site-footer" id="siteFooter"></footer>
+
+<script src="travel-data.js"></script>
+<script src="app.js"></script>
+<script>
+(function () {
+  var T = window.TRAVEL;
+
+  // ---- 签证速查 ----
+  document.getElementById('visaGrid').innerHTML = T.countries.filter(function (c) { return !c.isHome && c.id !== 'cn'; }).map(function (c) {
+    var badge = c.visa.indexOf('落地') !== -1
+      ? '<span class="badge warn">' + c.visa + '</span>'
+      : '<span class="badge ok">' + c.visa + '</span>';
+    var detail = c.visaDetail || '';
+    return '<div class="card" style="padding:16px 18px;">' +
+      '<div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;">' + badge +
+        '<b style="font-size:16px;">' + c.name + '</b>' +
+        '<span style="font-size:12px;color:var(--soft);font-family:var(--font-latin);letter-spacing:.08em;">' + c.en + '</span>' +
+      '</div>' +
+      '<p style="font-size:13.5px;color:#2a2a2a;margin-top:8px;">' + detail + '</p>' +
+    '</div>';
+  }).join('');
+
+  // ---- 电话卡 ----
+  var sims = [
+    { c: '哈萨克斯坦', cost: '¥44', how: '提前购买电话卡，使用 6 天', note: '' },
+    { c: '格鲁吉亚', cost: '约 ¥55', how: '建议落地买电话卡', note: '' },
+    { c: '亚美尼亚', cost: '约 11.8 元/天', how: '使用「一带一路」流量卡', note: '' },
+    { c: '土耳其', cost: '¥39', how: '提前购买流量卡', note: 'Booking 在土耳其可能被网络屏蔽，国内流量卡可正常使用' },
+    { c: '埃及', cost: '', how: '落地购买 WE 电话卡', note: '达哈卜使用 30GB WE 流量卡' },
+    { c: '阿联酋', cost: '', how: '迪拜落地领取流量卡', note: '' }
+  ];
+  document.getElementById('simList').innerHTML = sims.map(function (s) {
+    return '<div class="transport-card"><div class="tc-route"><h3>' + s.c + '</h3>' +
+      '<span class="tc-mode">' + (s.cost || '落地办理') + '</span></div>' +
+      '<div class="tc-detail">' + s.how + '</div>' +
+      (s.note ? '<div class="tc-note">⚠ ' + s.note + '</div>' : '') + '</div>';
+  }).join('');
+
+  // ---- 行李清单 ----
+  var packs = [
+    ['护照与身份证', '有效期 6 个月以上、空白页留足；复印件 1-2 份 + 手机电子版'],
+    ['大背包', '极致轻量化，只背必需品；青旅多人间为主'],
+    ['美元现金 300', '出国前兑换，用于换当地货币与落地签'],
+    ['Visa 卡', '境外主力支付；埃及 ATM 取现每笔约 3 美元手续费'],
+    ['旅行保险', '格鲁吉亚边检会查！保额覆盖全程'],
+    ['电话卡方案', '提前买好或落地办理，见上'],
+    ['洗漱用品', '沿线不少住宿不提供'],
+    ['转换插头', '欧标圆两脚（C/F）为主'],
+    ['药品', '肠胃药、感冒退烧、创可贴'],
+    ['U 型枕', '多段长途汽车/飞机，值机前可塞衣物省空间']
+  ];
+  document.getElementById('packList').innerHTML = packs.map(function (p) {
+    return '<div style="border-bottom:1px dashed var(--line);padding:10px 0;">' +
+      '<div style="font-weight:600;font-size:14px;">☐ ' + p[0] + '</div>' +
+      '<div style="font-size:12.5px;color:var(--soft);margin-top:2px;">' + p[1] + '</div></div>';
+  }).join('');
+
+  // ---- App ----
+  var apps = [
+    ['Booking / Agoda', '订住宿，跨平台比价', ''],
+    ['Uber / inDrive', '埃及打车主力，便宜好用', ''],
+    ['GetYourGuide', '阿克套 Mangystau 一日团等活动的预订', ''],
+    ['Instagram', '联系 mangystau_safari 报荒漠团', ''],
+    ['Google Maps', '导航', ''],
+    ['微信 / 支付宝', '国内支付与回国段', ''],
+    ['WITBUS', '锡瓦 → 开罗的长途巴士', ''],
+    ['翻译 / 汇率类', '基础沟通与换算', '']
+  ];
+  document.getElementById('appList').innerHTML = apps.map(function (a) {
+    return '<div class="transport-card" style="margin-bottom:8px;"><div class="tc-route"><h3>' + a[0] + '</h3></div>' +
+      '<div class="tc-detail">' + a[1] + '</div></div>';
+  }).join('');
+
+  // ---- 避坑 ----
+  var tips = [];
+  T.countries.forEach(function (c) {
+    if (c.id === 'cn') return;
+    (c.tips || []).forEach(function (t) {
+      tips.push('<div class="tl-item" style="padding-bottom:10px;">' +
+        '<span style="font-weight:700;">' + c.name + '</span> — ' + t + '</div>');
+    });
+  });
+  document.getElementById('tipList').innerHTML = '<div class="timeline">' + tips.join('') + '</div>';
+})();
+</script>
+</body>
+</html>

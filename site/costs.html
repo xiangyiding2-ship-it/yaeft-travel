@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>花费明细 · ¥22,355 · 亚欧非大环线</title>
+<meta name="description" content="59 天真实花费 ¥22,355：按国家 × 类别（交通/住宿/餐饮/活动/门票/通信/其他）。三份真实账单核对。">
+<link rel="stylesheet" href="style.css">
+</head>
+<body data-page="costs">
+
+<header class="site-header" id="siteHeader"></header>
+
+<div class="container">
+  <div class="page-head">
+    <div class="crumb"><a href="index.html">首页</a> / 花费</div>
+    <span class="eyebrow">REAL COSTS · 真实花费</span>
+    <h1 class="page-title">花费明细</h1>
+    <p class="lead" style="margin-top:14px;">这一页的数字不是估的——<strong>微信、支付宝、工行 Visa 三份真实账单逐笔核对</strong>，加上现金补充与 300 美元现金分配，最终合计 <strong>¥22,355</strong>。所有支出：交通、住宿、餐饮、电话卡、门票、活动、潜水、租车、打车、签证、其他。</p>
+  </div>
+</div>
+
+<!-- ============ 总览卡 ============ -->
+<section class="section">
+  <div class="container">
+    <div style="display:flex;gap:14px;flex-wrap:wrap;margin-bottom:20px;">
+      <div class="card" style="flex:1 1 220px;min-width:0;border-color:var(--fg);">
+        <div class="eyebrow">TOTAL · 总计</div>
+        <div style="font-size:44px;font-weight:700;letter-spacing:-.02em;margin-top:4px;">¥22,355</div>
+        <div style="font-size:13px;color:var(--soft);margin-top:4px;">目标预算 ¥22,400 · 差额 ¥45 零散现金未计入</div>
+      </div>
+      <div class="card" style="flex:1 1 160px;min-width:0;">
+        <div class="eyebrow">DAYS</div>
+        <div style="font-size:32px;font-weight:700;margin-top:4px;">59</div>
+        <div style="font-size:12.5px;color:var(--soft);">2026.06.29—08.26</div>
+      </div>
+      <div class="card" style="flex:1 1 160px;min-width:0;">
+        <div class="eyebrow">BILLS</div>
+        <div style="font-size:32px;font-weight:700;margin-top:4px;">353</div>
+        <div style="font-size:12.5px;color:var(--soft);">笔消费记录 + 13 条现金补充</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 全表 ============ -->
+<section class="section" style="padding-top:0;">
+  <div class="container">
+    <div class="section-head">
+      <span class="eyebrow">BY COUNTRY × CATEGORY</span>
+      <h2 class="block-title">按国家 × 类别</h2>
+    </div>
+    <div class="tbl-wrap" id="costsTable"></div>
+    <div style="margin-top:14px;font-size:12.5px;color:var(--soft);" id="costsNote"></div>
+  </div>
+</section>
+
+<!-- ============ 国家占比 ============ -->
+<section class="section">
+  <div class="container">
+    <div class="section-head">
+      <span class="eyebrow">SHARE · 各国占比</span>
+      <h2 class="block-title">钱花在哪了</h2>
+    </div>
+    <div id="shareList"></div>
+  </div>
+</section>
+
+<!-- ============ 亮点 ============ -->
+<section class="section">
+  <div class="container">
+    <div class="section-head">
+      <span class="eyebrow">HIGHLIGHTS · 几点说明</span>
+      <h2 class="block-title">几点说明</h2>
+    </div>
+    <div id="highlightList"></div>
+  </div>
+</section>
+
+<section class="section" style="padding-top:10px;padding-bottom:20px;">
+  <div class="container">
+    <div class="verify-note">
+      <div>
+        <strong style="color:var(--fg);">数据来源</strong><br>
+        微信支付账单（2026-06-30—08-26）68 笔 · 支付宝交易明细 134 笔 · 工行 Visa 卡账单 151 笔（PDF 密码 315714）。汇率口径 1 USD ≈ 6.76 CNY（由本卡人民币入账反推）。已剔除代买、退款、不计收支等无效记录。
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="site-footer" id="siteFooter"></footer>
+
+<script src="travel-data.js"></script>
+<script src="app.js"></script>
+<script>
+(function () {
+  var T = window.TRAVEL;
+  var cats = T.costs.categories;
+
+  // ---- 全表 ----
+  var head = '<th>国家</th>' + cats.map(function (c) { return '<th>' + c + '</th>'; }).join('') + '<th>合计</th>';
+  var rows = Object.keys(T.costs.byCountry).map(function (name) {
+    var d = T.costs.byCountry[name];
+    return '<tr><td><b>' + name + '</b></td>' +
+      cats.map(function (c) { return '<td>' + (d[c] || '-') + '</td>'; }).join('') +
+      '<td class="num-total">' + d['合计'] + '</td></tr>';
+  }).join('');
+  var total = Object.keys(T.costs.byCountry).reduce(function (s, k) { return s + T.costs.byCountry[k]['合计']; }, 0);
+  document.getElementById('costsTable').innerHTML =
+    '<table class="tbl"><thead><tr>' + head + '</tr></thead><tbody>' + rows + '</tbody>' +
+    '<tfoot><tr><td>总计</td>' + cats.map(function () { return '<td></td>'; }).join('') +
+    '<td class="num-total">' + total.toLocaleString() + '</td></tr></tfoot></table>';
+  document.getElementById('costsNote').textContent = T.costs.status;
+
+  // ---- 占比条 ----
+  var max = Math.max.apply(null, Object.keys(T.costs.byCountry).map(function (k) { return T.costs.byCountry[k]['合计']; }));
+  document.getElementById('shareList').innerHTML = Object.keys(T.costs.byCountry).map(function (name) {
+    var d = T.costs.byCountry[name];
+    var pct = Math.round(d['合计'] / total * 1000) / 10;
+    var w = Math.round(d['合计'] / max * 100);
+    return '<div style="margin-bottom:12px;">' +
+      '<div style="display:flex;justify-content:space-between;font-size:13.5px;margin-bottom:4px;">' +
+      '<b>' + name + '</b><span style="color:var(--soft);">¥' + d['合计'].toLocaleString() + ' · ' + pct + '%</span></div>' +
+      '<div style="height:8px;background:#e3e3e3;border-radius:4px;overflow:hidden;">' +
+      '<div style="height:100%;width:' + w + '%;background:var(--fg);border-radius:4px;"></div></div></div>';
+  }).join('');
+
+  // ---- 亮点 ----
+  document.getElementById('highlightList').innerHTML = T.costs.highlights.map(function (h) {
+    return '<div class="tl-item" style="padding-bottom:10px;"><span style="font-size:14px;">· ' + h + '</span></div>';
+  }).join('');
+})();
+</script>
+</body>
+</html>

@@ -2,762 +2,238 @@
 <html lang="zh-CN">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>亚欧非大环线 · 2.2万 · 6国 · 59天</title>
-<meta name="description" content="一个真正走完这条路的人，把真实经验整理成一份可以直接参考的旅行攻略。">
-<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
-<style>
-:root {
-  --bg: #FAF6F0; --ink: #22261F; --ink-soft: #3E4239; --muted: #767B70;
-  --line: rgba(34,38,31,0.14); --accent: #A64B2A; --accent-dark: #8A3D21;
-  --hero: #16221B; --hero-text: #F2EDE2; --hero-muted: rgba(242,237,226,0.66);
-}
-* { box-sizing: border-box; }
-html { scroll-behavior: smooth; }
-body { margin: 0; background: var(--bg); color: var(--ink); font-family: -apple-system, "PingFang SC", "Microsoft YaHei", "Segoe UI", sans-serif; line-height: 1.65; -webkit-font-smoothing: antialiased; }
-.wrap { max-width: 760px; margin: 0 auto; padding: 0 20px; }
-nav.top { position: sticky; top: 0; z-index: 50; background: rgba(250,246,240,0.92); backdrop-filter: blur(8px); border-bottom: 1px solid var(--line); }
-nav.top .inner { max-width: 760px; margin: 0 auto; padding: 10px 20px; display: flex; align-items: center; gap: 16px; }
-nav.top .brand { font-size: 14px; font-weight: 700; letter-spacing: 1px; white-space: nowrap; }
-nav.top .links { display: flex; gap: 14px; overflow-x: auto; scrollbar-width: none; }
-nav.top .links::-webkit-scrollbar { display: none; }
-nav.top a { font-size: 13px; color: var(--muted); text-decoration: none; white-space: nowrap; }
-nav.top a:hover { color: var(--ink); }
-.hero { background: var(--hero); color: var(--hero-text); padding: 56px 0 44px; }
-.hero .sig { font-size: clamp(34px, 9vw, 58px); font-weight: 700; letter-spacing: 2px; line-height: 1.2; }
-.hero .title { margin-top: 10px; font-size: clamp(18px, 4.5vw, 26px); letter-spacing: 6px; }
-.hero .sub { margin-top: 14px; font-size: 13.5px; color: var(--hero-muted); letter-spacing: 1px; }
-.hero .tag { margin-top: 22px; font-size: 14px; color: var(--hero-muted); max-width: 30em; }
-.sec { padding: 40px 0; border-bottom: 1px solid var(--line); }
-.sec-label { font-size: 12px; color: var(--accent); font-weight: 600; letter-spacing: 2px; margin-bottom: 6px; }
-.sec h2 { margin: 0 0 16px; font-size: 24px; letter-spacing: 1px; }
-.sec p { margin: 8px 0; }
-.chips { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 14px; }
-.chip { font-size: 12.5px; color: var(--ink-soft); border: 1px solid var(--line); border-radius: 999px; padding: 4px 12px; }
-.fact-row { display: flex; gap: 8px; margin-top: 10px; font-size: 13.5px; }
-.fact-row .k { color: var(--accent); font-weight: 600; flex: none; }
-#map { width: 100%; height: 420px; border-radius: 14px; border: 1px solid var(--line); z-index: 0; }
-.route-pin { background: var(--accent); color: #fff; border-radius: 50%; text-align: center; font-weight: 700; border: 2px solid #fff; box-shadow: 0 1px 4px rgba(0,0,0,0.3); }
-.route-pin__num { line-height: 28px; font-size: 12px; }
-.cost-total { font-size: clamp(30px, 7vw, 44px); font-weight: 700; color: var(--accent-dark); letter-spacing: 1px; }
-.cost-total small { font-size: 14px; color: var(--muted); font-weight: 400; }
-footer { padding: 34px 0 50px; font-size: 12.5px; color: var(--muted); }
-footer .sig-line { font-size: 13px; color: var(--ink-soft); margin-bottom: 6px; letter-spacing: 1px; }
-@media (min-width: 768px) {
-  .sec { padding: 52px 0; }
-  .hero { padding: 72px 0 56px; }
-}
-@media (max-width: 480px) {
-  #map { height: 340px; }
-}
-</style>
+<meta name="description" content="59天 ¥22,355 一个人走完中国—哈萨克斯坦—格鲁吉亚—亚美尼亚—土耳其—埃及—阿联酋。真实路线、真实花费、真实踩坑。">
+<link rel="stylesheet" href="style.css">
 </head>
-<body>
-<nav class="top"><div class="inner">
-  <span class="brand">亚欧非大环线</span>
-  <div class="links">
-    <a href="#intro">简介</a><a href="#route">路线</a><a href="#map">地图</a><a href="#countries">国家</a><a href="#costs">花费</a><a href="#photos">实拍</a>
+<body data-page="index">
+
+<header class="site-header" id="siteHeader"></header>
+
+<!-- ============ HERO ============ -->
+<section class="hero" id="heroSection">
+  <div class="hero-bg" id="heroBg"></div>
+  <div class="container">
+    <span class="eyebrow" id="heroEyebrow">A REAL OVERLAND LOOP · 真实环线</span>
+    <h1 id="heroTitle">59 天<br>穿过亚欧非</h1>
+    <p class="hero-sub" id="heroSub">一个真正走完这条路的人，把真实经验整理成一份可以直接参考的旅行攻略。</p>
+    <div class="hero-stats" id="heroStats"></div>
+    <div class="hero-cta">
+      <a class="btn btn-light" href="grand-loop.html">查看完整路线</a>
+      <a class="btn btn-line btn-light" href="destinations/egypt.html" style="border-color:rgba(241,241,241,.6);">最推荐：埃及 23 天</a>
+    </div>
   </div>
-</div></nav>
+</section>
 
-<header class="hero"><div class="wrap">
-  <div class="sig">2.2万 · 6国 · 59天</div>
-  <div class="title">亚欧非大环线</div>
-  <div class="sub">2026.06.29 — 2026.08.26 · 一个人 · 极致轻量化</div>
-  <div class="tag">一个真正走完这条路的人，把真实经验整理成一份可以直接参考的旅行攻略。</div>
-</div></header>
-
-<main class="wrap">
-
-  <section class="sec" id="intro">
-    <div class="sec-label">01 · 关于这段旅程</div>
-    <h2>这是怎样一段旅行</h2>
-    <p style="font-size:14.5px;color:var(--ink-soft);">2026 年 6 月 29 日从中国出发，8 月 26 日回到国内，共 59 天。先后经过哈萨克斯坦、格鲁吉亚、亚美尼亚、土耳其、埃及、阿联酋 6 个国家，总花费 ¥22,400，覆盖交通、住宿、餐饮、电话卡、门票、活动、潜水、租车、打车、签证等全部支出。</p>
-    <p style="font-size:14.5px;color:var(--ink-soft);">一个人，极致轻量化。青旅多人间为主，大量公共交通，经常自己做饭，追求性价比，不追求把所有景点打卡完。</p>
-    <div class="chips"><span class="chip">一个人旅行</span><span class="chip">极致轻量化</span><span class="chip">青旅多人间为主</span><span class="chip">大量公共交通</span><span class="chip">部分飞机</span><span class="chip">部分租车</span><span class="chip">经常自己做饭</span><span class="chip">追求性价比</span><span class="chip">不追求把所有景点打卡完</span></div>
-    <div style="margin-top:22px;font-size:14.5px;color:var(--ink-soft);">
-      <div class="sec-label" style="margin-bottom:8px;">支付方式</div>
-      <div class="fact-row"><span class="k">国内</span><span>中国国内：微信、支付宝。</span></div>
-      <div class="fact-row"><span class="k">出发前</span><span>出国前：兑换 300 美元现金。</span></div>
-      <div class="fact-row"><span class="k">境外</span><span>境外：大部分时候使用 Visa；美元主要用于兑换当地货币。</span></div>
-      <div class="fact-row"><span class="k">埃及</span><span>埃及：使用 Visa 在 National Bank ATM 取现，每笔国内银行卡约收 3 美元手续费。</span></div>
+<!-- ============ 一条线串起七个国家 ============ -->
+<section class="section">
+  <div class="container">
+    <div class="section-head">
+      <span class="eyebrow">ONE LINE · SEVEN COUNTRIES</span>
+      <h2 class="block-title">一条线，串起七个国家。</h2>
+      <p class="lead" style="margin-top:8px;">六段跨国的接驳，从陆路出境到跨海飞行：中国 → 哈萨克斯坦 → 格鲁吉亚 → 亚美尼亚 → 土耳其 → 埃及 → 阿联酋。每一段怎么走，都写在「大环线」里。</p>
     </div>
-    <div style="margin-top:18px;font-size:14.5px;color:var(--ink-soft);">
-      <div class="sec-label" style="margin-bottom:8px;">住宿</div>
-      <div class="fact-row"><span class="k">方式</span><span>住宿以青旅多人间为主，机场过夜 2 次。</span></div>
-      <div class="fact-row"><span class="k">预订</span><span>住宿主要使用 Booking + Agoda 比价。</span></div>
-      <div class="fact-row"><span class="k">土耳其</span><span>土耳其当地网络环境可能无法正常使用 Booking；因为使用了提前购买的国内流量卡，所以可以正常使用。</span></div>
+    <div class="route-map" id="routeMap"></div>
+    <div style="margin-top:16px;">
+      <a class="btn btn-dark" href="grand-loop.html">每一段怎么走 →</a>
     </div>
-  </section>
-
-  <section class="sec" id="route">
-    <div class="sec-label">02 · 路线</div>
-    <h2>每一段怎么走</h2>
-    <p style="font-size:13px;color:var(--muted);margin-bottom:6px;">重点展示国与国之间的走法，不是每天的行程。</p>
-    
-    <div style="padding:18px 0;border-bottom:1px solid var(--line);">
-      <div style="display:flex;align-items:baseline;gap:10px;flex-wrap:wrap;">
-        <span style="font-size:12px;color:var(--accent);font-weight:600;letter-spacing:1px;">01</span>
-        <span style="font-size:16px;font-weight:600;">中国</span>
-        <span style="color:var(--muted);">→</span>
-        <span style="font-size:16px;font-weight:600;">哈萨克斯坦</span>
-      </div>
-      <div style="margin-top:6px;font-size:14px;">伊犁 → 阿拉木图：汽车</div>
-      <div style="margin-top:3px;font-size:12.5px;color:var(--muted);">哈萨克斯坦免签。</div>
-    </div>
-    <div style="padding:18px 0;border-bottom:1px solid var(--line);">
-      <div style="display:flex;align-items:baseline;gap:10px;flex-wrap:wrap;">
-        <span style="font-size:12px;color:var(--accent);font-weight:600;letter-spacing:1px;">02</span>
-        <span style="font-size:16px;font-weight:600;">哈萨克斯坦</span>
-        <span style="color:var(--muted);">→</span>
-        <span style="font-size:16px;font-weight:600;">格鲁吉亚</span>
-      </div>
-      <div style="margin-top:6px;font-size:14px;">阿拉木图 → 阿克套：飞机；阿克套 → 第比利斯：飞机</div>
-      <div style="margin-top:3px;font-size:12.5px;color:var(--muted);">第比利斯机场过夜后：机场 → 公交 → 小巴车站 → 西格纳吉。</div>
-    </div>
-    <div style="padding:18px 0;border-bottom:1px solid var(--line);">
-      <div style="display:flex;align-items:baseline;gap:10px;flex-wrap:wrap;">
-        <span style="font-size:12px;color:var(--accent);font-weight:600;letter-spacing:1px;">03</span>
-        <span style="font-size:16px;font-weight:600;">格鲁吉亚</span>
-        <span style="color:var(--muted);">→</span>
-        <span style="font-size:16px;font-weight:600;">亚美尼亚</span>
-      </div>
-      <div style="margin-top:6px;font-size:14px;">第比利斯 → 姆兹赫塔 → 久姆里 → 埃里温：3 人租车自驾</div>
-      <div style="margin-top:3px;font-size:12.5px;color:var(--muted);">也可以拆开使用公共交通。</div>
-    </div>
-    <div style="padding:18px 0;border-bottom:1px solid var(--line);">
-      <div style="display:flex;align-items:baseline;gap:10px;flex-wrap:wrap;">
-        <span style="font-size:12px;color:var(--accent);font-weight:600;letter-spacing:1px;">04</span>
-        <span style="font-size:16px;font-weight:600;">格鲁吉亚</span>
-        <span style="color:var(--muted);">→</span>
-        <span style="font-size:16px;font-weight:600;">土耳其</span>
-      </div>
-      <div style="margin-top:6px;font-size:14px;">巴统公交 → 格土边境（步行过境）→ 土耳其小巴 → Hopa 汽车站 → 长途汽车 → Nevşehir → 换乘 → 格雷梅</div>
-      <div style="margin-top:3px;font-size:12.5px;color:var(--muted);">这一段长途汽车约 17 小时。</div>
-    </div>
-    <div style="padding:18px 0;border-bottom:1px solid var(--line);">
-      <div style="display:flex;align-items:baseline;gap:10px;flex-wrap:wrap;">
-        <span style="font-size:12px;color:var(--accent);font-weight:600;letter-spacing:1px;">05</span>
-        <span style="font-size:16px;font-weight:600;">土耳其</span>
-        <span style="color:var(--muted);">→</span>
-        <span style="font-size:16px;font-weight:600;">埃及</span>
-      </div>
-      <div style="margin-top:6px;font-size:14px;">伊斯坦布尔 → 沙姆沙伊赫：飞机</div>
-      <div style="margin-top:3px;font-size:12.5px;color:var(--muted);">伊斯坦布尔有两个机场，订票一定确认机场；沙姆沙伊赫机场 → 达哈卜：Taxi。</div>
-    </div>
-    <div style="padding:18px 0;border-bottom:1px solid var(--line);">
-      <div style="display:flex;align-items:baseline;gap:10px;flex-wrap:wrap;">
-        <span style="font-size:12px;color:var(--accent);font-weight:600;letter-spacing:1px;">06</span>
-        <span style="font-size:16px;font-weight:600;">埃及</span>
-        <span style="color:var(--muted);">→</span>
-        <span style="font-size:16px;font-weight:600;">阿联酋</span>
-      </div>
-      <div style="margin-top:6px;font-size:14px;">开罗 → 迪拜：飞机</div>
-      
-    </div>
-    <div style="padding:18px 0;border-bottom:1px solid var(--line);">
-      <div style="display:flex;align-items:baseline;gap:10px;flex-wrap:wrap;">
-        <span style="font-size:12px;color:var(--accent);font-weight:600;letter-spacing:1px;">07</span>
-        <span style="font-size:16px;font-weight:600;">阿联酋</span>
-        <span style="color:var(--muted);">→</span>
-        <span style="font-size:16px;font-weight:600;">中国</span>
-      </div>
-      <div style="margin-top:6px;font-size:14px;">迪拜 → 杭州：飞机；杭州 → 怀化：约 17 小时火车</div>
-      
-    </div>
-  </section>
-
-  <section class="sec" id="map">
-    <div class="sec-label">03 · 地图</div>
-    <h2>亚欧非大环线全览</h2>
-    <p style="font-size:13px;color:var(--muted);margin-bottom:12px;">城市级示意坐标；点击点位可查看城市与停留天数，并可跳转手机导航。</p>
-    <div id="map"></div>
-  </section>
-
-  <section class="sec" id="countries">
-    <div class="sec-label">04 · 国家攻略</div>
-    <h2>6 国 · 真实经验</h2>
-    <p style="font-size:13px;color:var(--muted);margin-bottom:6px;">签证、电话卡、支付、交通、住宿、避坑与我的评价。标注「待核实」的信息发布前会重新联网核实。</p>
-    
-    <div id="c-cn" style="padding:26px 0;border-bottom:1px solid var(--line);">
-      <div style="display:flex;align-items:baseline;gap:10px;flex-wrap:wrap;">
-        <span style="font-size:26px;font-weight:700;">中国</span>
-        <span style="font-size:13px;color:var(--muted);">7 天</span>
-        <span style="font-size:12px;color:var(--muted);">出发与返程</span>
-      </div>
-      <div style="margin-top:4px;font-size:13px;color:var(--muted);">出发与返程段。</div>
-      
-      
-      
-        <div style="margin-top:10px;font-size:13px;color:var(--ink-soft);">
-          <span style="color:var(--accent);font-weight:600;">境内交通 </span>沅陵 → 长沙：汽车；长沙 → 乌鲁木齐：飞机；乌鲁木齐 → 伊犁：火车；杭州 → 怀化：约 17 小时火车
-        </div>
-      
-    <div style="padding:12px 0 12px 14px;border-left:2px solid var(--line);margin:14px 0 0 4px;">
-      <div style="font-size:15px;font-weight:600;">
-        乌鲁木齐
-        <span style="font-size:11.5px;color:var(--muted);font-weight:400;"> · 3 天</span>
-      </div>
-      
-    </div>
-    <div style="padding:12px 0 12px 14px;border-left:2px solid var(--line);margin:14px 0 0 4px;">
-      <div style="font-size:15px;font-weight:600;">
-        伊犁
-        <span style="font-size:11.5px;color:var(--muted);font-weight:400;"> · 2 天</span>
-      </div>
-      
-    </div>
-    <div style="padding:12px 0 12px 14px;border-left:2px solid var(--line);margin:14px 0 0 4px;">
-      <div style="font-size:15px;font-weight:600;">
-        杭州
-        <span style="font-size:11.5px;color:var(--muted);font-weight:400;"> · 2 天</span>
-      </div>
-      
-    </div>
-    </div>
-    <div id="c-kz" style="padding:26px 0;border-bottom:1px solid var(--line);">
-      <div style="display:flex;align-items:baseline;gap:10px;flex-wrap:wrap;">
-        <span style="font-size:26px;font-weight:700;">哈萨克斯坦</span>
-        <span style="font-size:13px;color:var(--muted);">7 天</span>
-        
-      </div>
-      
-      
-        <div style="display:flex;gap:8px;margin-top:10px;font-size:13px;flex-wrap:wrap;">
-          <span style="color:var(--accent);font-weight:600;flex:none;">签证</span>
-          <span style="color:var(--ink-soft);">免签</span>
-        </div>
-        <div style="display:flex;gap:8px;margin-top:10px;font-size:13px;flex-wrap:wrap;">
-          <span style="color:var(--accent);font-weight:600;flex:none;">电话卡</span>
-          <span style="color:var(--ink-soft);">提前购买电话卡，使用 6 天。</span>
-        </div>
-      
-      
-      
-    <div style="padding:12px 0 12px 14px;border-left:2px solid var(--line);margin:14px 0 0 4px;">
-      <div style="font-size:15px;font-weight:600;">
-        阿拉木图
-        <span style="font-size:11.5px;color:var(--muted);font-weight:400;"> · 4 天</span>
-      </div>
-      
-        <ul style="margin:6px 0 0;padding-left:16px;">
-          <li style="font-size:13px;margin:4px 0;color:var(--ink-soft);">绿巴扎附近免费打卡三件套值得看看</li><li style="font-size:13px;margin:4px 0;color:var(--ink-soft);">地铁站值得打卡，每个站是不同的苏联风格</li><li style="font-size:13px;margin:4px 0;color:var(--ink-soft);">城市交通以公交、地铁为主，可以办公交卡</li><li style="font-size:13px;margin:4px 0;color:var(--ink-soft);">落日飞车不推荐：排队久，排到天黑</li><li style="font-size:13px;margin:4px 0;color:var(--ink-soft);">博物馆 70，文物较少，性价比不高</li><li style="font-size:13px;margin:4px 0;color:var(--ink-soft);">物价不便宜，更推荐自己做饭</li><li style="font-size:13px;margin:4px 0;color:var(--ink-soft);">推荐住宿：Good Inn Hostel</li>
-        </ul>
-    </div>
-    <div style="padding:12px 0 12px 14px;border-left:2px solid var(--line);margin:14px 0 0 4px;">
-      <div style="font-size:15px;font-weight:600;">
-        阿克套
-        <span style="font-size:11.5px;color:var(--muted);font-weight:400;"> · 3 天</span>
-      </div>
-      
-        <ul style="margin:6px 0 0;padding-left:16px;">
-          <li style="font-size:13px;margin:4px 0;color:var(--ink-soft);">哈萨克斯坦最西边，靠近里海</li><li style="font-size:13px;margin:4px 0;color:var(--ink-soft);">可以报 Mangystau 一日团（Instagram：mangystau_safari；也可以使用 GetYourGuide）</li>
-        </ul>
-    </div>
-    </div>
-    <div id="c-ge" style="padding:26px 0;border-bottom:1px solid var(--line);">
-      <div style="display:flex;align-items:baseline;gap:10px;flex-wrap:wrap;">
-        <span style="font-size:26px;font-weight:700;">格鲁吉亚</span>
-        <span style="font-size:13px;color:var(--muted);">6 天</span>
-        
-      </div>
-      
-      
-        <div style="display:flex;gap:8px;margin-top:10px;font-size:13px;flex-wrap:wrap;">
-          <span style="color:var(--accent);font-weight:600;flex:none;">签证</span>
-          <span style="color:var(--ink-soft);">免签</span>
-        </div>
-        <div style="display:flex;gap:8px;margin-top:10px;font-size:13px;flex-wrap:wrap;">
-          <span style="color:var(--accent);font-weight:600;flex:none;">电话卡</span>
-          <span style="color:var(--ink-soft);">建议落地买电话卡。</span>
-        </div>
-        <div style="display:flex;gap:8px;margin-top:10px;font-size:13px;flex-wrap:wrap;">
-          <span style="color:var(--accent);font-weight:600;flex:none;">保险</span>
-          <span style="color:var(--ink-soft);">旅行保险可能被查——本人实际被查过，务必购买保险。</span>
-        </div>
-      
-      
-      
-    <div style="padding:12px 0 12px 14px;border-left:2px solid var(--line);margin:14px 0 0 4px;">
-      <div style="font-size:15px;font-weight:600;">
-        第比利斯
-        
-      </div>
-      
-        <ul style="margin:6px 0 0;padding-left:16px;">
-          <li style="font-size:13px;margin:4px 0;color:var(--ink-soft);">Sol’s Kitchen（前台是南非小哥）</li><li style="font-size:13px;margin:4px 0;color:var(--ink-soft);">City Guli Hostel：厨房好用，离自由广场近</li><li style="font-size:13px;margin:4px 0;color:var(--ink-soft);">可以报 Kazbegi 一日团</li><li style="font-size:13px;margin:4px 0;color:var(--ink-soft);">徒步可以考虑 Mestia、Juta</li>
-        </ul>
-    </div>
-    <div style="padding:12px 0 12px 14px;border-left:2px solid var(--line);margin:14px 0 0 4px;">
-      <div style="font-size:15px;font-weight:600;">
-        西格纳吉
-        
-      </div>
-      
-        <ul style="margin:6px 0 0;padding-left:16px;">
-          <li style="font-size:13px;margin:4px 0;color:var(--ink-soft);">可以当天往返，也可以住一晚</li><li style="font-size:13px;margin:4px 0;color:var(--ink-soft);">推荐那托与拉多青旅：房东一家喜欢中国文化，会用自家葡萄酒和 Chacha 招待客人</li>
-        </ul>
-    </div>
-    <div style="padding:12px 0 12px 14px;border-left:2px solid var(--line);margin:14px 0 0 4px;">
-      <div style="font-size:15px;font-weight:600;">
-        姆兹赫塔
-        
-      </div>
-      
-        <ul style="margin:6px 0 0;padding-left:16px;">
-          <li style="font-size:13px;margin:4px 0;color:var(--ink-soft);">巨石阵</li><li style="font-size:13px;margin:4px 0;color:var(--ink-soft);">圣剑山</li><li style="font-size:13px;margin:4px 0;color:var(--ink-soft);">不自驾建议包车</li>
-        </ul>
-    </div>
-    <div style="padding:12px 0 12px 14px;border-left:2px solid var(--line);margin:14px 0 0 4px;">
-      <div style="font-size:15px;font-weight:600;">
-        巴统
-        
-      </div>
-      
-        <ul style="margin:6px 0 0;padding-left:16px;">
-          <li style="font-size:13px;margin:4px 0;color:var(--ink-soft);">住宿：Hostel VOYAGE</li><li style="font-size:13px;margin:4px 0;color:var(--ink-soft);">赌场很多；参加过赌场宣传活动，有免费啤酒和周边礼物</li><li style="font-size:13px;margin:4px 0;color:var(--ink-soft);">可以少量兑换土耳其里拉；部分小巴和商店只收里拉</li>
-        </ul>
-    </div>
-    </div>
-    <div id="c-am" style="padding:26px 0;border-bottom:1px solid var(--line);">
-      <div style="display:flex;align-items:baseline;gap:10px;flex-wrap:wrap;">
-        <span style="font-size:26px;font-weight:700;">亚美尼亚</span>
-        <span style="font-size:13px;color:var(--muted);">4 天</span>
-        
-      </div>
-      
-      
-        <div style="display:flex;gap:8px;margin-top:10px;font-size:13px;flex-wrap:wrap;">
-          <span style="color:var(--accent);font-weight:600;flex:none;">签证</span>
-          <span style="color:var(--ink-soft);">免签</span>
-        </div>
-        <div style="display:flex;gap:8px;margin-top:10px;font-size:13px;flex-wrap:wrap;">
-          <span style="color:var(--accent);font-weight:600;flex:none;">电话卡</span>
-          <span style="color:var(--ink-soft);">使用“一带一路”流量卡，约 11.8 元/天。</span>
-        </div>
-      
-      
-      
-    <div style="padding:12px 0 12px 14px;border-left:2px solid var(--line);margin:14px 0 0 4px;">
-      <div style="font-size:15px;font-weight:600;">
-        久姆里
-        
-      </div>
-      
-    </div>
-    <div style="padding:12px 0 12px 14px;border-left:2px solid var(--line);margin:14px 0 0 4px;">
-      <div style="font-size:15px;font-weight:600;">
-        埃里温
-        
-      </div>
-      
-        <ul style="margin:6px 0 0;padding-left:16px;">
-          <li style="font-size:13px;margin:4px 0;color:var(--ink-soft);">种族灭绝纪念馆、神庙、教堂、石头狂想曲（具体景点名称以后根据照片确认）</li><li style="font-size:13px;margin:4px 0;color:var(--ink-soft);">几乎全程自己做饭</li><li style="font-size:13px;margin:4px 0;color:var(--ink-soft);">普通游客建议青旅</li>
-        </ul>
-    </div>
-    <div style="padding:12px 0 12px 14px;border-left:2px solid var(--line);margin:14px 0 0 4px;">
-      <div style="font-size:15px;font-weight:600;">
-        塞凡镇
-        
-      </div>
-      
-        <ul style="margin:6px 0 0;padding-left:16px;">
-          <li style="font-size:13px;margin:4px 0;color:var(--ink-soft);">公交往返埃里温</li><li style="font-size:13px;margin:4px 0;color:var(--ink-soft);">塞凡湖、两座教堂</li><li style="font-size:13px;margin:4px 0;color:var(--ink-soft);">山下 BBQ 好吃</li>
-        </ul>
-    </div>
-    </div>
-    <div id="c-tr" style="padding:26px 0;border-bottom:1px solid var(--line);">
-      <div style="display:flex;align-items:baseline;gap:10px;flex-wrap:wrap;">
-        <span style="font-size:26px;font-weight:700;">土耳其</span>
-        <span style="font-size:13px;color:var(--muted);">11 天</span>
-        
-      </div>
-      
-      
-        <div style="display:flex;gap:8px;margin-top:10px;font-size:13px;flex-wrap:wrap;">
-          <span style="color:var(--accent);font-weight:600;flex:none;">签证</span>
-          <span style="color:var(--ink-soft);">免签</span>
-        </div>
-        <div style="display:flex;gap:8px;margin-top:10px;font-size:13px;flex-wrap:wrap;">
-          <span style="color:var(--accent);font-weight:600;flex:none;">电话卡</span>
-          <span style="color:var(--ink-soft);">提前购买流量卡。</span>
-        </div>
-      <div style="margin-top:8px;font-size:13px;color:var(--ink-soft);">当地网络环境可能无法正常使用 Booking；因为使用了提前购买的国内流量卡，所以可以正常使用。</div>
-      
-      
-    <div style="padding:12px 0 12px 14px;border-left:2px solid var(--line);margin:14px 0 0 4px;">
-      <div style="font-size:15px;font-weight:600;">
-        格雷梅
-        
-      </div>
-      
-        <ul style="margin:6px 0 0;padding-left:16px;">
-          <li style="font-size:13px;margin:4px 0;color:var(--ink-soft);">住宿：Home Cave Hostel，厨房和三楼阳台很大</li><li style="font-size:13px;margin:4px 0;color:var(--ink-soft);">连续 3 天自己做饭，在 101 买食材</li><li style="font-size:13px;margin:4px 0;color:var(--ink-soft);">热气球需要提前预定，且不一定每天飞</li><li style="font-size:13px;margin:4px 0;color:var(--ink-soft);">玫瑰谷徒步推荐</li><li style="font-size:13px;margin:4px 0;color:var(--ink-soft);">山坡可以看日落和夜景</li><li style="font-size:13px;margin:4px 0;color:var(--ink-soft);">没有坐热气球，而是在地面追热气球</li>
-        </ul>
-    </div>
-    <div style="padding:12px 0 12px 14px;border-left:2px solid var(--line);margin:14px 0 0 4px;">
-      <div style="font-size:15px;font-weight:600;">
-        安塔利亚
-        
-      </div>
-      
-        <ul style="margin:6px 0 0;padding-left:16px;">
-          <li style="font-size:13px;margin:4px 0;color:var(--ink-soft);">主要是去费特希耶的中转站</li><li style="font-size:13px;margin:4px 0;color:var(--ink-soft);">住宿：BE BOLD Hostel，青旅经常有活动</li><li style="font-size:13px;margin:4px 0;color:var(--ink-soft);">可以钓螃蟹（Decathlon 买线和抄网）</li><li style="font-size:13px;margin:4px 0;color:var(--ink-soft);">在 101 买鸡腿</li>
-        </ul>
-    </div>
-    <div style="padding:12px 0 12px 14px;border-left:2px solid var(--line);margin:14px 0 0 4px;">
-      <div style="font-size:15px;font-weight:600;">
-        卡什
-        
-      </div>
-      
-        <ul style="margin:6px 0 0;padding-left:16px;">
-          <li style="font-size:13px;margin:4px 0;color:var(--ink-soft);">D700 公路非常漂亮，海水像果冻</li><li style="font-size:13px;margin:4px 0;color:var(--ink-soft);">不需要专门去所谓“最美海滩”</li><li style="font-size:13px;margin:4px 0;color:var(--ink-soft);">中转时吃午饭、喝咖啡、三角梅拍照，然后继续去费特希耶</li>
-        </ul>
-    </div>
-    <div style="padding:12px 0 12px 14px;border-left:2px solid var(--line);margin:14px 0 0 4px;">
-      <div style="font-size:15px;font-weight:600;">
-        费特希耶
-        
-      </div>
-      
-        <ul style="margin:6px 0 0;padding-left:16px;">
-          <li style="font-size:13px;margin:4px 0;color:var(--ink-soft);">强烈推荐海盗船跳岛游</li><li style="font-size:13px;margin:4px 0;color:var(--ink-soft);">黑珍珠、龙号中国游客多；其他船外国游客更多</li><li style="font-size:13px;margin:4px 0;color:var(--ink-soft);">二楼甲板座位约 1000 里拉（价格以后核实）</li><li style="font-size:13px;margin:4px 0;color:var(--ink-soft);">船费约 2000 里拉，只收现金</li><li style="font-size:13px;margin:4px 0;color:var(--ink-soft);">住宿：HZD 青旅</li><li style="font-size:13px;margin:4px 0;color:var(--ink-soft);">去海滩需要城市 mini 巴士</li>
-        </ul>
-    </div>
-    <div style="padding:12px 0 12px 14px;border-left:2px solid var(--line);margin:14px 0 0 4px;">
-      <div style="font-size:15px;font-weight:600;">
-        伊斯坦布尔
-        
-      </div>
-      
-        <ul style="margin:6px 0 0;padding-left:16px;">
-          <li style="font-size:13px;margin:4px 0;color:var(--ink-soft);">新欧洲区、老欧洲区、亚洲区；亚洲区物价更便宜</li><li style="font-size:13px;margin:4px 0;color:var(--ink-soft);">圣索菲亚大教堂、蓝色清真寺在老欧洲区</li><li style="font-size:13px;margin:4px 0;color:var(--ink-soft);">住宿：塔克西姆中央酒店</li><li style="font-size:13px;margin:4px 0;color:var(--ink-soft);">建议办理交通小红卡（制卡费 210 里拉，价格以后核实）</li><li style="font-size:13px;margin:4px 0;color:var(--ink-soft);">可以坐地铁、游轮；刷 Visa 价格明显更高</li><li style="font-size:13px;margin:4px 0;color:var(--ink-soft);">两次游轮基本可以回本</li><li style="font-size:13px;margin:4px 0;color:var(--ink-soft);">推荐烤玉米、土耳其卷饼</li>
-        </ul>
-    </div>
-    </div>
-    <div id="c-eg" style="padding:26px 0;border-bottom:1px solid var(--line);">
-      <div style="display:flex;align-items:baseline;gap:10px;flex-wrap:wrap;">
-        <span style="font-size:26px;font-weight:700;">埃及</span>
-        <span style="font-size:13px;color:var(--muted);">23 天</span>
-        
-      </div>
-      
-      
-        <div style="display:flex;gap:8px;margin-top:10px;font-size:13px;flex-wrap:wrap;">
-          <span style="color:var(--accent);font-weight:600;flex:none;">签证</span>
-          <span style="color:var(--ink-soft);">落地签 30 美元</span>
-        </div>
-        <div style="display:flex;gap:8px;margin-top:10px;font-size:13px;flex-wrap:wrap;">
-          <span style="color:var(--accent);font-weight:600;flex:none;">电话卡</span>
-          <span style="color:var(--ink-soft);">落地购买 WE 电话卡（在达哈卜使用 30GB WE 流量卡）。</span>
-        </div>
-        <div style="display:flex;gap:8px;margin-top:10px;font-size:13px;flex-wrap:wrap;">
-          <span style="color:var(--accent);font-weight:600;flex:none;">交通</span>
-          <span style="color:var(--ink-soft);">Uber 和 inDrive 都很好用，打车比前面国家便宜。</span>
-        </div>
-      
-      
-      
-    <div style="padding:12px 0 12px 14px;border-left:2px solid var(--line);margin:14px 0 0 4px;">
-      <div style="font-size:15px;font-weight:600;">
-        达哈卜
-        
-      </div>
-      
-        <ul style="margin:6px 0 0;padding-left:16px;">
-          <li style="font-size:13px;margin:4px 0;color:var(--ink-soft);">非常适合躺平，物价不高；不去海上餐厅就可以控制成本</li><li style="font-size:13px;margin:4px 0;color:var(--ink-soft);">潜水非常便宜：1 对 2 全英教学约 300 欧元，1 对 1 约 350 欧元</li><li style="font-size:13px;margin:4px 0;color:var(--ink-soft);">中国游客较多的潜店：Seven、Fish and Friends</li><li style="font-size:13px;margin:4px 0;color:var(--ink-soft);">两证通常约 5 天 11 潜</li><li style="font-size:13px;margin:4px 0;color:var(--ink-soft);">桨板约 200–300 埃镑；户外野攀约 20 美元</li><li style="font-size:13px;margin:4px 0;color:var(--ink-soft);">还有西奈山日出、马术、ATV、风筝冲浪、自由潜、海钓、约旦一日游等活动</li>
-        </ul>
-    </div>
-    <div style="padding:12px 0 12px 14px;border-left:2px solid var(--line);margin:14px 0 0 4px;">
-      <div style="font-size:15px;font-weight:600;">
-        亚历山大
-        
-      </div>
-      
-        <ul style="margin:6px 0 0;padding-left:16px;">
-          <li style="font-size:13px;margin:4px 0;color:var(--ink-soft);">图书馆（个人认为可以直接省略）</li><li style="font-size:13px;margin:4px 0;color:var(--ink-soft);">可以从达哈卜直接去马特鲁</li>
-        </ul>
-    </div>
-    <div style="padding:12px 0 12px 14px;border-left:2px solid var(--line);margin:14px 0 0 4px;">
-      <div style="font-size:15px;font-weight:600;">
-        马特鲁
-        
-      </div>
-      
-        <ul style="margin:6px 0 0;padding-left:16px;">
-          <li style="font-size:13px;margin:4px 0;color:var(--ink-soft);">住宿：龙门客栈青旅（中国人开的，有住宿和餐厅）</li><li style="font-size:13px;margin:4px 0;color:var(--ink-soft);">有多个海滩；包车约 4 小时 500–700 埃镑</li><li style="font-size:13px;margin:4px 0;color:var(--ink-soft);">Agooba Beach 值得去；马特鲁之眼可以下海</li><li style="font-size:13px;margin:4px 0;color:var(--ink-soft);">海滩费用记忆为 15 过路费 + 50 门票（价格以后核实）</li>
-        </ul>
-    </div>
-    <div style="padding:12px 0 12px 14px;border-left:2px solid var(--line);margin:14px 0 0 4px;">
-      <div style="font-size:15px;font-weight:600;">
-        锡瓦
-        
-      </div>
-      
-        <ul style="margin:6px 0 0;padding-left:16px;">
-          <li style="font-size:13px;margin:4px 0;color:var(--ink-soft);">小巴到达；下车后如果赶时间，要第一时间买去开罗的车票</li><li style="font-size:13px;margin:4px 0;color:var(--ink-soft);">住宿：A&amp;S House，当地一家三口经营；海外旅行中唯一一次独享一间房</li><li style="font-size:13px;margin:4px 0;color:var(--ink-soft);">市内主要坐三轮车</li><li style="font-size:13px;margin:4px 0;color:var(--ink-soft);">盐湖、克娄巴特拉温泉</li><li style="font-size:13px;margin:4px 0;color:var(--ink-soft);">撒哈拉沙漠一日团强烈推荐，约 300 埃镑</li><li style="font-size:13px;margin:4px 0;color:var(--ink-soft);">晚上有鸡腿</li>
-        </ul>
-    </div>
-    <div style="padding:12px 0 12px 14px;border-left:2px solid var(--line);margin:14px 0 0 4px;">
-      <div style="font-size:15px;font-weight:600;">
-        开罗
-        
-      </div>
-      
-        <ul style="margin:6px 0 0;padding-left:16px;">
-          <li style="font-size:13px;margin:4px 0;color:var(--ink-soft);">住宿：马迪纳旅舍（Agoda 预订，位置不错）</li><li style="font-size:13px;margin:4px 0;color:var(--ink-soft);">面对推销者要强硬；买东西货比三家、砍价</li><li style="font-size:13px;margin:4px 0;color:var(--ink-soft);">开罗博物馆可以通过闲鱼购买便宜票</li><li style="font-size:13px;margin:4px 0;color:var(--ink-soft);">没有进入金字塔：热、人多、臭</li><li style="font-size:13px;margin:4px 0;color:var(--ink-soft);">可以在金字塔外肯德基二楼拍狮身人面像</li><li style="font-size:13px;margin:4px 0;color:var(--ink-soft);">垃圾城值得去</li>
-        </ul>
-    </div>
-    </div>
-    <div id="c-ae" style="padding:26px 0;border-bottom:1px solid var(--line);">
-      <div style="display:flex;align-items:baseline;gap:10px;flex-wrap:wrap;">
-        <span style="font-size:26px;font-weight:700;">阿联酋</span>
-        <span style="font-size:13px;color:var(--muted);">1 天</span>
-        
-      </div>
-      
-      
-        <div style="display:flex;gap:8px;margin-top:10px;font-size:13px;flex-wrap:wrap;">
-          <span style="color:var(--accent);font-weight:600;flex:none;">签证</span>
-          <span style="color:var(--ink-soft);">免签</span>
-        </div>
-        <div style="display:flex;gap:8px;margin-top:10px;font-size:13px;flex-wrap:wrap;">
-          <span style="color:var(--accent);font-weight:600;flex:none;">电话卡</span>
-          <span style="color:var(--ink-soft);">迪拜落地领取流量卡。</span>
-        </div>
-      
-      
-      
-    <div style="padding:12px 0 12px 14px;border-left:2px solid var(--line);margin:14px 0 0 4px;">
-      <div style="font-size:15px;font-weight:600;">
-        迪拜
-        <span style="font-size:11.5px;color:var(--muted);font-weight:400;"> · 1 天</span>
-      </div>
-      
-        <ul style="margin:6px 0 0;padding-left:16px;">
-          <li style="font-size:13px;margin:4px 0;color:var(--ink-soft);">落地领取流量卡；出机场办理地铁一日卡</li><li style="font-size:13px;margin:4px 0;color:var(--ink-soft);">天气太热，不建议把大量时间放在老城区，更适合去商场吹空调</li><li style="font-size:13px;margin:4px 0;color:var(--ink-soft);">去了哈利法塔和 Dubai Mall</li><li style="font-size:13px;margin:4px 0;color:var(--ink-soft);">如果乘坐 Emirates，可以向空姐要拍立得和航空公司周边礼物</li><li style="font-size:13px;margin:4px 0;color:var(--ink-soft);">不要换太多现金</li><li style="font-size:13px;margin:4px 0;color:var(--ink-soft);">机场贵宾厅价格、服务等以后必须重新核实</li>
-        </ul>
-    </div>
-    </div>
-  </section>
-
-  <section class="sec" id="costs">
-    <div class="sec-label">05 · 花费</div>
-    <h2>59 天，一共花了多少</h2>
-    <div class="cost-total">¥22,400 <small>/ 59 天 · 2.2 万元</small></div>
-    
-    <div style="font-size:15px;color:var(--ink-soft);margin-top:8px;">含全部旅行支出：交通、住宿、餐饮、电话卡、门票、活动、潜水、租车、打车、签证、其他。</div>
-    <div style="font-size:13px;color:var(--muted);margin-top:6px;">按三份真实账单（微信/支付宝/工行Visa）+ 现金补充整理定稿；差额 ¥45 为零散现金未计入。工行卡按 1USD≈6.76CNY。</div>
-    <div style="overflow-x:auto;margin-top:14px;">
-      <table style="border-collapse:collapse;width:100%;min-width:640px;font-variant-numeric:tabular-nums;">
-        <thead><tr style="border-bottom:1px solid var(--line);"><th style="text-align:left;padding:6px 8px;font-size:12px;white-space:nowrap;position:sticky;left:0;background:var(--bg);">国家</th><th style="text-align:right;padding:6px 8px;font-size:12px;white-space:nowrap;">交通</th><th style="text-align:right;padding:6px 8px;font-size:12px;white-space:nowrap;">住宿</th><th style="text-align:right;padding:6px 8px;font-size:12px;white-space:nowrap;">餐饮</th><th style="text-align:right;padding:6px 8px;font-size:12px;white-space:nowrap;">活动</th><th style="text-align:right;padding:6px 8px;font-size:12px;white-space:nowrap;">门票</th><th style="text-align:right;padding:6px 8px;font-size:12px;white-space:nowrap;">通信</th><th style="text-align:right;padding:6px 8px;font-size:12px;white-space:nowrap;">其他</th><th style="text-align:right;padding:6px 8px;font-size:12px;white-space:nowrap;">合计</th></tr></thead>
-        <tbody><tr>
-      <td style="padding:7px 8px;font-size:12.5px;white-space:nowrap;position:sticky;left:0;background:var(--bg);font-weight:600;">中国</td>
-      <td style="padding:7px 8px;font-size:12.5px;text-align:right;color:var(--muted);white-space:nowrap;">1365</td><td style="padding:7px 8px;font-size:12.5px;text-align:right;color:var(--muted);white-space:nowrap;">350</td><td style="padding:7px 8px;font-size:12.5px;text-align:right;color:var(--muted);white-space:nowrap;">209</td><td style="padding:7px 8px;font-size:12.5px;text-align:right;color:var(--muted);white-space:nowrap;">0</td><td style="padding:7px 8px;font-size:12.5px;text-align:right;color:var(--muted);white-space:nowrap;">30</td><td style="padding:7px 8px;font-size:12.5px;text-align:right;color:var(--muted);white-space:nowrap;">0</td><td style="padding:7px 8px;font-size:12.5px;text-align:right;color:var(--muted);white-space:nowrap;">80</td>
-      <td style="padding:7px 8px;font-size:12.5px;text-align:right;color:var(--muted);white-space:nowrap;">2033</td>
-    </tr><tr>
-      <td style="padding:7px 8px;font-size:12.5px;white-space:nowrap;position:sticky;left:0;background:var(--bg);font-weight:600;">哈萨克斯坦</td>
-      <td style="padding:7px 8px;font-size:12.5px;text-align:right;color:var(--muted);white-space:nowrap;">1919</td><td style="padding:7px 8px;font-size:12.5px;text-align:right;color:var(--muted);white-space:nowrap;">193</td><td style="padding:7px 8px;font-size:12.5px;text-align:right;color:var(--muted);white-space:nowrap;">561</td><td style="padding:7px 8px;font-size:12.5px;text-align:right;color:var(--muted);white-space:nowrap;">316</td><td style="padding:7px 8px;font-size:12.5px;text-align:right;color:var(--muted);white-space:nowrap;">0</td><td style="padding:7px 8px;font-size:12.5px;text-align:right;color:var(--muted);white-space:nowrap;">44</td><td style="padding:7px 8px;font-size:12.5px;text-align:right;color:var(--muted);white-space:nowrap;">313</td>
-      <td style="padding:7px 8px;font-size:12.5px;text-align:right;color:var(--muted);white-space:nowrap;">3346</td>
-    </tr><tr>
-      <td style="padding:7px 8px;font-size:12.5px;white-space:nowrap;position:sticky;left:0;background:var(--bg);font-weight:600;">格鲁吉亚</td>
-      <td style="padding:7px 8px;font-size:12.5px;text-align:right;color:var(--muted);white-space:nowrap;">164</td><td style="padding:7px 8px;font-size:12.5px;text-align:right;color:var(--muted);white-space:nowrap;">0</td><td style="padding:7px 8px;font-size:12.5px;text-align:right;color:var(--muted);white-space:nowrap;">605</td><td style="padding:7px 8px;font-size:12.5px;text-align:right;color:var(--muted);white-space:nowrap;">353</td><td style="padding:7px 8px;font-size:12.5px;text-align:right;color:var(--muted);white-space:nowrap;">0</td><td style="padding:7px 8px;font-size:12.5px;text-align:right;color:var(--muted);white-space:nowrap;">55</td><td style="padding:7px 8px;font-size:12.5px;text-align:right;color:var(--muted);white-space:nowrap;">645</td>
-      <td style="padding:7px 8px;font-size:12.5px;text-align:right;color:var(--muted);white-space:nowrap;">1822</td>
-    </tr><tr>
-      <td style="padding:7px 8px;font-size:12.5px;white-space:nowrap;position:sticky;left:0;background:var(--bg);font-weight:600;">亚美尼亚</td>
-      <td style="padding:7px 8px;font-size:12.5px;text-align:right;color:var(--muted);white-space:nowrap;">1242</td><td style="padding:7px 8px;font-size:12.5px;text-align:right;color:var(--muted);white-space:nowrap;">0</td><td style="padding:7px 8px;font-size:12.5px;text-align:right;color:var(--muted);white-space:nowrap;">0</td><td style="padding:7px 8px;font-size:12.5px;text-align:right;color:var(--muted);white-space:nowrap;">0</td><td style="padding:7px 8px;font-size:12.5px;text-align:right;color:var(--muted);white-space:nowrap;">0</td><td style="padding:7px 8px;font-size:12.5px;text-align:right;color:var(--muted);white-space:nowrap;">0</td><td style="padding:7px 8px;font-size:12.5px;text-align:right;color:var(--muted);white-space:nowrap;">47</td>
-      <td style="padding:7px 8px;font-size:12.5px;text-align:right;color:var(--muted);white-space:nowrap;">1289</td>
-    </tr><tr>
-      <td style="padding:7px 8px;font-size:12.5px;white-space:nowrap;position:sticky;left:0;background:var(--bg);font-weight:600;">土耳其</td>
-      <td style="padding:7px 8px;font-size:12.5px;text-align:right;color:var(--muted);white-space:nowrap;">1426</td><td style="padding:7px 8px;font-size:12.5px;text-align:right;color:var(--muted);white-space:nowrap;">608</td><td style="padding:7px 8px;font-size:12.5px;text-align:right;color:var(--muted);white-space:nowrap;">938</td><td style="padding:7px 8px;font-size:12.5px;text-align:right;color:var(--muted);white-space:nowrap;">120</td><td style="padding:7px 8px;font-size:12.5px;text-align:right;color:var(--muted);white-space:nowrap;">4</td><td style="padding:7px 8px;font-size:12.5px;text-align:right;color:var(--muted);white-space:nowrap;">51</td><td style="padding:7px 8px;font-size:12.5px;text-align:right;color:var(--muted);white-space:nowrap;">700</td>
-      <td style="padding:7px 8px;font-size:12.5px;text-align:right;color:var(--muted);white-space:nowrap;">3847</td>
-    </tr><tr>
-      <td style="padding:7px 8px;font-size:12.5px;white-space:nowrap;position:sticky;left:0;background:var(--bg);font-weight:600;">埃及</td>
-      <td style="padding:7px 8px;font-size:12.5px;text-align:right;color:var(--muted);white-space:nowrap;">2848</td><td style="padding:7px 8px;font-size:12.5px;text-align:right;color:var(--muted);white-space:nowrap;">1017</td><td style="padding:7px 8px;font-size:12.5px;text-align:right;color:var(--muted);white-space:nowrap;">1437</td><td style="padding:7px 8px;font-size:12.5px;text-align:right;color:var(--muted);white-space:nowrap;">2406</td><td style="padding:7px 8px;font-size:12.5px;text-align:right;color:var(--muted);white-space:nowrap;">231</td><td style="padding:7px 8px;font-size:12.5px;text-align:right;color:var(--muted);white-space:nowrap;">0</td><td style="padding:7px 8px;font-size:12.5px;text-align:right;color:var(--muted);white-space:nowrap;">1676</td>
-      <td style="padding:7px 8px;font-size:12.5px;text-align:right;color:var(--muted);white-space:nowrap;">9616</td>
-    </tr><tr>
-      <td style="padding:7px 8px;font-size:12.5px;white-space:nowrap;position:sticky;left:0;background:var(--bg);font-weight:600;">阿联酋</td>
-      <td style="padding:7px 8px;font-size:12.5px;text-align:right;color:var(--muted);white-space:nowrap;">40</td><td style="padding:7px 8px;font-size:12.5px;text-align:right;color:var(--muted);white-space:nowrap;">0</td><td style="padding:7px 8px;font-size:12.5px;text-align:right;color:var(--muted);white-space:nowrap;">102</td><td style="padding:7px 8px;font-size:12.5px;text-align:right;color:var(--muted);white-space:nowrap;">0</td><td style="padding:7px 8px;font-size:12.5px;text-align:right;color:var(--muted);white-space:nowrap;">0</td><td style="padding:7px 8px;font-size:12.5px;text-align:right;color:var(--muted);white-space:nowrap;">0</td><td style="padding:7px 8px;font-size:12.5px;text-align:right;color:var(--muted);white-space:nowrap;">260</td>
-      <td style="padding:7px 8px;font-size:12.5px;text-align:right;color:var(--muted);white-space:nowrap;">403</td>
-    </tr></tbody>
-      </table>
-    </div>
-  </section>
-
-  <section class="sec" id="photos">
-    <div class="sec-label">06 · 实拍</div>
-    <h2>真实照片</h2>
-    <div style="border:1px dashed var(--line);border-radius:14px;padding:36px 20px;text-align:center;margin-top:12px;">
-    <div style="font-size:14px;color:var(--ink-soft);">实拍区块 · 等待真实照片</div>
-    <div style="font-size:12.5px;color:var(--muted);margin-top:6px;">待上传：真实照片在 iPhone 相册，按国家/城市归档后填充到 site/assets/photos/。</div>
   </div>
-  </section>
+</section>
 
-  <section class="sec" id="verify">
-    <div class="sec-label">07 · 信息核实</div>
-    <h2>哪些信息会变化</h2>
-    
-    <div style="font-size:13.5px;color:var(--ink-soft);">签证、保险要求、交通、价格、门票、电话卡、营业时间等会变化的信息，最终发布前会重新联网核实，并标明更新时间。</div>
-    <ul style="margin:10px 0 0;padding-left:16px;font-size:13px;color:var(--ink-soft);">
-      <li style="margin:4px 0;">热气球价格</li><li style="margin:4px 0;">费特希耶海盗船船票（约 2000 里拉）与二楼甲板座位（约 1000 里拉）</li><li style="margin:4px 0;">伊斯坦布尔交通小红卡制卡费（记忆 210 里拉）</li><li style="margin:4px 0;">马特鲁海滩费用（记忆 15 过路费 + 50 门票）</li><li style="margin:4px 0;">迪拜机场贵宾厅价格与服务</li><li style="margin:4px 0;">各国 2026 年最新签证与保险政策</li>
-    </ul>
-    <div style="margin-top:18px;font-size:12.5px;color:var(--muted);border-top:1px solid var(--line);padding-top:14px;">
-      免责声明：本网站为一次真实个人旅行的记录与攻略整理。文中价格、签证政策、营业时间、班次等时效性信息均基于旅行期间的亲身经历与记忆，可能已过时；出行前请务必通过官方渠道核实。旅行者感受属于个人判断，不代表客观事实。
+<!-- ============ 走过七国 ============ -->
+<section class="section">
+  <div class="container">
+    <div class="section-head" style="display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:8px;">
+      <div>
+        <span class="eyebrow">SEVEN COUNTRIES</span>
+        <h2 class="block-title">走过七国</h2>
+      </div>
+      <span class="drag-hint" style="margin-bottom:4px;">拖动浏览</span>
     </div>
-  </section>
+    <div class="drag-scroll" id="countryDrag"></div>
+  </div>
+</section>
 
-</main>
+<!-- ============ 花费总览 ============ -->
+<section class="section">
+  <div class="container">
+    <div class="section-head">
+      <span class="eyebrow">REAL COSTS · 真实花费</span>
+      <h2 class="block-title">59 天，花了两万二</h2>
+      <p class="lead" style="margin-top:8px;">三份真实账单（微信 / 支付宝 / 工行 Visa）逐笔核对整理，<strong>¥22,355</strong> 覆盖交通、住宿、餐饮、电话卡、门票、活动、潜水、租车、打车、签证等全部支出。</p>
+    </div>
+    <div style="display:flex;gap:14px;flex-wrap:wrap;margin-bottom:18px;">
+      <div class="card" style="flex:1 1 200px;min-width:0;">
+        <div class="eyebrow">TOTAL · 总计</div>
+        <div style="font-size:38px;font-weight:700;letter-spacing:-.02em;margin-top:4px;">¥22,355</div>
+        <div style="font-size:13px;color:var(--soft);margin-top:4px;">目标预算 ¥22,400 · 差额 ¥45 未计入</div>
+      </div>
+      <div class="card" style="flex:1 1 200px;min-width:0;">
+        <div class="eyebrow">DAYS · 天数</div>
+        <div style="font-size:38px;font-weight:700;margin-top:4px;">59</div>
+        <div style="font-size:13px;color:var(--soft);margin-top:4px;">2026.06.29 — 08.26</div>
+      </div>
+      <div class="card" style="flex:1 1 200px;min-width:0;">
+        <div class="eyebrow">COUNTRIES · 国家</div>
+        <div style="font-size:38px;font-weight:700;margin-top:4px;">6 + 1</div>
+        <div style="font-size:13px;color:var(--soft);margin-top:4px;">6 个外国 + 中国出发返程</div>
+      </div>
+    </div>
+    <div class="tbl-wrap" id="costsTable"></div>
+    <div style="margin-top:14px;font-size:12.5px;color:var(--soft);" id="costsNote"></div>
+    <div style="margin-top:16px;"><a class="btn btn-dark" href="costs.html">完整花费明细 →</a></div>
+  </div>
+</section>
 
-<footer class="wrap">
-  <div class="sig-line">2.2万 · 6国 · 59天 · 亚欧非大环线</div>
-  <div>一个人旅行 · 极致轻量化 · 青旅多人间 · 公共交通 · 自己做饭 · 追求性价比</div>
-  <div style="margin-top:8px;">基于 travel-plan-viz 开源项目（MIT）构建 · 信息更新时间：待发布前核实后标注</div>
-</footer>
+<!-- ============ 出发之前 ============ -->
+<section class="section">
+  <div class="container">
+    <div class="section-head">
+      <span class="eyebrow">BEFORE YOU GO</span>
+      <h2 class="block-title">出发之前，把这些读完。</h2>
+      <p class="lead" style="margin-top:8px;">签证、保险、电话卡、换汇、住宿——最难查的不是景点，而是这些。</p>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px;">
+      <a class="card" href="prepare.html" style="display:block;">
+        <div class="eyebrow">PREPARE</div>
+        <h3 style="font-size:17px;margin:6px 0 6px;">出发准备</h3>
+        <p style="font-size:13.5px;color:var(--soft);">签证速查 · 保险 · 电话卡 · 支付换汇 · 行李 · App · 避坑</p>
+        <div style="margin-top:10px;font-size:13px;font-weight:600;">阅读 →</div>
+      </a>
+      <a class="card" href="grand-loop.html" style="display:block;">
+        <div class="eyebrow">GRAND LOOP</div>
+        <h3 style="font-size:17px;margin:6px 0 6px;">大环线怎么走</h3>
+        <p style="font-size:13.5px;color:var(--soft);">六段接驳的每一程 · 陆路过境 · 17 小时大巴 · 跨海飞行</p>
+        <div style="margin-top:10px;font-size:13px;font-weight:600;">阅读 →</div>
+      </a>
+      <a class="card" href="costs.html" style="display:block;">
+        <div class="eyebrow">COSTS</div>
+        <h3 style="font-size:17px;margin:6px 0 6px;">花费明细</h3>
+        <p style="font-size:13.5px;color:var(--soft);">按国家 × 类别：交通 / 住宿 / 餐饮 / 活动 / 门票 / 通信 / 其他</p>
+        <div style="margin-top:10px;font-size:13px;font-weight:600;">阅读 →</div>
+      </a>
+      <a class="card" href="photos.html" style="display:block;">
+        <div class="eyebrow">PHOTOS</div>
+        <h3 style="font-size:17px;margin:6px 0 6px;">实拍</h3>
+        <p style="font-size:13.5px;color:var(--soft);">路上拍的照片，全部来自 iPhone 相册真实素材</p>
+        <div style="margin-top:10px;font-size:13px;font-weight:600;">阅读 →</div>
+      </a>
+    </div>
+  </div>
+</section>
 
-<script id="trip-data" type="application/json">{"meta":{"title":"亚欧非大环线","signature":"2.2万 · 6国 · 59天","signatureSub":"2026.06.29 — 2026.08.26 · 一个人 · 极致轻量化","tagline":"一个真正走完这条路的人，把真实经验整理成一份可以直接参考的旅行攻略。","totalDays":59,"totalCost":"¥22,400","foreignCountryCount":6,"startDate":"2026-06-29","endDate":"2026-08-26"},"travelStyle":["一个人旅行","极致轻量化","青旅多人间为主","大量公共交通","部分飞机","部分租车","经常自己做饭","追求性价比","不追求把所有景点打卡完"],"payment":{"domestic":"中国国内：微信、支付宝。","before":"出国前：兑换 300 美元现金。","abroad":"境外：大部分时候使用 Visa；美元主要用于兑换当地货币。","egypt":"埃及：使用 Visa 在 National Bank ATM 取现，每笔国内银行卡约收 3 美元手续费。"},"accommodation":{"style":"住宿以青旅多人间为主，机场过夜 2 次。","booking":"住宿主要使用 Booking + Agoda 比价。","turkey":"土耳其当地网络环境可能无法正常使用 Booking；因为使用了提前购买的国内流量卡，所以可以正常使用。"},"route":[{"from":"中国","to":"哈萨克斯坦","how":"伊犁 → 阿拉木图：汽车","note":"哈萨克斯坦免签。"},{"from":"哈萨克斯坦","to":"格鲁吉亚","how":"阿拉木图 → 阿克套：飞机；阿克套 → 第比利斯：飞机","note":"第比利斯机场过夜后：机场 → 公交 → 小巴车站 → 西格纳吉。"},{"from":"格鲁吉亚","to":"亚美尼亚","how":"第比利斯 → 姆兹赫塔 → 久姆里 → 埃里温：3 人租车自驾","note":"也可以拆开使用公共交通。"},{"from":"格鲁吉亚","to":"土耳其","how":"巴统公交 → 格土边境（步行过境）→ 土耳其小巴 → Hopa 汽车站 → 长途汽车 → Nevşehir → 换乘 → 格雷梅","note":"这一段长途汽车约 17 小时。"},{"from":"土耳其","to":"埃及","how":"伊斯坦布尔 → 沙姆沙伊赫：飞机","note":"伊斯坦布尔有两个机场，订票一定确认机场；沙姆沙伊赫机场 → 达哈卜：Taxi。"},{"from":"埃及","to":"阿联酋","how":"开罗 → 迪拜：飞机","note":""},{"from":"阿联酋","to":"中国","how":"迪拜 → 杭州：飞机；杭州 → 怀化：约 17 小时火车","note":""}],"countries":[{"id":"cn","name":"中国","days":7,"isHome":true,"summary":"出发与返程段。","facts":{"transport":["沅陵 → 长沙：汽车","长沙 → 乌鲁木齐：飞机","乌鲁木齐 → 伊犁：火车","杭州 → 怀化：约 17 小时火车"]},"cities":[{"name":"乌鲁木齐","days":3,"items":[]},{"name":"伊犁","days":2,"items":[]},{"name":"杭州","days":2,"items":[]}]},{"id":"kz","name":"哈萨克斯坦","days":7,"visa":"免签","sim":"提前购买电话卡，使用 6 天。","cities":[{"name":"阿拉木图","days":4,"items":["绿巴扎附近免费打卡三件套值得看看","地铁站值得打卡，每个站是不同的苏联风格","城市交通以公交、地铁为主，可以办公交卡","落日飞车不推荐：排队久，排到天黑","博物馆 70，文物较少，性价比不高","物价不便宜，更推荐自己做饭","推荐住宿：Good Inn Hostel"]},{"name":"阿克套","days":3,"items":["哈萨克斯坦最西边，靠近里海","可以报 Mangystau 一日团（Instagram：mangystau_safari；也可以使用 GetYourGuide）"]}]},{"id":"ge","name":"格鲁吉亚","days":6,"visa":"免签","sim":"建议落地买电话卡。","insurance":"旅行保险可能被查——本人实际被查过，务必购买保险。","cities":[{"name":"第比利斯","items":["Sol’s Kitchen（前台是南非小哥）","City Guli Hostel：厨房好用，离自由广场近","可以报 Kazbegi 一日团","徒步可以考虑 Mestia、Juta"]},{"name":"西格纳吉","items":["可以当天往返，也可以住一晚","推荐那托与拉多青旅：房东一家喜欢中国文化，会用自家葡萄酒和 Chacha 招待客人"]},{"name":"姆兹赫塔","items":["巨石阵","圣剑山","不自驾建议包车"]},{"name":"巴统","items":["住宿：Hostel VOYAGE","赌场很多；参加过赌场宣传活动，有免费啤酒和周边礼物","可以少量兑换土耳其里拉；部分小巴和商店只收里拉"]}]},{"id":"am","name":"亚美尼亚","days":4,"visa":"免签","sim":"使用“一带一路”流量卡，约 11.8 元/天。","cities":[{"name":"久姆里","items":[]},{"name":"埃里温","items":["种族灭绝纪念馆、神庙、教堂、石头狂想曲（具体景点名称以后根据照片确认）","几乎全程自己做饭","普通游客建议青旅"]},{"name":"塞凡镇","items":["公交往返埃里温","塞凡湖、两座教堂","山下 BBQ 好吃"]}]},{"id":"tr","name":"土耳其","days":11,"visa":"免签","sim":"提前购买流量卡。","note":"当地网络环境可能无法正常使用 Booking；因为使用了提前购买的国内流量卡，所以可以正常使用。","cities":[{"name":"格雷梅","items":["住宿：Home Cave Hostel，厨房和三楼阳台很大","连续 3 天自己做饭，在 101 买食材","热气球需要提前预定，且不一定每天飞","玫瑰谷徒步推荐","山坡可以看日落和夜景","没有坐热气球，而是在地面追热气球"]},{"name":"安塔利亚","items":["主要是去费特希耶的中转站","住宿：BE BOLD Hostel，青旅经常有活动","可以钓螃蟹（Decathlon 买线和抄网）","在 101 买鸡腿"]},{"name":"卡什","items":["D700 公路非常漂亮，海水像果冻","不需要专门去所谓“最美海滩”","中转时吃午饭、喝咖啡、三角梅拍照，然后继续去费特希耶"]},{"name":"费特希耶","items":["强烈推荐海盗船跳岛游","黑珍珠、龙号中国游客多；其他船外国游客更多","二楼甲板座位约 1000 里拉（价格以后核实）","船费约 2000 里拉，只收现金","住宿：HZD 青旅","去海滩需要城市 mini 巴士"]},{"name":"伊斯坦布尔","items":["新欧洲区、老欧洲区、亚洲区；亚洲区物价更便宜","圣索菲亚大教堂、蓝色清真寺在老欧洲区","住宿：塔克西姆中央酒店","建议办理交通小红卡（制卡费 210 里拉，价格以后核实）","可以坐地铁、游轮；刷 Visa 价格明显更高","两次游轮基本可以回本","推荐烤玉米、土耳其卷饼"]}]},{"id":"eg","name":"埃及","days":23,"visa":"落地签 30 美元","sim":"落地购买 WE 电话卡（在达哈卜使用 30GB WE 流量卡）。","transport":"Uber 和 inDrive 都很好用，打车比前面国家便宜。","cities":[{"name":"达哈卜","items":["非常适合躺平，物价不高；不去海上餐厅就可以控制成本","潜水非常便宜：1 对 2 全英教学约 300 欧元，1 对 1 约 350 欧元","中国游客较多的潜店：Seven、Fish and Friends","两证通常约 5 天 11 潜","桨板约 200–300 埃镑；户外野攀约 20 美元","还有西奈山日出、马术、ATV、风筝冲浪、自由潜、海钓、约旦一日游等活动"]},{"name":"亚历山大","items":["图书馆（个人认为可以直接省略）","可以从达哈卜直接去马特鲁"]},{"name":"马特鲁","items":["住宿：龙门客栈青旅（中国人开的，有住宿和餐厅）","有多个海滩；包车约 4 小时 500–700 埃镑","Agooba Beach 值得去；马特鲁之眼可以下海","海滩费用记忆为 15 过路费 + 50 门票（价格以后核实）"]},{"name":"锡瓦","items":["小巴到达；下车后如果赶时间，要第一时间买去开罗的车票","住宿：A&S House，当地一家三口经营；海外旅行中唯一一次独享一间房","市内主要坐三轮车","盐湖、克娄巴特拉温泉","撒哈拉沙漠一日团强烈推荐，约 300 埃镑","晚上有鸡腿"]},{"name":"开罗","items":["住宿：马迪纳旅舍（Agoda 预订，位置不错）","面对推销者要强硬；买东西货比三家、砍价","开罗博物馆可以通过闲鱼购买便宜票","没有进入金字塔：热、人多、臭","可以在金字塔外肯德基二楼拍狮身人面像","垃圾城值得去"]}]},{"id":"ae","name":"阿联酋","days":1,"visa":"免签","sim":"迪拜落地领取流量卡。","cities":[{"name":"迪拜","days":1,"items":["落地领取流量卡；出机场办理地铁一日卡","天气太热，不建议把大量时间放在老城区，更适合去商场吹空调","去了哈利法塔和 Dubai Mall","如果乘坐 Emirates，可以向空姐要拍立得和航空公司周边礼物","不要换太多现金","机场贵宾厅价格、服务等以后必须重新核实"]}]}],"costs":{"total":"¥22,400","note":"含全部旅行支出：交通、住宿、餐饮、电话卡、门票、活动、潜水、租车、打车、签证、其他。","status":"按三份真实账单（微信/支付宝/工行Visa）+ 现金补充整理定稿；差额 ¥45 为零散现金未计入。工行卡按 1USD≈6.76CNY。","categories":["交通","住宿","餐饮","活动","门票","通信","其他"],"byCountry":{"中国":{"交通":1365,"住宿":350,"餐饮":209,"活动":0,"门票":30,"通信":0,"其他":80,"合计":2033},"哈萨克斯坦":{"交通":1919,"住宿":193,"餐饮":561,"活动":316,"门票":0,"通信":44,"其他":313,"合计":3346},"格鲁吉亚":{"交通":164,"住宿":0,"餐饮":605,"活动":353,"门票":0,"通信":55,"其他":645,"合计":1822},"亚美尼亚":{"交通":1242,"住宿":0,"餐饮":0,"活动":0,"门票":0,"通信":0,"其他":47,"合计":1289},"土耳其":{"交通":1426,"住宿":608,"餐饮":938,"活动":120,"门票":4,"通信":51,"其他":700,"合计":3847},"埃及":{"交通":2848,"住宿":1017,"餐饮":1437,"活动":2406,"门票":231,"通信":0,"其他":1676,"合计":9616},"阿联酋":{"交通":40,"住宿":0,"餐饮":102,"活动":0,"门票":0,"通信":0,"其他":260,"合计":403}},"highlights":["交通是大头：含 7 段国际/长线交通，返程「开罗→杭州(经迪拜)」机票 ¥2,685","潜水：达哈卜 Seven Heaven 两证，13,968埃镑(卡付) + 50美元(现金)","住宿以青旅多人间为主，Booking + Agoda 比价，机场过夜 2 次","埃及 23 天只花 ¥9,616，性价比最高的国家之一","亚美尼亚账单只有 ¥64 可见——埃里温几乎全程现金 + 自己做饭"]},"photos":{"status":"待上传：真实照片在 iPhone 相册，按国家/城市归档后填充到 site/assets/photos/。","byCountry":{}},"verification":{"note":"签证、保险要求、交通、价格、门票、电话卡、营业时间等会变化的信息，最终发布前会重新联网核实，并标明更新时间。","priceToVerify":["热气球价格","费特希耶海盗船船票（约 2000 里拉）与二楼甲板座位（约 1000 里拉）","伊斯坦布尔交通小红卡制卡费（记忆 210 里拉）","马特鲁海滩费用（记忆 15 过路费 + 50 门票）","迪拜机场贵宾厅价格与服务","各国 2026 年最新签证与保险政策"]},"CITY_COORDS":{"沅陵":[28.45,110.4],"长沙":[28.23,112.94],"乌鲁木齐":[43.83,87.62],"伊犁":[43.92,81.28],"阿拉木图":[43.24,76.89],"阿克套":[43.65,51.16],"第比利斯":[41.72,44.78],"西格纳吉":[41.62,45.92],"姆兹赫塔":[41.84,44.72],"巴统":[41.65,41.64],"久姆里":[40.79,43.85],"埃里温":[40.18,44.51],"塞凡镇":[40.56,44.94],"格雷梅":[38.64,34.83],"安塔利亚":[36.89,30.71],"卡什":[36.2,29.64],"费特希耶":[36.62,29.11],"伊斯坦布尔":[41.01,28.98],"达哈卜":[28.49,34.51],"亚历山大":[31.2,29.92],"马特鲁":[31.35,27.24],"锡瓦":[29.2,25.52],"开罗":[30.04,31.24],"迪拜":[25.2,55.27],"杭州":[30.27,120.16],"怀化":[27.55,110]}}</script>
-<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<!-- ============ 独立整理 · 持续核对 ============ -->
+<section class="section" style="padding-bottom:20px;">
+  <div class="container">
+    <div class="verify-note">
+      <div>
+        <strong style="color:var(--fg);">独立整理 · 持续核对</strong><br>
+        这是一份真实走完后的攻略。旅行经历全部来自本人；签证、保险、价格等会变化的信息，发布前会重新联网核实并标注更新时间。照片为本人实拍。
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="site-footer" id="siteFooter"></footer>
+
+<script src="travel-data.js"></script>
+<script src="app.js"></script>
 <script>
-// Leaflet 地图引擎。纯函数（buildNavLink/buildMapAppLinks/routeCoordinates/gcj02ToWgs84）可单元测试；
-// initTravelMap 需浏览器 + Leaflet (L)。浏览器与 Node 双用。
-
-// HTML 转义，防止 XSS
-function escapeHTML(s) {
-  return String(s)
-    .replace(/&/g, '&amp;')
-    .replace(/</g, '&lt;')
-    .replace(/>/g, '&gt;')
-    .replace(/"/g, '&quot;')
-    .replace(/'/g, '&#39;');
-}
-
-// 生成跳转手机地图导航的链接。
-// iOS 不识别 geo: scheme，用 Apple Maps 的 https 通用链接；其余平台用 geo:。
-// ua 可选（浏览器里传 navigator.userAgent），不传则回退 geo:。
-function buildNavLink(lat, lng, label, ua) {
-  if (ua && /iPhone|iPad|iPod/.test(ua)) {
-    return 'https://maps.apple.com/?ll=' + lat + ',' + lng + '&q=' + encodeURIComponent(label);
-  }
-  return 'geo:' + lat + ',' + lng + '?q=' + lat + ',' + lng + '(' + encodeURIComponent(label) + ')';
-}
-
-// 常用地图 App 的点位链接（免 key 的官方 URI 规范：高德 URI API、Google Maps URLs）。
-// 这不是 page-contract 的 actionLink——不承载实时数据主张，只是"打开地图看这个点"。
-// 境内点只给高德（Google 地图境内不可用、底图坐标系还会偏移）；境外点给 Google + 高德。
-// 输入坐标一律 WGS-84：高德 URI 用 coordinate=wgs84 声明由其换算，Google 本身即 WGS-84。
-// isInChinaBBox 声明在下方 GCJ 区块（函数声明有提升，此处可用）。
-function buildMapAppLinks(lat, lng, label) {
-  var amap = {
-    label: '高德地图',
-    url: 'https://uri.amap.com/marker?position=' + lng + ',' + lat
-      + '&name=' + encodeURIComponent(label)
-      + '&coordinate=wgs84&callnative=1&src=travel-plan-viz',
-  };
-  var google = {
-    label: 'Google 地图',
-    url: 'https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent(lat + ',' + lng),
-  };
-  return isInChinaBBox(lat, lng) ? [amap] : [google, amap];
-}
-
-// —— GCJ-02 → WGS-84 坐标转换 ——
-// 高德/腾讯地图返回的坐标是 GCJ-02（国测局加密），直接画在 OSM（WGS-84）瓦片上
-// 会偏移一百到几百米。凡坐标来自高德/腾讯类 skill，必须先经此函数转换。
-// 中国境外坐标原样返回（GCJ-02 仅在境内加偏）。
-var GCJ_A = 6378245.0;
-var GCJ_EE = 0.00669342162296594323;
-
-function isInChinaBBox(lat, lng) {
-  return lng >= 72.004 && lng <= 137.8347 && lat >= 0.8293 && lat <= 55.8271;
-}
-
-function gcjTransformLat(x, y) {
-  var ret = -100.0 + 2.0 * x + 3.0 * y + 0.2 * y * y + 0.1 * x * y + 0.2 * Math.sqrt(Math.abs(x));
-  ret += (20.0 * Math.sin(6.0 * x * Math.PI) + 20.0 * Math.sin(2.0 * x * Math.PI)) * 2.0 / 3.0;
-  ret += (20.0 * Math.sin(y * Math.PI) + 40.0 * Math.sin(y / 3.0 * Math.PI)) * 2.0 / 3.0;
-  ret += (160.0 * Math.sin(y / 12.0 * Math.PI) + 320.0 * Math.sin(y * Math.PI / 30.0)) * 2.0 / 3.0;
-  return ret;
-}
-
-function gcjTransformLng(x, y) {
-  var ret = 300.0 + x + 2.0 * y + 0.1 * x * x + 0.1 * x * y + 0.1 * Math.sqrt(Math.abs(x));
-  ret += (20.0 * Math.sin(6.0 * x * Math.PI) + 20.0 * Math.sin(2.0 * x * Math.PI)) * 2.0 / 3.0;
-  ret += (20.0 * Math.sin(x * Math.PI) + 40.0 * Math.sin(x / 3.0 * Math.PI)) * 2.0 / 3.0;
-  ret += (150.0 * Math.sin(x / 12.0 * Math.PI) + 300.0 * Math.sin(x / 30.0 * Math.PI)) * 2.0 / 3.0;
-  return ret;
-}
-
-function gcj02ToWgs84(lat, lng) {
-  if (!isInChinaBBox(lat, lng)) return { lat: lat, lng: lng };
-  var dLat = gcjTransformLat(lng - 105.0, lat - 35.0);
-  var dLng = gcjTransformLng(lng - 105.0, lat - 35.0);
-  var radLat = lat / 180.0 * Math.PI;
-  var magic = Math.sin(radLat);
-  magic = 1 - GCJ_EE * magic * magic;
-  var sqrtMagic = Math.sqrt(magic);
-  dLat = (dLat * 180.0) / ((GCJ_A * (1 - GCJ_EE)) / (magic * sqrtMagic) * Math.PI);
-  dLng = (dLng * 180.0) / (GCJ_A / sqrtMagic * Math.cos(radLat) * Math.PI);
-  return { lat: lat - dLat, lng: lng - dLng };
-}
-
-// 从有序点位提取 [lat,lng] 数组，用于连线
-function routeCoordinates(points) {
-  return points.map(function (p) { return [p.lat, p.lng]; });
-}
-
-// 初始化地图：编号 divIcon 标记、按序虚线路线、点击弹出 名称+时间+导航链接。
-// elementId: 容器 id；points: [{lat, lng, name, time}]（按行程顺序，坐标须为 WGS-84）
-// opts 可选：{ tileUrl, attribution } 替换默认 OSM 瓦片源（如 OSM 访问不稳时换镜像）。
-function initTravelMap(elementId, points, opts) {
-  opts = opts || {};
-  var map = L.map(elementId);
-  L.tileLayer(opts.tileUrl || 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-    attribution: opts.attribution || '© OpenStreetMap contributors',
-    maxZoom: 19,
-  }).addTo(map);
-
-  var ua = (typeof navigator !== 'undefined' && navigator.userAgent) || '';
-  points.forEach(function (p, i) {
-    var icon = L.divIcon({
-      className: 'route-pin',
-      html: '<span class="route-pin__num">' + (i + 1) + '</span>',
-      iconSize: [28, 28],
-      iconAnchor: [14, 14],
-    });
-    var navLinks = [{ label: '导航', url: buildNavLink(p.lat, p.lng, p.name, ua) }]
-      .concat(buildMapAppLinks(p.lat, p.lng, p.name));
-    L.marker([p.lat, p.lng], { icon: icon }).addTo(map).bindPopup(
-      '<b>' + (i + 1) + '. ' + escapeHTML(p.name) + '</b><br>'
-      + (p.time ? escapeHTML(p.time) + '<br>' : '')
-      + navLinks.map(function (l) {
-          return '<a href="' + l.url + '">' + escapeHTML(l.label) + '</a>';
-        }).join(' · ')
-    );
-  });
-
-  var coords = routeCoordinates(points);
-  if (coords.length > 1) {
-    L.polyline(coords, { dashArray: '6 8', weight: 2 }).addTo(map);
-  }
-  map.fitBounds(coords.length ? coords : [[0, 0]], { padding: [30, 30] });
-  return map;
-}
-
-if (typeof module !== 'undefined' && module.exports) {
-  module.exports = {
-    buildNavLink: buildNavLink,
-    buildMapAppLinks: buildMapAppLinks,
-    routeCoordinates: routeCoordinates,
-    gcj02ToWgs84: gcj02ToWgs84,
-    initTravelMap: initTravelMap,
-  };
-}
-
 (function () {
-  initTravelMap('map', [{"lat":28.45,"lng":110.4,"name":"沅陵","time":"中国"},{"lat":28.23,"lng":112.94,"name":"长沙","time":"中国"},{"lat":43.83,"lng":87.62,"name":"乌鲁木齐","time":"中国 · 3 天"},{"lat":43.92,"lng":81.28,"name":"伊犁","time":"中国 · 2 天"},{"lat":43.24,"lng":76.89,"name":"阿拉木图","time":"哈萨克斯坦 · 4 天"},{"lat":43.65,"lng":51.16,"name":"阿克套","time":"哈萨克斯坦 · 3 天"},{"lat":41.72,"lng":44.78,"name":"第比利斯","time":"格鲁吉亚"},{"lat":41.62,"lng":45.92,"name":"西格纳吉","time":"格鲁吉亚"},{"lat":41.84,"lng":44.72,"name":"姆兹赫塔","time":"格鲁吉亚"},{"lat":41.65,"lng":41.64,"name":"巴统","time":"格鲁吉亚"},{"lat":40.79,"lng":43.85,"name":"久姆里","time":"亚美尼亚"},{"lat":40.18,"lng":44.51,"name":"埃里温","time":"亚美尼亚"},{"lat":40.56,"lng":44.94,"name":"塞凡镇","time":"亚美尼亚"},{"lat":38.64,"lng":34.83,"name":"格雷梅","time":"土耳其"},{"lat":36.89,"lng":30.71,"name":"安塔利亚","time":"土耳其"},{"lat":36.2,"lng":29.64,"name":"卡什","time":"土耳其"},{"lat":36.62,"lng":29.11,"name":"费特希耶","time":"土耳其"},{"lat":41.01,"lng":28.98,"name":"伊斯坦布尔","time":"土耳其"},{"lat":28.49,"lng":34.51,"name":"达哈卜","time":"埃及"},{"lat":31.2,"lng":29.92,"name":"亚历山大","time":"埃及"},{"lat":31.35,"lng":27.24,"name":"马特鲁","time":"埃及"},{"lat":29.2,"lng":25.52,"name":"锡瓦","time":"埃及"},{"lat":30.04,"lng":31.24,"name":"开罗","time":"埃及"},{"lat":25.2,"lng":55.27,"name":"迪拜","time":"阿联酋 · 1 天"},{"lat":30.27,"lng":120.16,"name":"杭州","time":"中国 · 2 天"}], {
-    tileUrl: 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
-    attribution: '© OpenStreetMap contributors'
-  });
+  var T = window.TRAVEL;
+
+  // ---- Hero 背景：先用纹样占位，有照片后替换 ----
+  var pattern = "url(\"data:image/svg+xml," + encodeURIComponent(
+    "<svg xmlns='http://www.w3.org/2000/svg' width='96' height='96'>" +
+    "<rect width='96' height='96' fill='#14263c'/>" +
+    "<path d='M48 10 L62 34 L86 48 L62 62 L48 86 L34 62 L10 48 L34 34 Z' fill='none' stroke='#b8943f' stroke-width='1.4' opacity='0.55'/>" +
+    "<path d='M48 22 L58 36 L72 48 L58 60 L48 74 L38 60 L24 48 L38 36 Z' fill='none' stroke='#7c9a6d' stroke-width='1.1' opacity='0.5'/>" +
+    "<circle cx='48' cy='48' r='2.4' fill='#e8d9a8' opacity='0.7'/>" +
+    "<path d='M0 96 L12 84 L24 96 M72 0 L84 12 L96 0' stroke='#b8943f' stroke-width='1' opacity='0.35'/>" +
+    "</svg>") + "\")";
+  var heroBg = document.getElementById('heroBg');
+  heroBg.style.background = pattern;
+  heroBg.style.backgroundSize = '96px 96px';
+  heroBg.style.backgroundColor = '#14263c';
+  // 若未来配置了封面照片则优先用照片
+  if (T.photos.cover) {
+    heroBg.style.backgroundImage = 'url(' + T.photos.cover + ')';
+    heroBg.style.backgroundSize = 'cover';
+  }
+
+  // ---- Hero 统计 ----
+  document.getElementById('heroStats').innerHTML = [
+    T.meta.totalDays + ' 天', T.meta.totalCost, '6 个国家',
+    T.meta.signatureSub
+  ].map(function (s) { return '<span class="stat-chip">' + s + '</span>'; }).join('');
+
+  // ---- 路线点线图（数据驱动 SVG）----
+  var nodes = [
+    { n: '中国', en: 'CHINA' }, { n: '哈萨克斯坦', en: 'KAZAKHSTAN' },
+    { n: '格鲁吉亚', en: 'GEORGIA' }, { n: '亚美尼亚', en: 'ARMENIA' },
+    { n: '土耳其', en: 'TURKEY' }, { n: '埃及', en: 'EGYPT' }, { n: '阿联酋', en: 'UAE' }
+  ];
+  (function drawRoute() {
+    var W = 560, H = 150, y = 84, xs = [];
+    nodes.forEach(function (_, i) { xs.push(46 + i * (W - 92) / (nodes.length - 1)); });
+    var line = xs.map(function (x) { return x + ',' + y; }).join(' L');
+    var circles = xs.map(function (x, i) {
+      return '<circle class="rm-node" cx="' + x + '" cy="' + y + '" r="15"/>' +
+        '<text class="rm-num" x="' + x + '" y="' + y + '">' + (i + 1) + '</text>' +
+        '<text class="rm-label" x="' + x + '" y="' + (y + 34) + '" text-anchor="middle">' + nodes[i].n + '</text>' +
+        '<text class="rm-sub" x="' + x + '" y="' + (y + 50) + '" text-anchor="middle">' + nodes[i].en + '</text>';
+    }).join('');
+    document.getElementById('routeMap').innerHTML =
+      '<svg viewBox="0 0 ' + W + ' ' + H + '" role="img" aria-label="亚欧非大环线路线">' +
+      '<path class="rm-line" d="M ' + line + '"/>' +
+      '<path class="rm-line rm-dash" d="M ' + xs[0] + ',' + (y - 24) + ' L ' + xs[0] + ',' + (y + 24) + '" opacity="0"/>' +
+      circles + '</svg>';
+  })();
+
+  // ---- 七国拖动卡片 ----
+  var palettes = {
+    cn: 'linear-gradient(135deg,#8d2f2f,#c1694f)',
+    kz: 'linear-gradient(135deg,#2f5d8d,#5f9cc9)',
+    ge: 'linear-gradient(135deg,#7a3b2e,#c98a5f)',
+    am: 'linear-gradient(135deg,#4b3f72,#8d7bc4)',
+    tr: 'linear-gradient(135deg,#a3582f,#d99a6a)',
+    eg: 'linear-gradient(135deg,#a37a2f,#d4b06a)',
+    ae: 'linear-gradient(135deg,#2f7d63,#6ac9a4)'
+  };
+  document.getElementById('countryDrag').innerHTML = T.countries.map(function (c) {
+    var bg = palettes[c.id] || 'linear-gradient(135deg,#444,#888)';
+    var tags = (c.tags || []).slice(0, 3).map(function (t) {
+      return '<span class="badge">' + t + '</span>';
+    }).join('');
+    return '<a class="drag-item country-card" href="destinations/' + c.id + '.html">' +
+      '<div class="cc-photo" style="background:' + bg + ';">' +
+        '<span class="cc-en">' + c.en + '</span>' +
+      '</div>' +
+      '<div class="cc-body">' +
+        '<div class="cc-name">' + c.name + '</div>' +
+        '<div class="cc-tags">' + tags + '</div>' +
+        '<div class="cc-days">' + c.days + ' 天 · ' + c.region + '</div>' +
+      '</div></a>';
+  }).join('');
+
+  // ---- 花费表 ----
+  (function drawCosts() {
+    var cats = T.costs.categories;
+    var head = '<th>国家</th>' + cats.map(function (c) { return '<th>' + c + '</th>'; }).join('') + '<th>合计</th>';
+    var rows = Object.keys(T.costs.byCountry).map(function (name) {
+      var d = T.costs.byCountry[name];
+      return '<tr><td>' + name + '</td>' +
+        cats.map(function (c) { return '<td>' + (d[c] || '-') + '</td>'; }).join('') +
+        '<td class="num-total">' + d['合计'] + '</td></tr>';
+    }).join('');
+    var total = Object.keys(T.costs.byCountry).reduce(function (s, k) { return s + T.costs.byCountry[k]['合计']; }, 0);
+    document.getElementById('costsTable').innerHTML =
+      '<table class="tbl"><thead><tr>' + head + '</tr></thead><tbody>' + rows + '</tbody>' +
+      '<tfoot><tr><td>总计</td>' + cats.map(function () { return '<td></td>'; }).join('') +
+      '<td class="num-total">' + total.toLocaleString() + '</td></tr></tfoot></table>';
+    document.getElementById('costsNote').textContent = T.costs.status;
+  })();
 })();
 </script>
 </body>

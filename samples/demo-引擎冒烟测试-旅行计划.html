@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>引擎冒烟测试 · 演示行程（非真实行程）</title>
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+<style>
+  :root { --accent: #0f766e; --bg: #f8fafc; --card: #ffffff; }
+  * { box-sizing: border-box; }
+  body { margin: 0; font-family: system-ui, -apple-system, "PingFang SC", "Microsoft YaHei", sans-serif; background: var(--bg); color: #1e293b; line-height: 1.6; }
+  .wrap { max-width: 920px; margin: 0 auto; padding: 16px; }
+  header.hero { background: linear-gradient(135deg, var(--accent), #134e4a); color: #fff; border-radius: 16px; padding: 24px; margin-bottom: 16px; }
+  header.hero h1 { margin: 0 0 4px; font-size: 22px; }
+  header.hero .sub { opacity: .85; font-size: 14px; }
+  .card { background: var(--card); border-radius: 12px; padding: 16px; margin-bottom: 16px; box-shadow: 0 1px 3px rgba(0,0,0,.08); }
+  .card h2 { margin: 0 0 12px; font-size: 17px; border-left: 4px solid var(--accent); padding-left: 8px; }
+  #map { height: 360px; border-radius: 12px; z-index: 0; }
+  .slot { display: flex; gap: 12px; margin-bottom: 14px; }
+  .slot-photo { width: 110px; height: 82px; flex: none; border-radius: 8px; background: linear-gradient(135deg, #d1fae5, #ccfbf1); display: flex; align-items: center; justify-content: center; overflow: hidden; }
+  .slot-photo img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .slot-photo .ph-fallback { font-size: 12px; color: #0f766e; padding: 4px; text-align: center; }
+  .slot h3 { margin: 0 0 4px; font-size: 15px; }
+  .slot .meta { font-size: 13px; color: #64748b; }
+  .badge { display: inline-block; background: #fef3c7; color: #92400e; border-radius: 999px; padding: 2px 10px; font-size: 12px; margin-top: 4px; }
+  .pretrip-todo { list-style: none; padding: 0; margin: 0; }
+  .todo-item { padding: 6px 0; border-bottom: 1px dashed #e2e8f0; }
+  .todo-deadline { color: #b45309; font-weight: 600; }
+  .grid2 { display: grid; grid-template-columns: 1fr; gap: 12px; }
+  .route-pin { background: var(--accent); color: #fff; border-radius: 50%; text-align: center; font-weight: 700; border: 2px solid #fff; }
+  .route-pin__num { line-height: 28px; }
+  .disclaimer { background: #fffbeb; border: 1px solid #fde68a; border-radius: 10px; padding: 12px; font-size: 13px; color: #78350f; }
+  @media (min-width: 768px) {
+    .grid2 { grid-template-columns: 1fr 1fr; }
+    .wrap { padding: 24px; }
+    #map { height: 440px; }
+    header.hero h1 { font-size: 28px; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="hero">
+    <h1>引擎冒烟测试 · 演示行程（非真实行程）</h1>
+    <div class="sub">出发日期 2026-10-01 · 引擎冒烟测试演示页（非真实行程）</div>
+  </header>
+
+  <section class="card">
+    <h2>出发前待办</h2>
+    <div id="checklist"></div>
+  </section>
+
+  <section class="card">
+    <h2>行前须知</h2>
+    <p><strong>天气：</strong>演示数据：10 月初两地均约 20–26°C，早晚温差大，白天晴朗少雨</p>
+    <p><strong>台风/极端天气：</strong>演示数据：无台风季提示</p>
+    <p><strong>穿搭：</strong>演示数据：轻薄长袖 + 外套，舒适步行鞋</p>
+    <p><strong>支付：</strong>演示数据：信用卡 + 少量当地现金</p>
+    <p><strong>必备 App：</strong>演示 App A、演示 App B</p>
+    <p><strong>购票时机：</strong>演示数据：热门景点建议提前 3–7 天网上购票</p>
+  </section>
+
+  <div class="grid2">
+    <section class="card">
+      <h2>航班</h2>
+      <p>✅ 已预订：示例已订航班 XX 123 08:00–12:00</p>
+      <p>🕐 待选 · 请自行核实：示例候选班次 1 XX 456 09:30–13:30（直飞 · 价位参考区间请自行核实）</p><p>🕐 待选 · 请自行核实：示例候选班次 2 YY 789 14:00–18:00（经停 · 价位参考区间请自行核实）</p>
+    </section>
+    <section class="card">
+      <h2>酒店（片区 + 价位）</h2>
+      
+        <p><strong>示例住宿片区</strong> — 演示数据：靠近主要景点、交通便利</p>
+        <p>经济：示例经济酒店 约 ¥400/晚（演示数据）</p><p>中档：示例中档酒店 约 ¥800/晚（演示数据）</p><p>高端：示例高端酒店 约 ¥1600/晚（演示数据）</p>
+      
+    </section>
+  </div>
+
+  <section class="card">
+    <h2>路线地图</h2>
+    <div id="map"></div>
+  </section>
+
+  
+    <section class="card">
+      <h2>2026-10-01 · 周四 · 演示 · 伊斯坦布尔</h2>
+      <p class="meta">💡 演示当日贴士</p>
+      
+        <div class="slot">
+          <div class="slot-photo">
+            <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Hagia_Sophia_Mars_2013.jpg" alt="圣索菲亚大教堂（演示点位）" loading="lazy" onerror="this.style.display='none'">
+            <span class="ph-fallback" style="display:none">圣索菲亚大教堂（演示点位）</span>
+          </div>
+          <div>
+            <h3>圣索菲亚大教堂（演示点位） ⭐4.8</h3>
+            <div class="meta">09:00–12:00 · 演示点评：拜占庭建筑巅峰</div>
+            <div class="meta">营业：演示：09:00–17:00</div>
+            <div class="meta">门票参考：演示参考价</div>
+            <div class="meta">交通：示例：步行（约 10 分钟）</div>
+            <span data-needs-booking="0" data-lead-days="0"></span>
+          </div>
+        </div>
+      
+        <div class="slot">
+          <div class="slot-photo">
+            <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Blue_Mosque_Istanbul.jpg" alt="蓝色清真寺（演示点位）" loading="lazy" onerror="this.style.display='none'">
+            <span class="ph-fallback" style="display:none">蓝色清真寺（演示点位）</span>
+          </div>
+          <div>
+            <h3>蓝色清真寺（演示点位） ⭐4.7</h3>
+            <div class="meta">13:00–15:00 · 演示点评：六座宣礼塔</div>
+            
+            
+            
+            <span data-needs-booking="1" data-lead-days="3"></span>
+          </div>
+        </div>
+      
+      
+        <p class="meta">🍜 午餐：演示餐厅（11:00–22:00）演示菜 1 ¥80</p>
+      
+    </section>
+  
+    <section class="card">
+      <h2>2026-10-02 · 周五 · 演示 · 开罗</h2>
+      
+      
+        <div class="slot">
+          <div class="slot-photo">
+            <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Giza_pyramids.jpg" alt="吉萨金字塔群（演示点位）" loading="lazy" onerror="this.style.display='none'">
+            <span class="ph-fallback" style="display:none">吉萨金字塔群（演示点位）</span>
+          </div>
+          <div>
+            <h3>吉萨金字塔群（演示点位） ⭐4.9</h3>
+            <div class="meta">08:00–11:00 · 演示点评：世界奇迹</div>
+            
+            <div class="meta">门票参考：演示参考价</div>
+            <div class="meta">交通：示例：包车（约 40 分钟）</div>
+            <span data-needs-booking="0" data-lead-days="0"></span>
+          </div>
+        </div>
+      
+      
+    </section>
+  
+
+  <section class="card">
+    <h2>全程贴士</h2>
+    <ul><li>演示贴士 1：户外活动尽量安排在上午与傍晚</li><li>演示贴士 2：热门餐厅避开 12–13 点与 18–20 点高峰</li><li>演示贴士 3：本页为引擎冒烟测试演示，非真实行程</li></ul>
+  </section>
+
+  <section class="card disclaimer">本页全部信息（天气、航班、酒店、餐厅、景点、门票、价格、营业时间、评分、活动等）均为 AI 基于公开资料整理的参考建议，可能不准确或已过时，不保证与实时情况一致；请务必在官方渠道 / 订票订房 / 地图等 App 上核实后再做决定或前往。</section>
+</div>
+
+<script id="trip-data" type="application/json">{"title":"引擎冒烟测试 · 演示行程（非真实行程）","startDate":"2026-10-01","colorScheme":"teal","preTrip":{"weather":{"summary":"演示数据：10 月初两地均约 20–26°C，早晚温差大，白天晴朗少雨","typhoon":"演示数据：无台风季提示"},"packing":"演示数据：轻薄长袖 + 外套，舒适步行鞋","payment":"演示数据：信用卡 + 少量当地现金","apps":["演示 App A","演示 App B"],"ticketTip":"演示数据：热门景点建议提前 3–7 天网上购票"},"flights":{"booked":[{"label":"示例已订航班","code":"XX 123","time":"08:00–12:00"}],"candidates":[{"label":"示例候选班次 1","code":"XX 456","time":"09:30–13:30","note":"直飞 · 价位参考区间请自行核实"},{"label":"示例候选班次 2","code":"YY 789","time":"14:00–18:00","note":"经停 · 价位参考区间请自行核实"}]},"hotelAreas":[{"area":"示例住宿片区","reason":"演示数据：靠近主要景点、交通便利","options":[{"tier":"经济","name":"示例经济酒店","priceRange":"约 ¥400/晚","note":"演示数据"},{"tier":"中档","name":"示例中档酒店","priceRange":"约 ¥800/晚","note":"演示数据"},{"tier":"高端","name":"示例高端酒店","priceRange":"约 ¥1600/晚","note":"演示数据"}]}],"disclaimer":"本页全部信息（天气、航班、酒店、餐厅、景点、门票、价格、营业时间、评分、活动等）均为 AI 基于公开资料整理的参考建议，可能不准确或已过时，不保证与实时情况一致；请务必在官方渠道 / 订票订房 / 地图等 App 上核实后再做决定或前往。","tips":["演示贴士 1：户外活动尽量安排在上午与傍晚","演示贴士 2：热门餐厅避开 12–13 点与 18–20 点高峰","演示贴士 3：本页为引擎冒烟测试演示，非真实行程"],"reminders":[{"item":"演示：热门景点门票","leadDays":7},{"item":"演示：往返机票","leadDays":14}],"days":[{"date":"2026-10-01","weekday":"周四","theme":"演示 · 伊斯坦布尔","tips":["演示当日贴士"],"slots":[{"period":"morning","name":"圣索菲亚大教堂（演示点位）","time":"09:00–12:00","lat":41.0086,"lng":28.9802,"photo":"https://commons.wikimedia.org/wiki/Special:FilePath/Hagia_Sophia_Mars_2013.jpg","rating":4.8,"review":"演示点评：拜占庭建筑巅峰","openingHours":"演示：09:00–17:00","ticketPrice":"演示参考价","transport":{"mode":"示例：步行","fare":"免费","duration":"约 10 分钟"},"needsBooking":false,"leadDays":0},{"period":"noon","name":"蓝色清真寺（演示点位）","time":"13:00–15:00","lat":41.0054,"lng":28.9768,"photo":"https://commons.wikimedia.org/wiki/Special:FilePath/Blue_Mosque_Istanbul.jpg","rating":4.7,"review":"演示点评：六座宣礼塔","needsBooking":true,"leadDays":3}],"dining":[{"meal":"午餐","place":"演示餐厅","hours":"11:00–22:00","dishes":[{"name":"演示菜 1","price":"¥80"}]}]},{"date":"2026-10-02","weekday":"周五","theme":"演示 · 开罗","slots":[{"period":"morning","name":"吉萨金字塔群（演示点位）","time":"08:00–11:00","lat":29.9792,"lng":31.1342,"photo":"https://commons.wikimedia.org/wiki/Special:FilePath/Giza_pyramids.jpg","rating":4.9,"review":"演示点评：世界奇迹","ticketPrice":"演示参考价","transport":{"mode":"示例：包车","fare":"演示","duration":"约 40 分钟"},"needsBooking":false,"leadDays":0}],"dining":[]}]}</script>
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script>
+// 出发前提醒：截止日期计算 + 渲染。浏览器与 Node 双用。
+
+// startDateISO: 'YYYY-MM-DD'；items: [{item, leadDays}]
+// 返回按 deadline 升序的 [{item, leadDays, deadline}]，deadline 为 'YYYY-MM-DD'
+// 用 UTC 做日期运算，避免本地时区导致的偏移。
+function computeReminders(startDateISO, items) {
+  return items
+    .map(function (it) {
+      var d = new Date(startDateISO + 'T00:00:00Z');
+      d.setUTCDate(d.getUTCDate() - it.leadDays);
+      return { item: it.item, leadDays: it.leadDays, deadline: d.toISOString().slice(0, 10) };
+    })
+    .sort(function (a, b) {
+      return a.deadline < b.deadline ? -1 : a.deadline > b.deadline ? 1 : 0;
+    });
+}
+
+function escapeHTML(s) {
+  return String(s)
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#39;');
+}
+
+function renderChecklistHTML(reminders) {
+  var lis = reminders.map(function (r) {
+    return '<li class="todo-item">'
+      + '<input type="checkbox"> '
+      + '<span class="todo-deadline">' + r.deadline + '前</span> '
+      + '<span class="todo-text">' + escapeHTML(r.item) + '（建议提前' + r.leadDays + '天）</span>'
+      + '</li>';
+  }).join('');
+  return '<ul class="pretrip-todo">' + lis + '</ul>';
+}
+
+function reminderBadgeHTML(leadDays) {
+  return '<span class="reminder-badge">⚠️ 建议提前' + leadDays + '天订</span>';
+}
+
+if (typeof module !== 'undefined' && module.exports) {
+  module.exports = {
+    computeReminders: computeReminders,
+    renderChecklistHTML: renderChecklistHTML,
+    reminderBadgeHTML: reminderBadgeHTML,
+  };
+}
+
+// Leaflet 地图引擎。纯函数（buildNavLink/buildMapAppLinks/routeCoordinates/gcj02ToWgs84）可单元测试；
+// initTravelMap 需浏览器 + Leaflet (L)。浏览器与 Node 双用。
+
+// HTML 转义，防止 XSS
+function escapeHTML(s) {
+  return String(s)
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#39;');
+}
+
+// 生成跳转手机地图导航的链接。
+// iOS 不识别 geo: scheme，用 Apple Maps 的 https 通用链接；其余平台用 geo:。
+// ua 可选（浏览器里传 navigator.userAgent），不传则回退 geo:。
+function buildNavLink(lat, lng, label, ua) {
+  if (ua && /iPhone|iPad|iPod/.test(ua)) {
+    return 'https://maps.apple.com/?ll=' + lat + ',' + lng + '&q=' + encodeURIComponent(label);
+  }
+  return 'geo:' + lat + ',' + lng + '?q=' + lat + ',' + lng + '(' + encodeURIComponent(label) + ')';
+}
+
+// 常用地图 App 的点位链接（免 key 的官方 URI 规范：高德 URI API、Google Maps URLs）。
+// 这不是 page-contract 的 actionLink——不承载实时数据主张，只是"打开地图看这个点"。
+// 境内点只给高德（Google 地图境内不可用、底图坐标系还会偏移）；境外点给 Google + 高德。
+// 输入坐标一律 WGS-84：高德 URI 用 coordinate=wgs84 声明由其换算，Google 本身即 WGS-84。
+// isInChinaBBox 声明在下方 GCJ 区块（函数声明有提升，此处可用）。
+function buildMapAppLinks(lat, lng, label) {
+  var amap = {
+    label: '高德地图',
+    url: 'https://uri.amap.com/marker?position=' + lng + ',' + lat
+      + '&name=' + encodeURIComponent(label)
+      + '&coordinate=wgs84&callnative=1&src=travel-plan-viz',
+  };
+  var google = {
+    label: 'Google 地图',
+    url: 'https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent(lat + ',' + lng),
+  };
+  return isInChinaBBox(lat, lng) ? [amap] : [google, amap];
+}
+
+// —— GCJ-02 → WGS-84 坐标转换 ——
+// 高德/腾讯地图返回的坐标是 GCJ-02（国测局加密），直接画在 OSM（WGS-84）瓦片上
+// 会偏移一百到几百米。凡坐标来自高德/腾讯类 skill，必须先经此函数转换。
+// 中国境外坐标原样返回（GCJ-02 仅在境内加偏）。
+var GCJ_A = 6378245.0;
+var GCJ_EE = 0.00669342162296594323;
+
+function isInChinaBBox(lat, lng) {
+  return lng >= 72.004 && lng <= 137.8347 && lat >= 0.8293 && lat <= 55.8271;
+}
+
+function gcjTransformLat(x, y) {
+  var ret = -100.0 + 2.0 * x + 3.0 * y + 0.2 * y * y + 0.1 * x * y + 0.2 * Math.sqrt(Math.abs(x));
+  ret += (20.0 * Math.sin(6.0 * x * Math.PI) + 20.0 * Math.sin(2.0 * x * Math.PI)) * 2.0 / 3.0;
+  ret += (20.0 * Math.sin(y * Math.PI) + 40.0 * Math.sin(y / 3.0 * Math.PI)) * 2.0 / 3.0;
+  ret += (160.0 * Math.sin(y / 12.0 * Math.PI) + 320.0 * Math.sin(y * Math.PI / 30.0)) * 2.0 / 3.0;
+  return ret;
+}
+
+function gcjTransformLng(x, y) {
+  var ret = 300.0 + x + 2.0 * y + 0.1 * x * x + 0.1 * x * y + 0.1 * Math.sqrt(Math.abs(x));
+  ret += (20.0 * Math.sin(6.0 * x * Math.PI) + 20.0 * Math.sin(2.0 * x * Math.PI)) * 2.0 / 3.0;
+  ret += (20.0 * Math.sin(x * Math.PI) + 40.0 * Math.sin(x / 3.0 * Math.PI)) * 2.0 / 3.0;
+  ret += (150.0 * Math.sin(x / 12.0 * Math.PI) + 300.0 * Math.sin(x / 30.0 * Math.PI)) * 2.0 / 3.0;
+  return ret;
+}
+
+function gcj02ToWgs84(lat, lng) {
+  if (!isInChinaBBox(lat, lng)) return { lat: lat, lng: lng };
+  var dLat = gcjTransformLat(lng - 105.0, lat - 35.0);
+  var dLng = gcjTransformLng(lng - 105.0, lat - 35.0);
+  var radLat = lat / 180.0 * Math.PI;
+  var magic = Math.sin(radLat);
+  magic = 1 - GCJ_EE * magic * magic;
+  var sqrtMagic = Math.sqrt(magic);
+  dLat = (dLat * 180.0) / ((GCJ_A * (1 - GCJ_EE)) / (magic * sqrtMagic) * Math.PI);
+  dLng = (dLng * 180.0) / (GCJ_A / sqrtMagic * Math.cos(radLat) * Math.PI);
+  return { lat: lat - dLat, lng: lng - dLng };
+}
+
+// 从有序点位提取 [lat,lng] 数组，用于连线
+function routeCoordinates(points) {
+  return points.map(function (p) { return [p.lat, p.lng]; });
+}
+
+// 初始化地图：编号 divIcon 标记、按序虚线路线、点击弹出 名称+时间+导航链接。
+// elementId: 容器 id；points: [{lat, lng, name, time}]（按行程顺序，坐标须为 WGS-84）
+// opts 可选：{ tileUrl, attribution } 替换默认 OSM 瓦片源（如 OSM 访问不稳时换镜像）。
+function initTravelMap(elementId, points, opts) {
+  opts = opts || {};
+  var map = L.map(elementId);
+  L.tileLayer(opts.tileUrl || 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    attribution: opts.attribution || '© OpenStreetMap contributors',
+    maxZoom: 19,
+  }).addTo(map);
+
+  var ua = (typeof navigator !== 'undefined' && navigator.userAgent) || '';
+  points.forEach(function (p, i) {
+    var icon = L.divIcon({
+      className: 'route-pin',
+      html: '<span class="route-pin__num">' + (i + 1) + '</span>',
+      iconSize: [28, 28],
+      iconAnchor: [14, 14],
+    });
+    var navLinks = [{ label: '导航', url: buildNavLink(p.lat, p.lng, p.name, ua) }]
+      .concat(buildMapAppLinks(p.lat, p.lng, p.name));
+    L.marker([p.lat, p.lng], { icon: icon }).addTo(map).bindPopup(
+      '<b>' + (i + 1) + '. ' + escapeHTML(p.name) + '</b><br>'
+      + (p.time ? escapeHTML(p.time) + '<br>' : '')
+      + navLinks.map(function (l) {
+          return '<a href="' + l.url + '">' + escapeHTML(l.label) + '</a>';
+        }).join(' · ')
+    );
+  });
+
+  var coords = routeCoordinates(points);
+  if (coords.length > 1) {
+    L.polyline(coords, { dashArray: '6 8', weight: 2 }).addTo(map);
+  }
+  map.fitBounds(coords.length ? coords : [[0, 0]], { padding: [30, 30] });
+  return map;
+}
+
+if (typeof module !== 'undefined' && module.exports) {
+  module.exports = {
+    buildNavLink: buildNavLink,
+    buildMapAppLinks: buildMapAppLinks,
+    routeCoordinates: routeCoordinates,
+    gcj02ToWgs84: gcj02ToWgs84,
+    initTravelMap: initTravelMap,
+  };
+}
+
+(function () {
+  var reminders = computeReminders("2026-10-01", [{"item":"演示：热门景点门票","leadDays":7},{"item":"演示：往返机票","leadDays":14}]);
+  document.getElementById('checklist').innerHTML = renderChecklistHTML(reminders);
+  document.querySelectorAll('[data-needs-booking="1"]').forEach(function (el) {
+    el.insertAdjacentHTML('beforeend', reminderBadgeHTML(Number(el.dataset.leadDays)));
+  });
+  initTravelMap('map', [{"lat":41.0086,"lng":28.9802,"name":"圣索菲亚大教堂（演示点位）","time":"09:00–12:00"},{"lat":41.0054,"lng":28.9768,"name":"蓝色清真寺（演示点位）","time":"13:00–15:00"},{"lat":29.9792,"lng":31.1342,"name":"吉萨金字塔群（演示点位）","time":"08:00–11:00"}]);
+})();
+</script>
+</body>
+</html>

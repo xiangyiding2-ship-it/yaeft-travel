@@ -187,7 +187,8 @@ h3.card-title { font-size: 18px; font-weight: 700; }
   transition: box-shadow .15s;
 }
 .country-card:hover { box-shadow: 0 4px 16px rgba(0,0,0,.06); }
-.country-card .cc-photo { height: 150px; background-size: cover; background-position: center; position: relative; }
+.country-card .cc-photo { height: 150px; background-size: cover; background-position: center; position: relative; overflow: hidden; }
+.country-card .cc-photo img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
 .country-card .cc-photo .cc-en {
   position: absolute; left: 12px; top: 10px;
   font-family: var(--font-latin); font-size: 11px; letter-spacing: .16em;
@@ -401,12 +402,6 @@ table.tbl { width: 100%; border-collapse: collapse; font-size: 13.5px; min-width
   .dest-row { flex-direction: column; }
   .di-thumb img { width: 100%; height: 150px; }
 }
-
-/* 首页沿途实录横向照片卡 */
-.road-card { position: relative; border-radius: 10px; overflow: hidden; background: #fff; border: 1px solid var(--line); }
-.road-card img { display: block; width: 100%; aspect-ratio: 4/3; object-fit: cover; }
-.road-card .road-cap { position: absolute; left: 0; right: 0; bottom: 0; display: flex; align-items: center; gap: 8px; padding: 8px 10px; font-size: 12.5px; color: #fff; background: linear-gradient(transparent, rgba(0,0,0,.72)); }
-.road-card .badge { background: rgba(255,255,255,.16); border: 1px solid rgba(255,255,255,.5); color: #fff; font-family: var(--font-latin); letter-spacing: .06em; text-transform: uppercase; }
 
 /* ---------- 季节矩阵 ---------- */
 .season-grid { border: 1px solid var(--line); border-radius: var(--radius); background: #fff; overflow-x: auto; }

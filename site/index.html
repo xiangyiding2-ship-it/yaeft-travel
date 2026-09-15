@@ -21,18 +21,17 @@
     <div class="hero-stats" id="heroStats"></div>
     <div class="hero-cta">
       <a class="btn btn-light" href="grand-loop.html">查看完整路线</a>
-      <a class="btn btn-line btn-light" href="destinations/egypt.html" style="border-color:rgba(241,241,241,.6);">最推荐：埃及 23 天</a>
     </div>
   </div>
 </section>
 
-<!-- ============ 一条线串起七个国家 ============ -->
+<!-- ============ 一条线串起六个国家 ============ -->
 <section class="section">
   <div class="container">
     <div class="section-head">
-      <span class="eyebrow">ONE LINE · SEVEN COUNTRIES</span>
-      <h2 class="block-title">一条线，串起七个国家。</h2>
-      <p class="lead" style="margin-top:8px;">六段跨国的接驳，从陆路出境到跨海飞行：中国 → 哈萨克斯坦 → 格鲁吉亚 → 亚美尼亚 → 土耳其 → 埃及 → 阿联酋。每一段怎么走，都写在「大环线」里。</p>
+      <span class="eyebrow">ONE LINE · SIX COUNTRIES</span>
+      <h2 class="block-title">一条线，串起六个国家。</h2>
+      <p class="lead" style="margin-top:8px;">从陆路出境到跨海飞行：哈萨克斯坦 → 格鲁吉亚 → 亚美尼亚 → 土耳其 → 埃及 → 阿联酋。每一段怎么走，都写在「大环线」里。</p>
     </div>
     <div class="route-map" id="routeMap"></div>
     <div style="margin-top:16px;">
@@ -41,32 +40,17 @@
   </div>
 </section>
 
-<!-- ============ 走过七国 ============ -->
+<!-- ============ 走过六国 ============ -->
 <section class="section">
   <div class="container">
     <div class="section-head" style="display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:8px;">
       <div>
-        <span class="eyebrow">SEVEN COUNTRIES</span>
-        <h2 class="block-title">走过七国</h2>
+        <span class="eyebrow">SIX COUNTRIES</span>
+        <h2 class="block-title">走过六国</h2>
       </div>
       <span class="drag-hint" style="margin-bottom:4px;">拖动浏览</span>
     </div>
     <div class="drag-scroll" id="countryDrag"></div>
-  </div>
-</section>
-
-<!-- ============ 沿途实录 ============ -->
-<section class="section" id="roadPhotosSec">
-  <div class="container">
-    <div class="section-head" style="display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:8px;">
-      <div>
-        <span class="eyebrow">ON THE ROAD · 沿途实录</span>
-        <h2 class="block-title">路上拍下的真实画面</h2>
-        <p class="lead" style="margin-top:8px;">全部来自 iPhone 相册，不是网图。拖着看，点开看大图。</p>
-      </div>
-      <a class="drag-hint" href="photos.html" style="margin-bottom:4px;text-decoration:none;border-bottom:1px solid var(--fg);">全部照片 →</a>
-    </div>
-    <div class="drag-scroll" id="roadPhotos"></div>
   </div>
 </section>
 
@@ -91,8 +75,8 @@
       </div>
       <div class="card" style="flex:1 1 200px;min-width:0;">
         <div class="eyebrow">COUNTRIES · 国家</div>
-        <div style="font-size:38px;font-weight:700;margin-top:4px;">6 + 1</div>
-        <div style="font-size:13px;color:var(--soft);margin-top:4px;">6 个外国 + 中国出发返程</div>
+        <div style="font-size:38px;font-weight:700;margin-top:4px;">6</div>
+        <div style="font-size:13px;color:var(--soft);margin-top:4px;">六个国家，不含中国出发/返程段</div>
       </div>
     </div>
     <div class="tbl-wrap" id="costsTable"></div>
@@ -185,9 +169,9 @@
 
   // ---- 路线点线图（数据驱动 SVG）----
   var nodes = [
-    { n: '中国', en: 'CHINA' }, { n: '哈萨克斯坦', en: 'KAZAKHSTAN' },
-    { n: '格鲁吉亚', en: 'GEORGIA' }, { n: '亚美尼亚', en: 'ARMENIA' },
-    { n: '土耳其', en: 'TURKEY' }, { n: '埃及', en: 'EGYPT' }, { n: '阿联酋', en: 'UAE' }
+    { n: '哈萨克斯坦', en: 'KAZAKHSTAN' }, { n: '格鲁吉亚', en: 'GEORGIA' },
+    { n: '亚美尼亚', en: 'ARMENIA' }, { n: '土耳其', en: 'TURKEY' },
+    { n: '埃及', en: 'EGYPT' }, { n: '阿联酋', en: 'UAE' }
   ];
   (function drawRoute() {
     var W = 560, H = 150, y = 84, xs = [];
@@ -206,23 +190,23 @@
       circles + '</svg>';
   })();
 
-  // ---- 七国拖动卡片 ----
-  var palettes = {
-    cn: 'linear-gradient(135deg,#8d2f2f,#c1694f)',
-    kz: 'linear-gradient(135deg,#2f5d8d,#5f9cc9)',
-    ge: 'linear-gradient(135deg,#7a3b2e,#c98a5f)',
-    am: 'linear-gradient(135deg,#4b3f72,#8d7bc4)',
-    tr: 'linear-gradient(135deg,#a3582f,#d99a6a)',
-    eg: 'linear-gradient(135deg,#a37a2f,#d4b06a)',
-    ae: 'linear-gradient(135deg,#2f7d63,#6ac9a4)'
+  // ---- 六国拖动卡片（每国一张代表照片）----
+  var covers = {
+    kz: 'photos/kz/img2.jpg',
+    ge: 'photos/ge/img7.jpg',
+    am: 'photos/am/img2.jpg',
+    tr: 'photos/tr/img2.jpg',
+    eg: 'photos/eg/img1.jpg',
+    ae: 'photos/ae/img1.jpg'
   };
   document.getElementById('countryDrag').innerHTML = T.countries.map(function (c) {
-    var bg = palettes[c.id] || 'linear-gradient(135deg,#444,#888)';
+    var img = covers[c.id] || '';
     var tags = (c.tags || []).slice(0, 3).map(function (t) {
       return '<span class="badge">' + t + '</span>';
     }).join('');
     return '<a class="drag-item country-card" href="destinations/' + c.id + '.html">' +
-      '<div class="cc-photo" style="background:' + bg + ';">' +
+      '<div class="cc-photo">' +
+        (img ? '<img src="' + img + '" alt="' + c.name + '" loading="lazy">' : '') +
         '<span class="cc-en">' + c.en + '</span>' +
       '</div>' +
       '<div class="cc-body">' +
@@ -232,43 +216,23 @@
       '</div></a>';
   }).join('');
 
-  // ---- 沿途实录（每国精选照片，横向拖动）----
-  var roadPicks = [
-    { id: 'kz', src: 'photos/kz/img1.jpg', cap: '绿巴扎：马肉摊' },
-    { id: 'kz', src: 'photos/kz/img6.jpg', cap: '阿克套：Mangystau 荒漠雅丹' },
-    { id: 'ge', src: 'photos/ge/img7.jpg', cap: '卡兹别克：格尔盖蒂三一教堂' },
-    { id: 'ge', src: 'photos/ge/img3.jpg', cap: '第比利斯：黄昏与缆车' },
-    { id: 'am', src: 'photos/am/img1.jpg', cap: '埃里温：Cascade 阶梯' },
-    { id: 'am', src: 'photos/am/img2.jpg', cap: '塞凡湖：湖畔教堂' },
-    { id: 'tr', src: 'photos/tr/img2.jpg', cap: '格雷梅：地面追热气球' },
-    { id: 'tr', src: 'photos/tr/img4.jpg', cap: '费特希耶：海盗船泡沫派对' },
-    { id: 'eg', src: 'photos/eg/img5.jpg', cap: '撒哈拉：沙漠银河' },
-    { id: 'eg', src: 'photos/eg/img1.jpg', cap: '达哈卜：红海珊瑚礁' },
-    { id: 'ae', src: 'photos/ae/img1.jpg', cap: '迪拜：哈利法塔夜景' },
-    { id: 'ae', src: 'photos/ae/img4.jpg', cap: '迪拜：Dubai Mall 水族馆' }
-  ];
-  document.getElementById('roadPhotos').innerHTML = roadPicks.map(function (r) {
-    return '<a class="drag-item road-card" href="photos.html">' +
-      '<img src="' + r.src + '" alt="' + r.cap + '" loading="lazy">' +
-      '<div class="road-cap"><span class="badge">' + r.id + '</span>' + r.cap + '</div></a>';
-  }).join('');
-
-  // ---- 花费表 ----
+  // ---- 花费表（6 国；中国出发/返程段计入总计，不在国家行内单列）----
   (function drawCosts() {
     var cats = T.costs.categories;
     var head = '<th>国家</th>' + cats.map(function (c) { return '<th>' + c + '</th>'; }).join('') + '<th>合计</th>';
-    var rows = Object.keys(T.costs.byCountry).map(function (name) {
+    var names = Object.keys(T.costs.byCountry).filter(function (n) { return n !== '中国'; });
+    var rows = names.map(function (name) {
       var d = T.costs.byCountry[name];
       return '<tr><td>' + name + '</td>' +
         cats.map(function (c) { return '<td>' + (d[c] || '-') + '</td>'; }).join('') +
         '<td class="num-total">' + d['合计'] + '</td></tr>';
     }).join('');
-    var total = Object.keys(T.costs.byCountry).reduce(function (s, k) { return s + T.costs.byCountry[k]['合计']; }, 0);
     document.getElementById('costsTable').innerHTML =
       '<table class="tbl"><thead><tr>' + head + '</tr></thead><tbody>' + rows + '</tbody>' +
       '<tfoot><tr><td>总计</td>' + cats.map(function () { return '<td></td>'; }).join('') +
-      '<td class="num-total">' + total.toLocaleString() + '</td></tr></tfoot></table>';
-    document.getElementById('costsNote').textContent = T.costs.status;
+      '<td class="num-total">' + T.costs.total.replace('¥', '') + '</td></tr></tfoot></table>';
+    document.getElementById('costsNote').textContent =
+      T.costs.status + ' 总计含中国出发/返程段 ¥2,033。';
   })();
 })();
 </script>

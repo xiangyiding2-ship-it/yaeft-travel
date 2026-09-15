@@ -117,30 +117,8 @@ TRAVEL_GLOBAL.TRAVEL = (function () {
     { place: '杭州', days: 2, country: '中国', note: '返程中转' }
   ];
 
-  // ---------- 7 国攻略 ----------
+  // ---------- 6 国攻略 ----------
   var countries = [
-    {
-      id: 'cn', name: '中国', en: 'CHINA', region: '出发 · 返程', days: 7,
-      tags: ['出发段', '返程段', '陆路出境'],
-      summary: '从沅陵出发，经长沙、乌鲁木齐、伊犁陆路出境；最后从迪拜经杭州火车回怀化。',
-      visa: '本国',
-      visaDetail: '',
-      insurance: '', sim: '', payment: '', exchange: '',
-      accommodation: '',
-      transportDetail: [
-        { route: '沅陵 → 长沙', mode: '汽车', cost: '¥80', note: '' },
-        { route: '长沙 → 乌鲁木齐', mode: '飞机', cost: '¥725', note: '' },
-        { route: '乌鲁木齐 → 伊犁', mode: '火车', cost: '', note: '' },
-        { route: '杭州 → 怀化', mode: '火车', cost: '', note: '约 17 小时' }
-      ],
-      cities: [
-        { name: '乌鲁木齐', days: 3, items: [], sights: [] },
-        { name: '伊犁', days: 2, items: [], sights: [] },
-        { name: '杭州', days: 2, items: [], sights: [] }
-      ],
-      tips: [], verdict: '',
-      costKey: '中国'
-    },
     {
       id: 'kz', name: '哈萨克斯坦', en: 'KAZAKHSTAN', region: '中亚', days: 7,
       tags: ['雪山', '草原', '现代城市', '里海'],

@@ -55,7 +55,7 @@
           '<div><h4>' + esc(T.meta.title) + '</h4>' +
             '<p style="font-size:12.5px;color:var(--soft);max-width:26em;">' + esc(T.meta.tagline) + '</p></div>' +
           '<div><h4>站内导航</h4><ul>' + navLinks + '</ul></div>' +
-          '<div><h4>走过七国</h4><ul>' + countryLinks + '</ul></div>' +
+          '<div><h4>走过六国</h4><ul>' + countryLinks + '</ul></div>' +
         '</div>' +
         '<div class="footer-bottom">' +
           '<span>© 2026 ' + esc(T.meta.title) + ' · 独立攻略站</span>' +

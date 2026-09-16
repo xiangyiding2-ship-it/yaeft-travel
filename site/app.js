@@ -18,19 +18,21 @@
   var body = document.body;
   var pageKey = body.getAttribute('data-page') || 'index';
   var isSub = body.getAttribute('data-sub') === '1';
+  // 子页面（destinations/ 下）所有站内链接需加 ../ 前缀
+  var prefix = isSub ? '../' : '';
 
   // ---------- 顶部导航 ----------
   function renderHeader() {
     var el = document.getElementById('siteHeader');
     if (!el) return;
     var links = T.nav.map(function (n) {
-      var href = n.page === 'index' ? 'index.html' : n.page + '.html';
+      var href = prefix + (n.page === 'index' ? 'index.html' : n.page + '.html');
       var active = n.page === pageKey ? ' class="active"' : '';
       return '<a href="' + href + '"' + active + '>' + esc(n.label) + '</a>';
     }).join('');
     el.innerHTML =
       '<div class="container">' +
-        '<a class="brand" href="index.html">' + esc(T.meta.title) +
+        '<a class="brand" href="' + prefix + 'index.html">' + esc(T.meta.title) +
           '<span class="en">' + esc(T.meta.en) + '</span>' +
         '</a>' +
         '<nav class="nav-links">' + links +
@@ -44,10 +46,10 @@
     var el = document.getElementById('siteFooter');
     if (!el) return;
     var countryLinks = T.countries.map(function (c) {
-      return '<li><a href="destinations/' + c.id + '.html">' + esc(c.name) + '</a></li>';
+      return '<li><a href="' + prefix + 'destinations/' + c.id + '.html">' + esc(c.name) + '</a></li>';
     }).join('');
     var navLinks = T.nav.map(function (n) {
-      return '<li><a href="' + (n.page === 'index' ? 'index.html' : n.page + '.html') + '">' + esc(n.label) + '</a></li>';
+      return '<li><a href="' + prefix + (n.page === 'index' ? 'index.html' : n.page + '.html') + '">' + esc(n.label) + '</a></li>';
     }).join('');
     el.innerHTML =
       '<div class="container">' +
@@ -74,7 +76,7 @@
       '<div class="so-head"><span class="eyebrow">SEARCH</span>' +
       '<button class="so-close" id="soClose">关闭 ×</button></div>' +
       '<input type="search" id="soInput" placeholder="搜索国家 / 城市 / 景点…" autocomplete="off">' +
-      '<div class="so-hint">覆盖 7 国、全部收录城市与景点，支持中文与当地语言名称。</div>' +
+      '<div class="so-hint">覆盖 6 国、全部收录城市与景点，支持中文与当地语言名称。</div>' +
       '<div class="so-results" id="soResults"></div>';
     document.body.appendChild(overlay);
 
@@ -88,7 +90,7 @@
         return (item.title + ' ' + (item.en || '') + ' ' + item.k).toLowerCase().indexOf(q) !== -1;
       }).slice(0, 30);
       results.innerHTML = hits.map(function (h) {
-        return '<a class="so-item" href="' + h.href + '">' +
+        return '<a class="so-item" href="' + prefix + h.href + '">' +
           '<span class="si-k">' + esc(h.k) + (h.en ? ' · ' + esc(h.en) : '') + '</span><br>' +
           esc(h.title) + '</a>';
       }).join('') || '<div class="so-item" style="color:var(--soft);">没有找到“' + esc(q) + '”</div>';

@@ -7,7 +7,31 @@
 <meta name="description" content="59天 ¥22,355 一个人走完中国—哈萨克斯坦—格鲁吉亚—亚美尼亚—土耳其—埃及—阿联酋。真实路线、真实花费、真实踩坑。">
 <link rel="stylesheet" href="style.css">
 </head>
-<body data-page="index">
+<body data-page="index" class="splash-on">
+
+<!-- ============ 进入动画封面 ============ -->
+<div id="splash">
+  <div class="sp-bg" id="spBg">
+    <div class="sp-slide" style="background-image:url('photos/tr/img2.jpg')"></div>
+    <div class="sp-slide" style="background-image:url('photos/tr/img1.jpg')"></div>
+  </div>
+  <div class="sp-dim"></div>
+  <div class="sp-inner">
+    <div class="sp-eyebrow">A REAL OVERLAND LOOP · 真实环线</div>
+    <h1 class="sp-title"><span>59 天</span><span>穿过亚欧非</span></h1>
+    <p class="sp-sub">一个真正走完这条路的人，把真实经验整理成一份可以直接参考的旅行攻略。</p>
+    <div class="sp-stats">
+      <span><b>59天</b>旅程</span>
+      <span><b>¥22,355</b>真实花费</span>
+      <span><b>6个</b>国家</span>
+    </div>
+    <div class="sp-meta">2026.06.29 — 2026.08.26 · 一个人 · 极致轻量化</div>
+    <div class="sp-cta">
+      <a class="sp-btn" href="grand-loop.html">查看完整路线 →</a>
+      <a class="sp-skip" href="#" id="spSkip">直接进入网站 ↓</a>
+    </div>
+  </div>
+</div>
 
 <header class="site-header" id="siteHeader"></header>
 
@@ -142,7 +166,39 @@
 (function () {
   var T = window.TRAVEL;
 
-  // ---- Hero 背景：先用纹样占位，有照片后替换 ----
+  // ---- 进入动画封面：背景自动切换 + 自动淡出 ----
+  (function splash() {
+    var sp = document.getElementById('splash');
+    if (!sp) return;
+    var slides = sp.querySelectorAll('.sp-slide');
+    var cur = 0, autoDone = null;
+    if (slides.length > 1) {
+      slides[0].classList.add('active');
+      setInterval(function () {
+        slides[cur].classList.remove('active');
+        cur = (cur + 1) % slides.length;
+        slides[cur].classList.add('active');
+      }, 6000);
+    } else if (slides.length === 1) {
+      slides[0].classList.add('active');
+    }
+    function done() {
+      if (sp.classList.contains('sp-done')) return;
+      sp.classList.add('sp-done');
+      document.body.classList.remove('splash-on');
+      setTimeout(function () { if (sp.parentNode) sp.parentNode.removeChild(sp); }, 900);
+    }
+    // 7.5 秒后自动进入网站
+    autoDone = setTimeout(done, 7500);
+    var skip = document.getElementById('spSkip');
+    if (skip) skip.addEventListener('click', function (e) {
+      e.preventDefault();
+      clearTimeout(autoDone);
+      done();
+    });
+  })();
+
+  // ---- Hero 背景 ----
   var pattern = "url(\"data:image/svg+xml," + encodeURIComponent(
     "<svg xmlns='http://www.w3.org/2000/svg' width='96' height='96'>" +
     "<rect width='96' height='96' fill='#14263c'/>" +

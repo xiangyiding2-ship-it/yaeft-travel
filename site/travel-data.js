@@ -402,7 +402,7 @@ TRAVEL_GLOBAL.TRAVEL = (function () {
       ],
       cities: [
         {
-          name: '达哈卜', days: 9, items: [
+          name: '达哈卜', days: 15, items: [
             '非常适合躺平，物价不高；不去海上餐厅就可以控制成本',
             '潜水非常便宜：1 对 2 全英教学约 300 欧元，1 对 1 约 350 欧元',
             '中国游客较多的潜店：Seven、Fish and Friends',
@@ -420,7 +420,7 @@ TRAVEL_GLOBAL.TRAVEL = (function () {
           sights: ['图书馆']
         },
         {
-          name: '马特鲁', days: 3, items: [
+          name: '马特鲁', days: 2, items: [
             '住宿：龙门客栈青旅（中国人开的，有住宿和餐厅）',
             '有多个海滩；包车约 4 小时 500–700 埃镑',
             'Agooba Beach 值得去；马特鲁之眼可以下海',
@@ -429,7 +429,7 @@ TRAVEL_GLOBAL.TRAVEL = (function () {
           sights: ['Agooba Beach', '马特鲁之眼']
         },
         {
-          name: '锡瓦', days: 4, items: [
+          name: '锡瓦', days: 2, items: [
             '小巴到达；下车后如果赶时间，要第一时间买去开罗的车票',
             '住宿：A&S House，当地一家三口经营；海外旅行中唯一一次独享一间房',
             '市内主要坐三轮车',
@@ -440,7 +440,7 @@ TRAVEL_GLOBAL.TRAVEL = (function () {
           sights: ['盐湖', '克娄巴特拉温泉', '撒哈拉沙漠']
         },
         {
-          name: '开罗', days: 6, items: [
+          name: '开罗', days: 3, items: [
             '住宿：马迪纳旅舍（Agoda 预订，位置不错）',
             '面对推销者要强硬；买东西货比三家、砍价',
             '开罗博物馆可以通过闲鱼购买便宜票',

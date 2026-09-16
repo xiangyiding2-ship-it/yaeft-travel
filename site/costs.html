@@ -66,17 +66,6 @@
   </div>
 </section>
 
-<!-- ============ 亮点 ============ -->
-<section class="section">
-  <div class="container">
-    <div class="section-head">
-      <span class="eyebrow">HIGHLIGHTS · 几点说明</span>
-      <h2 class="block-title">几点说明</h2>
-    </div>
-    <div id="highlightList"></div>
-  </div>
-</section>
-
 <section class="section" style="padding-top:10px;padding-bottom:20px;">
   <div class="container">
     <div class="verify-note">
@@ -110,7 +99,7 @@
     '<table class="tbl"><thead><tr>' + head + '</tr></thead><tbody>' + rows + '</tbody>' +
     '<tfoot><tr><td>总计</td>' + cats.map(function () { return '<td></td>'; }).join('') +
     '<td class="num-total">' + T.costs.total.replace('¥', '') + '</td></tr></tfoot></table>';
-  document.getElementById('costsNote').textContent = T.costs.status;
+  document.getElementById('costsNote').textContent = '明细为 AI 生成归类，参考意义不大，仅为 6.29—8.26 实际账单导出。';
 
   // ---- 占比条 ----
   var total = 22355;
@@ -124,11 +113,6 @@
       '<b>' + name + '</b><span style="color:var(--soft);">¥' + d['合计'].toLocaleString() + ' · ' + pct + '%</span></div>' +
       '<div style="height:8px;background:#e3e3e3;border-radius:4px;overflow:hidden;">' +
       '<div style="height:100%;width:' + w + '%;background:var(--fg);border-radius:4px;"></div></div></div>';
-  }).join('');
-
-  // ---- 亮点 ----
-  document.getElementById('highlightList').innerHTML = T.costs.highlights.map(function (h) {
-    return '<div class="tl-item" style="padding-bottom:10px;"><span style="font-size:14px;">· ' + h + '</span></div>';
   }).join('');
 })();
 </script>

@@ -443,3 +443,16 @@ table.tbl { width: 100%; border-collapse: collapse; font-size: 13.5px; min-width
   .drag-item { width: min(260px, 84vw); }
   .search-overlay input[type="search"] { font-size: 18px; }
 }
+
+/* ---------- 全程交通流水（大环线页） ---------- */
+.route-steps{display:flex;flex-direction:column;}
+.route-step{display:flex;align-items:baseline;gap:8px;flex-wrap:wrap;padding:7px 2px;border-bottom:1px solid var(--line);font-size:14px;line-height:1.5;}
+.route-step:last-child{border-bottom:none;}
+.rs-no{font-family:var(--font-latin);font-size:11px;color:var(--soft);letter-spacing:.08em;min-width:22px;}
+.rs-mode{font-size:14px;}
+.rs-from{font-weight:600;}
+.rs-arrow{color:var(--soft);}
+.rs-to{font-weight:500;}
+.rs-meta{font-size:12px;color:var(--soft);}
+.rs-country{margin-left:auto;font-size:11px;font-family:var(--font-latin);color:var(--soft);letter-spacing:.06em;}
+@media (max-width:640px){.rs-country{display:none;}}

@@ -28,7 +28,7 @@
   <a href="#stay">住宿</a>
   <a href="#pack">行李</a>
   <a href="#apps">App</a>
-  <a href="#tips">避坑</a>
+  <a href="#tips">小帖士</a>
 </nav>
 
 <!-- ============ 签证速查 ============ -->
@@ -79,7 +79,7 @@
     <div class="info-lines">
       <div class="info-line"><div class="il-key">国内</div><div class="il-val"><b>微信、支付宝</b></div></div>
       <div class="info-line"><div class="il-key">出发前</div><div class="il-val"><b>兑换 300 美元现金</b>（手续费 ¥10）：哈萨克斯坦换钱 20 美元 · 格鲁吉亚换钱 80 美元 · 土耳其换钱 100 美元 · 埃及落地签 30 美元 · 埃及换钱 20 美元 · 潜水混合支付 50 美元</div></div>
-      <div class="info-line"><div class="il-key">境外</div><div class="il-val">大部分时候使用 <b>Visa</b>；美元主要用于兑换当地货币</div></div>
+      <div class="info-line"><div class="il-key">境外</div><div class="il-val">大部分时候使用 <b>Visa</b>；美元主要用于兑换当地货币。<b>土耳其大部分项目需要现金支付</b></div></div>
       <div class="info-line"><div class="il-key">埃及</div><div class="il-val">Visa 在 <b>National Bank ATM</b> 取现，每笔国内银行卡约收 <b>3 美元</b>手续费</div></div>
       <div class="info-line"><div class="il-key">迪拜</div><div class="il-val">不要换太多现金（100 元人民币现金换了迪拜钱）</div></div>
       <div class="info-line"><div class="il-key">汇率口径</div><div class="il-val">账单整理统一按 <b>1 USD ≈ 6.76 CNY</b>（由本卡人民币入账反推）</div></div>
@@ -95,11 +95,12 @@
       <h2 class="block-title">住哪里、怎么订</h2>
     </div>
     <div class="info-lines">
-      <div class="info-line"><div class="il-key">风格</div><div class="il-val"><b>青旅多人间为主</b>，机场过夜 2 次</div></div>
-      <div class="info-line"><div class="il-key">预订</div><div class="il-val"><b>Booking + Agoda 比价</b></div></div>
+      <div class="info-line"><div class="il-key">风格</div><div class="il-val"><b>青旅为主</b>；红眼航班机场过夜 3 次；夜间大巴（土耳其 3 段，埃及 2 段）</div></div>
+      <div class="info-line"><div class="il-key">预订</div><div class="il-val"><b>Booking + Agoda 比价</b>；线下入住有机会更便宜，可以到店问价</div></div>
       <div class="info-line"><div class="il-key">土耳其</div><div class="il-val">当地网络环境可能无法正常使用 Booking；因为用了提前购买的国内流量卡，所以可以正常使用</div></div>
-      <div class="info-line"><div class="il-key">推荐</div><div class="il-val">阿拉木图 Good Inn · 第比利斯 City Guli · 西格纳吉 那托与拉多 · 巴统 Hostel VOYAGE · 格雷梅 Home Cave · 安塔利亚 BE BOLD · 费特希耶 HZD · 马特鲁 龙门客栈 · 锡瓦 A&S House · 开罗 马迪纳旅舍</div></div>
+      <div class="info-line"><div class="il-key">评分口径</div><div class="il-val">干净 / 氛围 / 价格（5 星制），来自本人真实入住体验</div></div>
     </div>
+    <div id="hostelList" style="margin-top:14px;"></div>
   </div>
 </section>
 
@@ -127,12 +128,12 @@
   </div>
 </section>
 
-<!-- ============ 避坑 ============ -->
+<!-- ============ 小帖士 ============ -->
 <section class="section" id="tips">
   <div class="container">
     <div class="section-head">
-      <span class="eyebrow">PITFALLS · 避坑</span>
-      <h2 class="block-title">踩过的坑，都写在这</h2>
+      <span class="eyebrow">TIPS · 小帖士</span>
+      <h2 class="block-title">一些小 tips，写在这里</h2>
     </div>
     <div id="tipList"></div>
   </div>
@@ -188,17 +189,42 @@
       (s.note ? '<div class="tc-note">⚠ ' + s.note + '</div>' : '') + '</div>';
   }).join('');
 
+  // ---- 住宿推荐（按国家拆分 + 评分）----
+  function stars(n) { return '★'.repeat(n) + '☆'.repeat(5 - n); }
+  var hostelOrder = ['哈萨克斯坦', '格鲁吉亚', '亚美尼亚', '土耳其', '埃及', '阿联酋'];
+  document.getElementById('hostelList').innerHTML = hostelOrder.map(function (cn) {
+    var list = T.hostels.byCountry[cn] || [];
+    if (cn === '亚美尼亚') {
+      return '<div class="card" style="margin-bottom:10px;padding:14px 16px;"><b>' + cn + '</b>' +
+        '<p style="font-size:13.5px;color:#2a2a2a;margin-top:6px;">' + T.hostels.noteAM + '</p></div>';
+    }
+    if (!list.length) return '';
+    var rows = list.map(function (h) {
+      return '<div class="route-step">' +
+        '<span class="rs-from">' + h.city + '</span>' +
+        '<span class="rs-to" style="font-weight:600;">' + h.name + '</span>' +
+        '<span class="rs-meta">干净 ' + stars(h.clean) + '</span>' +
+        '<span class="rs-meta">氛围 ' + stars(h.vibe) + '</span>' +
+        '<span class="rs-meta">价格 ' + stars(h.price) + '</span>' +
+      '</div>';
+    }).join('');
+    return '<div class="card" style="margin-bottom:10px;padding:14px 16px;">' +
+      '<b style="font-size:15px;">' + cn + '</b>' +
+      '<div class="route-steps" style="margin-top:6px;">' + rows + '</div></div>';
+  }).join('');
+
   // ---- 行李清单 ----
   var packs = [
     ['护照与身份证', '有效期 6 个月以上、空白页留足；复印件 1-2 份 + 手机电子版'],
     ['大背包', '极致轻量化，只背必需品；青旅多人间为主'],
-    ['美元现金 300', '出国前兑换，用于换当地货币与落地签'],
+    ['美元现金 300', '出国前兑换（手续费 ¥10），用于换当地货币与落地签'],
     ['Visa 卡', '境外主力支付；埃及 ATM 取现每笔约 3 美元手续费'],
     ['旅行保险', '我本人没买（不推荐模仿）；格鲁吉亚查得严，尤其飞机入境查电子凭证，建议买'],
     ['电话卡方案', '提前买好或落地办理，见上'],
-    ['洗漱用品', '沿线不少住宿不提供'],
+    ['洗漱用品', '自带牙刷、浴巾。牙膏、洗发露等可以路上买'],
     ['转换插头', '欧标圆两脚（C/F）为主'],
-    ['药品', '肠胃药、感冒退烧、创可贴'],
+    ['药品', '肠胃药（重要！）、中暑药、感冒药、碘伏棉签'],
+    ['其他', '密码锁、指甲刀、隔脏睡袋（好用）'],
     ['U 型枕', '多段长途汽车/飞机，值机前可塞衣物省空间']
   ];
   document.getElementById('packList').innerHTML = packs.map(function (p) {

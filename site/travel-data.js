@@ -52,56 +52,86 @@ TRAVEL_GLOBAL.TRAVEL = (function () {
   };
 
   var accommodation = {
-    style: '住宿以青旅多人间为主，机场过夜 2 次。',
-    booking: '住宿主要使用 Booking + Agoda 比价。',
+    style: '青旅为主；红眼航班机场过夜 3 次；夜间大巴（土耳其 3 段，埃及 2 段）。',
+    booking: '住宿主要使用 Booking + Agoda 比价；线下入住有机会更便宜，可以到店问价。',
     turkey: '土耳其当地网络环境可能无法正常使用 Booking；因为使用了提前购买的国内流量卡，所以可以正常使用。'
   };
 
-  // ---------- 国与国之间怎么走（大环线页）----------
-  var routeSegments = [
-    {
-      from: '中国（沅陵/长沙/乌鲁木齐/伊犁）', to: '哈萨克斯坦（阿拉木图）',
-      steps: ['沅陵 → 长沙：汽车（¥80）', '长沙 → 乌鲁木齐：飞机（¥725）', '乌鲁木齐 → 伊犁：火车'],
-      note: '伊犁 → 阿拉木图：汽车（陆路口岸出境）',
-      duration: '入境后进入中亚第一站',
-      verified: '经历'
+  // ---------- 住宿推荐（住哪里，怎么订）----------
+  // 评分 = 干净 / 氛围 / 价格（5 星制），本人真实入住体验
+  var hostels = {
+    note: '评分＝干净 / 氛围 / 价格（5 星制），来自本人真实入住体验。',
+    byCountry: {
+      '哈萨克斯坦': [
+        { city: '阿拉木图', name: 'Good Inn Hostel', clean: 5, vibe: 3, price: 3 },
+        { city: '阿拉木图', name: 'Samal Hostel', clean: 2, vibe: 2, price: 4 },
+        { city: '阿克套', name: 'Hostel MANDARIN', clean: 3, vibe: 2, price: 5 }
+      ],
+      '格鲁吉亚': [
+        { city: '第比利斯', name: "Soul 的厨房（Sol's Kitchen）", clean: 4, vibe: 4, price: 4 },
+        { city: '第比利斯', name: 'City Guli Hostel', clean: 4, vibe: 3, price: 4 },
+        { city: '西格纳吉', name: '那托与拉多旅馆', clean: 4, vibe: 5, price: 4 },
+        { city: '巴统', name: 'Hostel VOYAGE', clean: 4, vibe: 3, price: 3 }
+      ],
+      '亚美尼亚': [],
+      '土耳其': [
+        { city: '格雷梅', name: 'Cave Homestay', clean: 4, vibe: 5, price: 4 },
+        { city: '安塔利亚', name: 'BE BOLD Hostel', clean: 5, vibe: 4, price: 3 },
+        { city: '费特希耶', name: 'HZD ADAPTMENTS Hostel', clean: 3, vibe: 3, price: 3 },
+        { city: '伊斯坦布尔', name: 'Central House Istanbul Taksim', clean: 4, vibe: 4, price: 5 }
+      ],
+      '埃及': [
+        { city: '达哈卜', name: '阿拉斯加旅馆', clean: 2, vibe: 3, price: 3 },
+        { city: '达哈卜', name: 'Carmine Hostel', clean: 3, vibe: 4, price: 4 },
+        { city: '亚历山大', name: 'Ithaka Mansheya Hostel', clean: 4, vibe: 4, price: 3 },
+        { city: '马特鲁', name: '龙门客栈', clean: 5, vibe: 5, price: 3 },
+        { city: '锡瓦', name: 'A&S House', clean: 4, vibe: 4, price: 5 },
+        { city: '开罗', name: 'Madina Hostel', clean: 4, vibe: 5, price: 5 }
+      ],
+      '阿联酋': []
     },
-    {
-      from: '哈萨克斯坦（阿拉木图）', to: '格鲁吉亚（第比利斯）',
-      steps: ['阿拉木图 → 阿克套：飞机（¥855）', '阿克套 → 第比利斯：飞机（¥781）'],
-      note: '第比利斯机场过夜后：机场 → 公交 → 小巴车站 → 西格纳吉',
-      duration: '哈国内飞行两段',
-      verified: '经历'
-    },
-    {
-      from: '格鲁吉亚（第比利斯）', to: '亚美尼亚（埃里温）',
-      steps: ['第比利斯 → 姆兹赫塔 → 久姆里 → 埃里温：3 人租车自驾'],
-      note: '也可以拆开使用公共交通。租车费用 3 人分摊（¥1,000 + 群收款 ¥225 归入亚美尼亚交通）。',
-      duration: '高加索段陆路',
-      verified: '经历'
-    },
-    {
-      from: '格鲁吉亚（巴统）', to: '土耳其（格雷梅）',
-      steps: ['巴统公交 → 格土边境（步行过境）→ 土耳其小巴 → Hopa 汽车站 → 长途汽车 → Nevşehir → 换乘 → 格雷梅'],
-      note: '这一段长途汽车约 17 小时。',
-      duration: '陆路过境',
-      verified: '经历'
-    },
-    {
-      from: '土耳其（伊斯坦布尔）', to: '埃及（达哈卜）',
-      steps: ['伊斯坦布尔 → 沙姆沙伊赫：飞机（¥524，提前购买）'],
-      note: '伊斯坦布尔有两个机场，订票一定确认机场；沙姆沙伊赫机场 → 达哈卜：Taxi。',
-      duration: '跨海飞行',
-      verified: '经历'
-    },
-    {
-      from: '埃及（开罗）', to: '阿联酋（迪拜）',
-      steps: ['开罗 → 迪拜：飞机'],
-      note: '返程：迪拜 → 杭州：飞机；杭州 → 怀化：约 17 小时火车（返程机票 ¥2,685）。',
-      duration: '非洲 → 海湾',
-      verified: '经历'
-    }
+    noteAM: '亚美尼亚是蹭的住宿，因此不予推荐；建议选软件评分高的。'
+  };
+
+  // ---------- 全程交通：每一段怎么接上（大环线页）----------
+  // mode 用 emoji：🚌汽车/巴士 🚐小巴/面包车 🚗自驾 🚄火车 ✈️飞机
+  var routeSteps = [
+    { from: '沅陵', to: '长沙', mode: '🚌', time: '', country: '中国', note: '' },
+    { from: '长沙', to: '乌鲁木齐', mode: '✈️', time: '', country: '中国', note: '' },
+    { from: '乌鲁木齐', to: '伊犁', mode: '🚄', time: '', country: '中国', note: '' },
+    { from: '伊犁', to: '阿拉木图', mode: '🚌', time: '11h', country: '哈萨克斯坦', note: '陆路口岸出境' },
+    { from: '阿拉木图', to: '阿克套', mode: '✈️', time: '', country: '哈萨克斯坦', note: '' },
+    { from: '阿克套', to: '第比利斯', mode: '✈️', time: '', country: '格鲁吉亚', note: '' },
+    { from: '第比利斯', to: '西格纳吉', mode: '🚐', time: '', country: '格鲁吉亚', note: '往返' },
+    { from: '第比利斯', to: '卡兹别克', mode: '🚐', time: '', country: '格鲁吉亚', note: '一日团往返' },
+    { from: '第比利斯', to: '埃里温', mode: '🚗', time: '', country: '亚美尼亚', note: '3 人租车自驾' },
+    { from: '第比利斯', to: '巴统', mode: '🚌', time: '6h', country: '格鲁吉亚', note: '' },
+    { from: '巴统', to: 'Hopa 车站', mode: '🚐', time: '', country: '土耳其', note: '巴统公交 → spari 口岸 → 步行过境 → 土耳其小巴' },
+    { from: 'Hopa 车站', to: 'Nevşehir', mode: '🚌', time: '17h', country: '土耳其', note: '长途汽车' },
+    { from: 'Nevşehir', to: '格雷梅', mode: '🚌', time: '', country: '土耳其', note: '公交车' },
+    { from: '格雷梅', to: '安塔利亚', mode: '🚌', time: '8h', country: '土耳其', note: '' },
+    { from: '安塔利亚', to: '卡什', mode: '🚐', time: '3.5h', country: '土耳其', note: 'D700 公路，风景极好' },
+    { from: '卡什', to: '费特希耶', mode: '🚐', time: '2.5h', country: '土耳其', note: '' },
+    { from: '费特希耶', to: '伊斯坦布尔（新欧洲区）', mode: '🚌', time: '14h', country: '土耳其', note: '' },
+    { from: '伊斯坦布尔', to: '沙姆沙伊赫', mode: '✈️', time: '', country: '埃及', note: '伊斯坦布尔有两个机场，订票一定确认' },
+    { from: '沙姆沙伊赫', to: '达哈卜', mode: '🚗', time: '', country: '埃及', note: 'Taxi' },
+    { from: '达哈卜', to: '亚历山大', mode: '🚌', time: '11h', country: '埃及', note: '' },
+    { from: '亚历山大', to: '马特鲁', mode: '🚌', time: '4h', country: '埃及', note: '' },
+    { from: '马特鲁', to: '锡瓦', mode: '🚐', time: '4h', country: '埃及', note: '小巴' },
+    { from: '锡瓦', to: '开罗', mode: '🚌', time: '12h', country: '埃及', note: 'WITBUS' },
+    { from: '开罗', to: '迪拜', mode: '✈️', time: '', country: '阿联酋', note: '返程第一段' },
+    { from: '迪拜', to: '杭州', mode: '✈️', time: '', country: '中国', note: '返程' },
+    { from: '杭州', to: '怀化', mode: '🚄', time: '17h', country: '中国', note: '返程火车' }
   ];
+
+  // 按国家分组索引（“分别到每个国家怎么走”）
+  function routeByCountry() {
+    var map = {};
+    routeSteps.forEach(function (s) {
+      (map[s.country] = map[s.country] || []).push(s);
+    });
+    return map;
+  }
 
   // ---------- 59 天时间轴（按真实停留拆分）----------
   var timeline = [
@@ -159,7 +189,10 @@ TRAVEL_GLOBAL.TRAVEL = (function () {
       tips: [
         '落日飞车不推荐，排队久',
         '博物馆性价比不高',
-        '物价不便宜，自己做饭更省'
+        '物价不便宜，自己做饭更省',
+        '地处天山之间，气温较低，注意防寒',
+        '公交卡在小红房子制作，部分车可用现金支付，司机若不收钱就“免单”了',
+        '打车价格偏贵'
       ],
       verdict: '物价不算便宜，但地铁和绿巴扎值得看；阿拉木图适合慢下来住几天。',
       costKey: '哈萨克斯坦'
@@ -214,7 +247,9 @@ TRAVEL_GLOBAL.TRAVEL = (function () {
       tips: [
         '边检查保险概率高（尤其飞机），记得备好电子保单',
         '巴统换少量里拉，小巴和商店只收里拉',
-        '姆兹赫塔不自驾建议包车'
+        '姆兹赫塔不自驾建议包车',
+        '卡兹别克一日团在 GetYourGuide 上很便宜',
+        '很多古着店值得逛逛'
       ],
       verdict: '高加索最舒服的一段：红酒、山城、黑海，节奏适合放慢。',
       costKey: '格鲁吉亚'
@@ -256,7 +291,7 @@ TRAVEL_GLOBAL.TRAVEL = (function () {
           sights: ['塞凡湖', '两座教堂']
         }
       ],
-      tips: ['埃里温几乎全程自己做饭', '塞凡镇山下 BBQ 好吃'],
+      tips: ['埃里温几乎全程自己做饭', '塞凡镇山下 BBQ 好吃', '若自驾收停车费时可以说没有现金要求刷卡，无 POS 机会放行', '埃里温有南线东线团，可以报一日团'],
       verdict: '小众但舒服的一站，塞凡湖值得；消费低，适合自己做饭省预算。',
       costKey: '亚美尼亚'
     },
@@ -267,7 +302,7 @@ TRAVEL_GLOBAL.TRAVEL = (function () {
       visa: '免签',
       visaDetail: '土耳其对中国免签。（待核实：2026 最新政策，参考：2026-01 起免签，180 天内累计停留不超过 90 天）',
       insurance: '', sim: '提前购买流量卡（¥39）。',
-      payment: '交通小红卡刷 Visa 价格明显更高，建议办卡。',
+      payment: '大部分项目需要现金支付；交通小红卡刷 Visa 价格明显更高，建议办卡。',
       exchange: '伊斯坦布尔亚洲区物价更便宜。',
       exchangeRate: { label: '1 元 ≈ 7.25 里拉', updated: '2026-09-14', src: '新浪财经 2026-09-14' },
       food: '格雷梅自己做饭；其他地方以快餐为主。',
@@ -337,7 +372,10 @@ TRAVEL_GLOBAL.TRAVEL = (function () {
         '海盗船跳岛只收现金',
         '小红卡刷 Visa 更贵，办卡划算',
         '伊斯坦布尔两个机场，订票看准',
-        'Booking 可能被当地网络屏蔽，用国内流量卡'
+        'Booking 可能被当地网络屏蔽，用国内流量卡',
+        '平价超市 101、BMI',
+        '土耳其 ATM 取钱手续费特高',
+        '大巴公司个人感觉都差不多，可以在小红书上攻略参考'
       ],
       verdict: '整条环线最好玩的国家之一。格雷梅追热气球、费特希耶跳岛、伊斯坦布尔欧亚两岸——都值得。',
       costKey: '土耳其'
@@ -418,7 +456,8 @@ TRAVEL_GLOBAL.TRAVEL = (function () {
         '面对推销者要强硬，货比三家砍价',
         '金字塔不进去，肯德基二楼拍狮身人面像',
         '锡瓦下车先买去开罗的车票',
-        '潜水和沙漠团是亮点'
+        '潜水和沙漠团是亮点',
+        '取款机取不出钱可尝试自定义金额 3000 元，百试百灵'
       ],
       verdict: '性价比之王：23 天 ¥9,616，潜水 + 撒哈拉 + 红海躺平。西奈半岛和锡瓦是精华。',
       costKey: '埃及'
@@ -614,7 +653,9 @@ TRAVEL_GLOBAL.TRAVEL = (function () {
     travelStyle: travelStyle,
     payment: payment,
     accommodation: accommodation,
-    routeSegments: routeSegments,
+    routeSteps: routeSteps,
+    routeByCountry: routeByCountry(),
+    hostels: hostels,
     timeline: timeline,
     countries: countries,
     costs: costs,

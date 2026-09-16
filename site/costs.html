@@ -97,8 +97,8 @@
   var T = window.TRAVEL;
   var cats = T.costs.categories;
 
-  // ---- 全表（6 国；中国出发/返程段计入总计，不在国家行内单列）----
-  var names = Object.keys(T.costs.byCountry).filter(function (n) { return n !== '中国'; });
+  // ---- 全表（含中国出发/返程段）----
+  var names = Object.keys(T.costs.byCountry);
   var head = '<th>国家</th>' + cats.map(function (c) { return '<th>' + c + '</th>'; }).join('') + '<th>合计</th>';
   var rows = names.map(function (name) {
     var d = T.costs.byCountry[name];
@@ -110,8 +110,7 @@
     '<table class="tbl"><thead><tr>' + head + '</tr></thead><tbody>' + rows + '</tbody>' +
     '<tfoot><tr><td>总计</td>' + cats.map(function () { return '<td></td>'; }).join('') +
     '<td class="num-total">' + T.costs.total.replace('¥', '') + '</td></tr></tfoot></table>';
-  document.getElementById('costsNote').textContent =
-    T.costs.status + ' 总计含中国出发/返程段 ¥2,033。';
+  document.getElementById('costsNote').textContent = T.costs.status;
 
   // ---- 占比条 ----
   var total = 22355;

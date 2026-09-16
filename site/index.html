@@ -192,7 +192,7 @@
 
   // ---- 六国拖动卡片（每国一张代表照片）----
   var covers = {
-    kz: 'photos/kz/img2.jpg',
+    kz: 'photos/kz/img6.jpg',
     ge: 'photos/ge/img7.jpg',
     am: 'photos/am/img2.jpg',
     tr: 'photos/tr/img2.jpg',
@@ -216,11 +216,11 @@
       '</div></a>';
   }).join('');
 
-  // ---- 花费表（6 国；中国出发/返程段计入总计，不在国家行内单列）----
+  // ---- 花费表（含中国出发/返程段）----
   (function drawCosts() {
     var cats = T.costs.categories;
     var head = '<th>国家</th>' + cats.map(function (c) { return '<th>' + c + '</th>'; }).join('') + '<th>合计</th>';
-    var names = Object.keys(T.costs.byCountry).filter(function (n) { return n !== '中国'; });
+    var names = Object.keys(T.costs.byCountry);
     var rows = names.map(function (name) {
       var d = T.costs.byCountry[name];
       return '<tr><td>' + name + '</td>' +
@@ -231,8 +231,7 @@
       '<table class="tbl"><thead><tr>' + head + '</tr></thead><tbody>' + rows + '</tbody>' +
       '<tfoot><tr><td>总计</td>' + cats.map(function () { return '<td></td>'; }).join('') +
       '<td class="num-total">' + T.costs.total.replace('¥', '') + '</td></tr></tfoot></table>';
-    document.getElementById('costsNote').textContent =
-      T.costs.status + ' 总计含中国出发/返程段 ¥2,033。';
+    document.getElementById('costsNote').textContent = T.costs.status;
   })();
 })();
 </script>

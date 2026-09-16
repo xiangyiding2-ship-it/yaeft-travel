@@ -62,7 +62,7 @@
         '<div class="footer-bottom">' +
           '<span>© 2026 ' + esc(T.meta.title) + ' · 独立攻略站</span>' +
           '<span>' + esc(T.meta.signature) + '</span>' +
-          '<span>全网同名：向一丁</span>' +
+          '<span>小红书：菜腿叮叮 · 抖音/微博：向一丁</span>' +
         '</div>' +
       '</div>';
   }
